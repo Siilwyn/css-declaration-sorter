@@ -1,0 +1,38 @@
+a {
+    animation: none;
+}
+
+a {
+    animation: none;
+    border-color: #59ace5;
+}
+
+a {
+    animation: none;
+    border: 0;
+    border-bottom: 1rem;
+    border-color: #59ace5;
+}
+
+a {
+    animation: none;
+    border: 0;
+    border: 0.1rem;
+    display: block;
+    font: none;
+    clear: none;
+    border-bottom: 1rem;
+    border-color: #59ace5;
+}
+
+a {
+    animation: none;
+    border: 0;
+    font: 'Open Sans';
+    border: 0.1rem;
+    display: block;
+    font: none;
+    clear: none;
+    border-bottom: 1rem;
+    border-color: #59ace5;
+}
