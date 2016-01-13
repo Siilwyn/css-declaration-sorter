@@ -1,0 +1,52 @@
+{
+  "name": "css-declaration-sorter",
+  "version": "1.0.0",
+  "description": "Sorts CSS declarations fast and automatically in a certain order.",
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "css",
+    "declaration",
+    "sorter",
+    "property",
+    "order"
+  ],
+  "homepage": "https://github.com/Siilwyn/css-declaration-sorter",
+  "bugs": "https://github.com/Siilwyn/css-declaration-sorter/issues",
+  "license": "MIT",
+  "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
+  "files": [
+    "src",
+    "bin",
+    "orders"
+  ],
+  "main": "src/index.js",
+  "bin": {
+    "cssdeclsort": "bin/cssdeclsort.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
+  },
+  "scripts": {
+    "start": "npm run watch",
+    "test": "node tests/test.js",
+    "preversion": "npm test",
+    "postversion": "git push && npm publish",
+    "lint": "eslint src/*.js bin/*.js tests/*.js",
+    "watch": "watch 'npm run test && npm run lint --silent' src bin",
+    "scrape": "node src/property-scraper"
+  },
+  "dependencies": {
+    "argh": "^0.1.4",
+    "postcss": "^5.0.2",
+    "read-file-stdin": "^0.2.0",
+    "sort-array": "^0.1.0",
+    "write-file-stdout": "0.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^1.10.1",
+    "tape": "^4.2.1",
+    "watch": "^0.17.1"
+  }
+}
