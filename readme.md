@@ -52,7 +52,7 @@ Options:
   --verbose         Log extra information about the process to the console.
 
 Orders:
-  alphabetically, smacss
+  alphabetically, smacss, concentric-css
 
 ```
 
@@ -100,6 +100,14 @@ See [PostCSS] docs for more examples and other environments.
   - Background
   - Text
   - Other
+
+- [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)  
+*Starts outside the box model, moves inward.*
+  - Positioning
+  - Visibility
+  - Box model
+  - Dimensions
+  - Text
 
 - Custom order  
 *Provide your own order by passing an array in a JSON file.*

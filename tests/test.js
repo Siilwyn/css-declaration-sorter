@@ -37,6 +37,12 @@ var sortOrderTests = [
     fixture: 'a{border: 0;flex: 0;}',
     expected: 'a{flex: 0;border: 0;}',
     options: { order: 'smacss' }
+  },
+  {
+    message: 'Sort according to Concentric CSS.',
+    fixture: 'a{border: 0;flex: 0;}',
+    expected: 'a{flex: 0;border: 0;}',
+    options: { order: 'concentric-css' }
   }
 ];
 

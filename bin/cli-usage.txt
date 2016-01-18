@@ -11,4 +11,4 @@ Options:
   --verbose         Log extra information about the process to the console.
 
 Orders:
-  alphabetically, smacss
+  alphabetically, smacss, concentric-css
