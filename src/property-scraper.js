@@ -3,18 +3,14 @@
 var https = require('https');
 var fs = require('fs');
 
-var isProperty = function (element) {
-  return element.type === 'Properties';
-};
-
-var getName = function (element) {
-  return element.name;
+var includes = function (element, searchValue) {
+  return Boolean(~element.indexOf(searchValue));
 };
 
 var options = {
-  hostname: 'docs.devdocs.io',
+  hostname: 'developer.mozilla.org',
   port: 443,
-  path: '/css/index.json'
+  path: '/en-US/docs/Web/CSS$children?expand'
 };
 
 var request = https.get(options, function (result) {
@@ -29,11 +25,16 @@ var request = https.get(options, function (result) {
 
   // Write a filtered array of CSS property names to a JSON file
   result.on('end', function () {
-    data = JSON.parse(data)
-      .entries.filter(isProperty)
-      .map(getName);
+    data = JSON.parse(data);
 
-    cssProperties = JSON.stringify(data, null, 2);
+    data.subpages.forEach(function (element) {
+      // Add element if tagged as CSS property and not tagged as Non-standard
+      if (includes(element.tags, 'CSS Property') && !includes(element.tags, 'Non-standard')) {
+        cssProperties.push(element.title);
+      }
+    });
+
+    cssProperties = JSON.stringify(cssProperties, null, 2);
 
     fs.writeFile('orders/source.json', cssProperties, function (error) {
       if (error) throw error;

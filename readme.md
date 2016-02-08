@@ -29,7 +29,7 @@ body {
 ```
 
 ## Capabilities
-- Up-to-date CSS properties from [MDN](https://developer.mozilla.org/), scraped from [DevDocs](https://devdocs.io/).
+- Up-to-date CSS properties from the [MDN Web Platform](https://developer.mozilla.org/).
 - Sort using your own defined order.
 - Sass support when combined with [postcss-scss](https://github.com/postcss/postcss-scss/).
 - Thought-out sorting orders out of the box, approved by their authors.
