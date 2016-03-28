@@ -4,7 +4,6 @@ var fs = require('fs');
 var path = require('path');
 
 var postcss = require('postcss');
-var sortArray = require('sort-array');
 
 module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   var sortCssDecls = function (css, sortOrder) {
@@ -19,10 +18,23 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
 
       // Sort using the set sorting order if it's not set to sort alphabetically
       if (sortOrder === 'alphabetically') {
-        sortArray(cssDecls, 'prop');
+        cssDecls.sort(function (a, b) {
+          if (a.prop !== b.prop) {
+            return a.prop < b.prop ? -1 : 1;
+          } else {
+            return 0;
+          }
+        });
       } else {
-        sortArray(cssDecls, 'prop', {
-          prop: sortOrder
+        cssDecls.sort(function (a, b) {
+          var aIndex = sortOrder.indexOf(a.prop);
+          var bIndex = sortOrder.indexOf(b.prop);
+
+          if (aIndex !== bIndex) {
+            return aIndex < bIndex ? -1 : 1;
+          } else {
+            return 0;
+          }
         });
       }
 
