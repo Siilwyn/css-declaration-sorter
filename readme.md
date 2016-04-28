@@ -113,7 +113,7 @@ See [PostCSS] docs for more examples and other environments.
 
 [PostCSS]: https://github.com/postcss/postcss
 [travis]: https://travis-ci.org/Siilwyn/css-declaration-sorter
-[travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter.svg?style=flat-square
+[travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
 [david]: https://david-dm.org/Siilwyn/css-declaration-sorter
 [david-icon]: https://img.shields.io/david/Siilwyn/css-declaration-sorter.svg?style=flat-square
 [david-dev]: https://david-dm.org/Siilwyn/css-declaration-sorter#info=devDependencies
