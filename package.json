@@ -46,6 +46,6 @@
   "devDependencies": {
     "eslint": "^2.0.0",
     "tape": "^4.2.1",
-    "watch": "^0.17.1"
+    "watch": "^0.18.0"
   }
 }
