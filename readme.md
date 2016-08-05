@@ -118,5 +118,5 @@ See [PostCSS] docs for more examples and other environments.
 [travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
 [david]: https://david-dm.org/Siilwyn/css-declaration-sorter
 [david-icon]: https://img.shields.io/david/Siilwyn/css-declaration-sorter.svg?style=flat-square
-[david-dev]: https://david-dm.org/Siilwyn/css-declaration-sorter#info=devDependencies
+[david-dev]: https://david-dm.org/Siilwyn/css-declaration-sorter?type=dev
 [david-dev-icon]: https://img.shields.io/david/dev/Siilwyn/css-declaration-sorter.svg?style=flat-square
