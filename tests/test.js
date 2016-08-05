@@ -74,6 +74,19 @@ var commentOrderTests = [
   }
 ];
 
+var nestedDeclarationTests = [
+  {
+    message: 'Sort nested declarations.',
+    fixture: 'a{a{flex: 0;border: 0;}}',
+    expected: 'a{a{border: 0;flex: 0;}}',
+  },
+  {
+    message: 'Sort nested at-rule declarations.',
+    fixture: 'a{@media(){flex: 0;border: 0;}}',
+    expected: 'a{@media(){border: 0;flex: 0;}}'
+  }
+];
+
 test('Should order CSS declarations.', function (t) {
   // Set amount of assertions by setting two assertions per sort order test
   t.plan(sortOrderTests.length * 2);
@@ -93,6 +106,20 @@ test('Should retain comments.', function (t) {
   t.plan(commentOrderTests.length * 2);
 
   commentOrderTests.forEach(function (test) {
+    var options = test.options || {};
+
+    processTest(test.fixture, options).then(function (result) {
+      t.equal(result.css, test.expected, test.message);
+      t.equal(result.warnings().length, 0);
+    });
+  });
+});
+
+test('Should order nested CSS declarations.', function (t) {
+  // Set amount of assertions by setting two assertions per sort order test
+  t.plan(nestedDeclarationTests.length * 2);
+
+  nestedDeclarationTests.forEach(function (test) {
     var options = test.options || {};
 
     processTest(test.fixture, options).then(function (result) {
