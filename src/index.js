@@ -6,42 +6,86 @@ var path = require('path');
 var postcss = require('postcss');
 
 module.exports = postcss.plugin('css-declaration-sorter', function (options) {
-  var sortCssDecls = function (css, sortOrder) {
-    // Walk through CSS selectors
-    css.walkRules(function (rules) {
-      var cssDecls = [];
-
-      // Walk through CSS declarations pushing each declaration into an array
-      rules.walkDecls(function (decl) {
-        cssDecls.push(decl);
+  // Sort CSS declarations alphabetically or using the set sorting order
+  var sortCssDecls = function (cssDecls, sortOrder) {
+    if (sortOrder === 'alphabetically') {
+      cssDecls.sort(function (a, b) {
+        if (a.prop !== b.prop) {
+          return a.prop < b.prop ? -1 : 1;
+        } else {
+          return 0;
+        }
       });
+    } else {
+      cssDecls.sort(function (a, b) {
+        var aIndex = sortOrder.indexOf(a.prop);
+        var bIndex = sortOrder.indexOf(b.prop);
 
-      // Sort using the set sorting order if it's not set to sort alphabetically
-      if (sortOrder === 'alphabetically') {
-        cssDecls.sort(function (a, b) {
-          if (a.prop !== b.prop) {
-            return a.prop < b.prop ? -1 : 1;
-          } else {
-            return 0;
-          }
+        if (aIndex !== bIndex) {
+          return aIndex < bIndex ? -1 : 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+  };
+
+  // Return all comments in two types with the node they belong to
+  var processComments = function (css) {
+    var newline = [];
+    var inline = [];
+
+    css.walkComments(function (comment) {
+      // Don't do anything to the last newline comment
+      if (!comment.next() && ~comment.raws.before.indexOf('\n')) {
+        return;
+      }
+
+      if (~comment.raws.before.indexOf('\n')) {
+        newline.push({
+          'comment': comment,
+          'pairedNode': comment.next()
         });
       } else {
-        cssDecls.sort(function (a, b) {
-          var aIndex = sortOrder.indexOf(a.prop);
-          var bIndex = sortOrder.indexOf(b.prop);
-
-          if (aIndex !== bIndex) {
-            return aIndex < bIndex ? -1 : 1;
-          } else {
-            return 0;
-          }
+        inline.push({
+          'comment': comment,
+          'pairedNode': comment.prev()
         });
       }
 
-      // Remove all CSS declarations from the CSS selector
-      rules.removeAll();
-      // Append sorted CSS declarations to the CSS selector
-      rules.append(cssDecls);
+      comment.remove();
+    });
+
+    // Reverse order because newline comments are inserted before the next node
+    newline.reverse();
+
+    return {
+      'newline': newline,
+      'inline': inline
+    };
+  };
+
+  var processCss = function (css, sortOrder) {
+    var processedComments = processComments(css);
+
+    // Traverse nodes with children and sort those children
+    css.walk(function (rule) {
+      var isRule = rule.type === 'rule' || rule.type === 'atrule';
+
+      if (isRule && rule.nodes && rule.nodes.length > 1) {
+        sortCssDecls(rule.nodes, sortOrder);
+      }
+    });
+
+    // Add comments back to the nodes they are paired with
+    processedComments.newline.forEach(function (element) {
+      element.comment.remove();
+      element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+    });
+
+    processedComments.inline.forEach(function (element) {
+      element.comment.remove();
+      element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
     });
   };
 
@@ -57,7 +101,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
       sortOrderPath = options.customOrder;
     } else {
       // Fallback to the default sorting order
-      return sortCssDecls(css, 'alphabetically');
+      return processCss(css, 'alphabetically');
     }
 
     // Load in the array containing the order from a JSON file
@@ -67,7 +111,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
         resolve(data);
       });
     }).then(function (data) {
-      return sortCssDecls(css, JSON.parse(data));
+      return processCss(css, JSON.parse(data));
     });
   };
 });
