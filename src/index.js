@@ -4,12 +4,13 @@ var fs = require('fs');
 var path = require('path');
 
 var postcss = require('postcss');
+var timsort = require('timsort').sort;
 
 module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   // Sort CSS declarations alphabetically or using the set sorting order
   var sortCssDecls = function (cssDecls, sortOrder) {
     if (sortOrder === 'alphabetically') {
-      cssDecls.sort(function (a, b) {
+      timsort(cssDecls, function (a, b) {
         if (a.prop !== b.prop) {
           return a.prop < b.prop ? -1 : 1;
         } else {
@@ -17,7 +18,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
         }
       });
     } else {
-      cssDecls.sort(function (a, b) {
+      timsort(cssDecls, function (a, b) {
         var aIndex = sortOrder.indexOf(a.prop);
         var bIndex = sortOrder.indexOf(b.prop);
 
