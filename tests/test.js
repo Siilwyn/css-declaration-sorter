@@ -1,12 +1,28 @@
 'use strict';
 
-var test = require('tape');
+var tape = require('tape');
 var postcss = require('postcss');
 var plugin = require('../src/');
 var name = require('../package.json').name;
 
-var processTest = function (css, options) {
+var processCss = function (css, options) {
   return postcss(plugin(options)).process(css);
+};
+
+var testCssFixtures = function (testMessage, tests) {
+  tape(testMessage, function (t) {
+    // Set amount of assertions by setting two assertions per sort order test
+    t.plan(tests.length * 2);
+
+    tests.forEach(function (test) {
+      var options = test.options || {};
+
+      processCss(test.fixture, options).then(function (result) {
+        t.equal(result.css, test.expected, test.message);
+        t.equal(result.warnings().length, 0);
+      });
+    });
+  });
 };
 
 var sortOrderTests = [
@@ -46,21 +62,54 @@ var sortOrderTests = [
   }
 ];
 
-test('Should order CSS declarations.', function (t) {
-  // Set amount of assertions by setting two assertions per sort order test
-  t.plan(sortOrderTests.length * 2);
+var commentOrderTests = [
+  {
+    message: 'Keep comment intact.',
+    fixture: 'a{flex: 0;/*flex*/}',
+    expected: 'a{flex: 0;/*flex*/}'
+  },
+  {
+    message: 'Keep dangling comment intact.',
+    fixture: 'a{flex: 0;\n/*end*/}',
+    expected: 'a{flex: 0;\n/*end*/}'
+  },
+  {
+    message: 'Keep multiple comments intact.',
+    fixture: 'a{flex: 0;\n/*flex*/\n/*flex 2*/}',
+    expected: 'a{flex: 0;\n/*flex*/\n/*flex 2*/}'
+  },
+  {
+    message: 'Keep newline comment above declaration.',
+    fixture: 'a{flex: 0;\n/*border*/\nborder: 0;}',
+    expected: 'a{\n/*border*/\nborder: 0;flex: 0;}'
+  },
+  {
+    message: 'Keep inline comment beside declaration.',
+    fixture: 'a{flex: 0;\nborder: 0; /*border*/}',
+    expected: 'a{\nborder: 0; /*border*/flex: 0;}'
+  }
+];
 
-  sortOrderTests.forEach(function (test) {
-    var options = test.options || {};
+var nestedDeclarationTests = [
+  {
+    message: 'Sort nested declarations.',
+    fixture: 'a{a{flex: 0;border: 0;}}',
+    expected: 'a{a{border: 0;flex: 0;}}',
+  },
+  {
+    message: 'Sort nested at-rule declarations.',
+    fixture: 'a{@media(){flex: 0;border: 0;}}',
+    expected: 'a{@media(){border: 0;flex: 0;}}'
+  }
+];
 
-    processTest(test.fixture, options).then(function (result) {
-      t.equal(result.css, test.expected, test.message);
-      t.equal(result.warnings().length, 0);
-    });
-  });
-});
+testCssFixtures('Should order CSS declarations.', sortOrderTests);
 
-test('Should use the PostCSS plugin API.', function (t) {
+testCssFixtures('Should retain comments.', commentOrderTests);
+
+testCssFixtures('Should order nested CSS declarations.', nestedDeclarationTests);
+
+tape('Should use the PostCSS plugin API.', function (t) {
   t.plan(2);
 
   t.ok(plugin().postcssVersion, 'Able to access version.');

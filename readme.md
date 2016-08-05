@@ -5,7 +5,7 @@
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
 
-A Node.js module and [PostCSS] plugin to sort the CSS declarations inside each selector based on their property names. Leveraging PostCSS’s speed, this module can quickly sort all your styling for added neatness. On top of that sorted CSS is smaller when gzipped because there will be more similar strings. The intention of this module is to sort the source CSS code of a project in the build process. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual use.
+A Node.js module and [PostCSS] plugin to sort the CSS declarations inside each selector based on their property names. Leveraging PostCSS’s speed, this module can quickly sort all your styling for added neatness. On top of that sorted CSS is smaller when gzipped because there will be more similar strings. The intention of this module is to sort the source CSS code of a project in the build process. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
 
 ## Alphabetical example
 Input:
@@ -31,6 +31,8 @@ body {
 ## Capabilities
 - Up-to-date CSS properties from the [MDN Web Platform](https://developer.mozilla.org/).
 - Sort using your own defined order.
+- Sorting nested rules.
+- Less and SCSS support when combined with either [postcss-scss](https://github.com/postcss/postcss-scss) or [postcss-less](https://github.com/webschik/postcss-less).
 - Thought-out sorting orders out of the box, approved by their authors.
 
 ## Usage
