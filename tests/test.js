@@ -1,12 +1,28 @@
 'use strict';
 
-var test = require('tape');
+var tape = require('tape');
 var postcss = require('postcss');
 var plugin = require('../src/');
 var name = require('../package.json').name;
 
-var processTest = function (css, options) {
+var processCss = function (css, options) {
   return postcss(plugin(options)).process(css);
+};
+
+var testCssFixtures = function (testMessage, tests) {
+  tape(testMessage, function (t) {
+    // Set amount of assertions by setting two assertions per sort order test
+    t.plan(tests.length * 2);
+
+    tests.forEach(function (test) {
+      var options = test.options || {};
+
+      processCss(test.fixture, options).then(function (result) {
+        t.equal(result.css, test.expected, test.message);
+        t.equal(result.warnings().length, 0);
+      });
+    });
+  });
 };
 
 var sortOrderTests = [
@@ -87,49 +103,13 @@ var nestedDeclarationTests = [
   }
 ];
 
-test('Should order CSS declarations.', function (t) {
-  // Set amount of assertions by setting two assertions per sort order test
-  t.plan(sortOrderTests.length * 2);
+testCssFixtures('Should order CSS declarations.', sortOrderTests);
 
-  sortOrderTests.forEach(function (test) {
-    var options = test.options || {};
+testCssFixtures('Should retain comments.', commentOrderTests);
 
-    processTest(test.fixture, options).then(function (result) {
-      t.equal(result.css, test.expected, test.message);
-      t.equal(result.warnings().length, 0);
-    });
-  });
-});
+testCssFixtures('Should order nested CSS declarations.', nestedDeclarationTests);
 
-test('Should retain comments.', function (t) {
-  // Set amount of assertions by setting two assertions per sort order test
-  t.plan(commentOrderTests.length * 2);
-
-  commentOrderTests.forEach(function (test) {
-    var options = test.options || {};
-
-    processTest(test.fixture, options).then(function (result) {
-      t.equal(result.css, test.expected, test.message);
-      t.equal(result.warnings().length, 0);
-    });
-  });
-});
-
-test('Should order nested CSS declarations.', function (t) {
-  // Set amount of assertions by setting two assertions per sort order test
-  t.plan(nestedDeclarationTests.length * 2);
-
-  nestedDeclarationTests.forEach(function (test) {
-    var options = test.options || {};
-
-    processTest(test.fixture, options).then(function (result) {
-      t.equal(result.css, test.expected, test.message);
-      t.equal(result.warnings().length, 0);
-    });
-  });
-});
-
-test('Should use the PostCSS plugin API.', function (t) {
+tape('Should use the PostCSS plugin API.', function (t) {
   t.plan(2);
 
   t.ok(plugin().postcssVersion, 'Able to access version.');
