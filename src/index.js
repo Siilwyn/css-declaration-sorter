@@ -37,8 +37,10 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
     var inline = [];
 
     css.walkComments(function (comment) {
-      // Don't do anything to the last newline comment
-      if (!comment.next() && ~comment.raws.before.indexOf('\n')) {
+      // Don't do anything to root comments or the last newline comment
+      var lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+
+      if (comment.parent.type === 'root' || lastNewlineNode) {
         return;
       }
 
