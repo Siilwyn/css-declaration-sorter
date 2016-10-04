@@ -217,7 +217,7 @@
   "white-space",
   "word-break",
   "word-spacing",
-  "word-wrap",
+  "overflow-wrap",
 
   "all",
   "animation",
