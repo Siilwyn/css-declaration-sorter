@@ -208,6 +208,7 @@
   "outline-width",
   "overflow",
   "overflow-clip-box",
+  "overflow-wrap",
   "overflow-x",
   "overflow-y",
   "padding",
@@ -275,7 +276,6 @@
   "will-change",
   "word-break",
   "word-spacing",
-  "word-wrap",
   "writing-mode",
   "z-index"
 ]

@@ -277,7 +277,7 @@
   "white-space",
   "word-break",
   "word-spacing",
-  "word-wrap",
+  "overflow-wrap",
   "quotes",
   "tab-size",
   "content",
