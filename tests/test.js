@@ -1,5 +1,8 @@
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
+
 var tape = require('tape');
 var postcss = require('postcss');
 var plugin = require('../src/');
@@ -114,4 +117,36 @@ tape('Should use the PostCSS plugin API.', function (t) {
 
   t.ok(plugin().postcssVersion, 'Able to access version.');
   t.equal(plugin().postcssPlugin, name, 'Able to access name.');
+});
+
+tape('CSS properties are up-to-date.', function (t) {
+  var cssOrdersDir = './orders/';
+
+  fs.readdir(cssOrdersDir, function (error, files) {
+    var sourceProperties = JSON.parse(
+      fs.readFileSync(path.join(cssOrdersDir, 'source.json'))
+    );
+
+    files
+      .filter(function (fileName) {
+        return fileName !== 'source.json';
+      })
+      // Pair filenames and amount of properties from each CSS order file
+      .map(function (fileName) {
+        return {
+          'fileName': fileName,
+          'properties': JSON.parse(
+            fs.readFileSync(path.join(cssOrdersDir, fileName))
+          )
+        };
+      })
+      .forEach(function (customOrderFile) {
+        t.deepLooseEqual(
+          customOrderFile.properties.sort(), sourceProperties.sort(),
+          customOrderFile.fileName + ' ' + 'has the same properties as source.'
+        );
+      });
+
+    t.end();
+  });
 });
