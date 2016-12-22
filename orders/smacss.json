@@ -283,6 +283,7 @@
   "transition-timing-function",
   "will-change",
   "unicode-bidi",
+  "unicode-range",
   "vertical-align",
   "visibility",
   "widows",
