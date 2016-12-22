@@ -32,8 +32,18 @@ var request = https.get(options, function (result) {
       if (includes(element.tags, 'CSS Property') && !includes(element.tags, 'Non-standard')) {
         cssProperties.push(element.title);
       }
+
+      // Get CSS descriptors that are used in at-rules
+      if (includes(element.tags, 'At-rule')) {
+        element.subpages.forEach(function (subElement) {
+          if (includes(subElement.tags, 'CSS Property') && !includes(cssProperties, subElement.title)) {
+            cssProperties.push(subElement.title);
+          }
+        });
+      }
     });
 
+    cssProperties.sort();
     cssProperties = JSON.stringify(cssProperties, null, 2);
 
     fs.writeFile('orders/source.json', cssProperties, function (error) {

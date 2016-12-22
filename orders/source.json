@@ -274,6 +274,7 @@
   "transition-property",
   "transition-timing-function",
   "unicode-bidi",
+  "unicode-range",
   "vertical-align",
   "visibility",
   "white-space",

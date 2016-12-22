@@ -265,6 +265,7 @@
   "writing-mode",
   "direction",
   "unicode-bidi",
+  "unicode-range",
   "text-combine-upright",
   "text-align",
   "text-align-last",
