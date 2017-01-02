@@ -3,8 +3,15 @@
 var https = require('https');
 var fs = require('fs');
 
-var includes = function (element, searchValue) {
-  return Boolean(~element.indexOf(searchValue));
+var isStandardProperty = function (tags) {
+  return (
+    tags.find(function (tagName) {
+      return tagName.match(/css property/i);
+    }) &&
+    !tags.find(function (tagName) {
+      return tagName.match(/non-standard/i);
+    })
+  );
 };
 
 var options = {
@@ -15,7 +22,6 @@ var options = {
 
 var request = https.get(options, function (result) {
   var data = '';
-  var cssProperties = [];
 
   result.setEncoding('utf8');
 
@@ -27,21 +33,22 @@ var request = https.get(options, function (result) {
   result.on('end', function () {
     data = JSON.parse(data);
 
-    data.subpages.forEach(function (element) {
-      // Add element if tagged as CSS property and not tagged as Non-standard
-      if (includes(element.tags, 'CSS Property') && !includes(element.tags, 'Non-standard')) {
-        cssProperties.push(element.title);
+    var cssProperties = data.subpages.reduce(function (cssProperties, page) {
+      // Add page title if tagged as CSS property and not tagged as Non-standard
+      if (isStandardProperty(page.tags)) {
+        cssProperties.push(page.title);
       }
 
-      // Get CSS descriptors that are used in at-rules
-      if (includes(element.tags, 'At-rule')) {
-        element.subpages.forEach(function (subElement) {
-          if (includes(subElement.tags, 'CSS Property') && !includes(cssProperties, subElement.title)) {
-            cssProperties.push(subElement.title);
-          }
-        });
-      }
-    });
+      var cssDescriptors = page.subpages.reduce(function (cssDescriptors, subPage) {
+        if (isStandardProperty(subPage.tags) && !~cssProperties.indexOf(subPage.title)) {
+          cssDescriptors.push(subPage.title)
+        }
+
+        return cssDescriptors;
+      }, [])
+
+      return [].concat(cssProperties, cssDescriptors);
+    }, []);
 
     cssProperties.sort();
     cssProperties = JSON.stringify(cssProperties, null, 2);
