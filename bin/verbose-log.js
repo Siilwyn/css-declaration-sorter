@@ -1,6 +1,6 @@
 'use strict';
 
-var args = require('argh').argv;
+const args = require('argh').argv;
 
 module.exports = function () {
   if (args.verbose) {

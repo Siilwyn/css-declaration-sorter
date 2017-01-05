@@ -1,24 +1,24 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-var tape = require('tape');
-var postcss = require('postcss');
-var plugin = require('../src/');
-var name = require('../package.json').name;
+const tape = require('tape');
+const postcss = require('postcss');
+const plugin = require('../src/');
+const name = require('../package.json').name;
 
-var processCss = function (css, options) {
+const processCss = function (css, options) {
   return postcss(plugin(options)).process(css);
 };
 
-var testCssFixtures = function (testMessage, tests) {
+const testCssFixtures = function (testMessage, tests) {
   tape(testMessage, function (t) {
     // Set amount of assertions by setting two assertions per sort order test
     t.plan(tests.length * 2);
 
     tests.forEach(function (test) {
-      var options = test.options || {};
+      const options = test.options || {};
 
       processCss(test.fixture, options).then(function (result) {
         t.equal(result.css, test.expected, test.message);
@@ -28,7 +28,7 @@ var testCssFixtures = function (testMessage, tests) {
   });
 };
 
-var sortOrderTests = [
+const sortOrderTests = [
   {
     message: 'Keep same order for identical properties.',
     fixture: 'a{flex: 0;flex: 2;}',
@@ -65,7 +65,7 @@ var sortOrderTests = [
   }
 ];
 
-var commentOrderTests = [
+const commentOrderTests = [
   {
     message: 'Keep comment intact.',
     fixture: 'a{flex: 0;/*flex*/}',
@@ -93,7 +93,7 @@ var commentOrderTests = [
   }
 ];
 
-var nestedDeclarationTests = [
+const nestedDeclarationTests = [
   {
     message: 'Sort nested declarations.',
     fixture: 'a{a{flex: 0;border: 0;}}',
@@ -120,10 +120,11 @@ tape('Should use the PostCSS plugin API.', function (t) {
 });
 
 tape('CSS properties are up-to-date.', function (t) {
-  var cssOrdersDir = './orders/';
+  const cssOrdersDir = './orders/';
 
   fs.readdir(cssOrdersDir, function (error, files) {
-    var sourceProperties = JSON.parse(
+    const sourceProperties = JSON.parse(
+      // eslint-disable-next-line no-sync
       fs.readFileSync(path.join(cssOrdersDir, 'source.json'))
     );
 
@@ -136,6 +137,7 @@ tape('CSS properties are up-to-date.', function (t) {
         return {
           'fileName': fileName,
           'properties': JSON.parse(
+            // eslint-disable-next-line no-sync
             fs.readFileSync(path.join(cssOrdersDir, fileName))
           )
         };
