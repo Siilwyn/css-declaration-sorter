@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var read = require('read-file-stdin');
-var write = require('write-file-stdout');
-var args = require('argh').argv;
+const fs = require('fs');
+const path = require('path');
+const read = require('read-file-stdin');
+const write = require('write-file-stdout');
+const args = require('argh').argv;
 
-var cssdeclsort = require('../src/index.js');
-var log = require('./verbose-log');
+const cssdeclsort = require('../src/index.js');
+const log = require('./verbose-log');
 
-var transform = function (input, output) {
+const transform = function (input, output) {
   // Read from a file, fallback to stdin
   read(input, function (error, data) {
-    var options = {};
+    const options = {};
 
     if (error) throw error;
 
@@ -33,10 +33,10 @@ var transform = function (input, output) {
   });
 };
 
-var handleArgs = function () {
-  var directory = args.directory || '';
-  var explicitOutput = args.output;
-  var usageFile;
+const handleArgs = function () {
+  const directory = args.directory || '';
+  const explicitOutput = args.output;
+  let usageFile;
 
   log('Arguments:', args, '\n');
 
@@ -61,7 +61,7 @@ var handleArgs = function () {
   // Loop through given arguments and process each argument
   if (args.argv) {
     args.argv.forEach(function (file) {
-      var output = explicitOutput || path.join(directory, file);
+      const output = explicitOutput || path.join(directory, file);
       transform(file, output);
     });
   } else {

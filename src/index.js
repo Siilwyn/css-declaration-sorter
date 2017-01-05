@@ -1,14 +1,14 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-var postcss = require('postcss');
-var timsort = require('timsort').sort;
+const postcss = require('postcss');
+const timsort = require('timsort').sort;
 
 module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   // Sort CSS declarations alphabetically or using the set sorting order
-  var sortCssDecls = function (cssDecls, sortOrder) {
+  const sortCssDecls = function (cssDecls, sortOrder) {
     if (sortOrder === 'alphabetically') {
       timsort(cssDecls, function (a, b) {
         if (a.prop !== b.prop) {
@@ -19,8 +19,8 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
       });
     } else {
       timsort(cssDecls, function (a, b) {
-        var aIndex = sortOrder.indexOf(a.prop);
-        var bIndex = sortOrder.indexOf(b.prop);
+        const aIndex = sortOrder.indexOf(a.prop);
+        const bIndex = sortOrder.indexOf(b.prop);
 
         if (aIndex !== bIndex) {
           return aIndex < bIndex ? -1 : 1;
@@ -32,13 +32,13 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   };
 
   // Return all comments in two types with the node they belong to
-  var processComments = function (css) {
-    var newline = [];
-    var inline = [];
+  const processComments = function (css) {
+    const newline = [];
+    const inline = [];
 
     css.walkComments(function (comment) {
       // Don't do anything to root comments or the last newline comment
-      var lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+      const lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
 
       if (comment.parent.type === 'root' || lastNewlineNode) {
         return;
@@ -68,12 +68,12 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
     };
   };
 
-  var processCss = function (css, sortOrder) {
-    var processedComments = processComments(css);
+  const processCss = function (css, sortOrder) {
+    const processedComments = processComments(css);
 
     // Traverse nodes with children and sort those children
     css.walk(function (rule) {
-      var isRule = rule.type === 'rule' || rule.type === 'atrule';
+      const isRule = rule.type === 'rule' || rule.type === 'atrule';
 
       if (isRule && rule.nodes && rule.nodes.length > 1) {
         sortCssDecls(rule.nodes, sortOrder);
@@ -93,7 +93,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   };
 
   return function (css) {
-    var sortOrderPath;
+    let sortOrderPath;
 
     options = options || {};
 

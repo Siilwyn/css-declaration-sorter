@@ -1,9 +1,9 @@
 'use strict';
 
-var https = require('https');
-var fs = require('fs');
+const https = require('https');
+const fs = require('fs');
 
-var isStandardProperty = function (tags) {
+const isStandardProperty = function (tags) {
   return (
     tags.find(function (tagName) {
       return tagName.match(/css property/i);
@@ -14,14 +14,14 @@ var isStandardProperty = function (tags) {
   );
 };
 
-var options = {
+const options = {
   hostname: 'developer.mozilla.org',
   port: 443,
   path: '/en-US/docs/Web/CSS$children?expand'
 };
 
-var request = https.get(options, function (result) {
-  var data = '';
+const request = https.get(options, function (result) {
+  let data = '';
 
   result.setEncoding('utf8');
 
@@ -33,19 +33,19 @@ var request = https.get(options, function (result) {
   result.on('end', function () {
     data = JSON.parse(data);
 
-    var cssProperties = data.subpages.reduce(function (cssProperties, page) {
+    let cssProperties = data.subpages.reduce(function (cssProperties, page) {
       // Add page title if tagged as CSS property and not tagged as Non-standard
       if (isStandardProperty(page.tags)) {
         cssProperties.push(page.title);
       }
 
-      var cssDescriptors = page.subpages.reduce(function (cssDescriptors, subPage) {
+      const cssDescriptors = page.subpages.reduce(function (cssDescriptors, subPage) {
         if (isStandardProperty(subPage.tags) && !~cssProperties.indexOf(subPage.title)) {
-          cssDescriptors.push(subPage.title)
+          cssDescriptors.push(subPage.title);
         }
 
         return cssDescriptors;
-      }, [])
+      }, []);
 
       return [].concat(cssProperties, cssDescriptors);
     }, []);
