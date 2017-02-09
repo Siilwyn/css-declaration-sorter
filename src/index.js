@@ -45,7 +45,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
       }
 
       if (~comment.raws.before.indexOf('\n')) {
-        newline.push({
+        newline.unshift({
           'comment': comment,
           'pairedNode': comment.next()
         });
@@ -58,9 +58,6 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
 
       comment.remove();
     });
-
-    // Reverse order because newline comments are inserted before the next node
-    newline.reverse();
 
     return {
       'newline': newline,
