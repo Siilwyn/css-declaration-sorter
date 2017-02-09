@@ -30,59 +30,59 @@ function sortCssDecls (cssDecls, sortOrder) {
   }
 }
 
-// Return all comments in two types with the node they belong to
-function processComments (css) {
+function processCss (css, sortOrder) {
   const newline = [];
   const inline = [];
+  const cached = [];
 
-  css.walkComments(function (comment) {
-    // Don't do anything to root comments or the last newline comment
-    const lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+  css.walk(function (node) {
+    const nodes = node.nodes;
+    const type = node.type;
 
-    if (comment.parent.type === 'root' || lastNewlineNode) {
+    if (type === 'comment') {
+      // Don't do anything to root comments or the last newline comment
+      const lastNewlineNode = !node.next() && ~node.raws.before.indexOf('\n');
+
+      if (node.parent.type === 'root' || lastNewlineNode) {
+        return;
+      }
+
+      if (~node.raws.before.indexOf('\n')) {
+        newline.unshift({
+          'comment': node,
+          'pairedNode': node.next()
+        });
+      } else {
+        inline.push({
+          'comment': node,
+          'pairedNode': node.prev()
+        });
+      }
+
+      node.remove();
       return;
     }
 
-    if (~comment.raws.before.indexOf('\n')) {
-      newline.unshift({
-        'comment': comment,
-        'pairedNode': comment.next()
-      });
-    } else {
-      inline.push({
-        'comment': comment,
-        'pairedNode': comment.prev()
-      });
+    // Add rule-like nodes to a cache so that we can remove all
+    // comment nodes before we start sorting.
+    const isRule = type === 'rule' || type === 'atrule';
+    if (isRule && nodes && nodes.length > 1) {
+      cached.push(nodes);
     }
-
-    comment.remove();
   });
 
-  return {
-    'newline': newline,
-    'inline': inline
-  };
-}
-
-function processCss (css, sortOrder) {
-  const processedComments = processComments(css);
-
-  // Traverse nodes with children and sort those children
-  css.walk(function (rule) {
-    const isRule = rule.type === 'rule' || rule.type === 'atrule';
-
-    if (isRule && rule.nodes && rule.nodes.length > 1) {
-      sortCssDecls(rule.nodes, sortOrder);
-    }
+  // Perform a sort once all comment nodes are removed
+  cached.forEach(function (nodes) {
+    sortCssDecls(nodes, sortOrder);
   });
 
   // Add comments back to the nodes they are paired with
-  processedComments.newline.forEach(function (element) {
+  newline.forEach(function (element) {
     element.comment.remove();
     element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
   });
 
-  processedComments.inline.forEach(function (element) {
+  inline.forEach(function (element) {
     element.comment.remove();
     element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
   });
