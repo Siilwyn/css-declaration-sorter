@@ -6,89 +6,89 @@ const path = require('path');
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
-module.exports = postcss.plugin('css-declaration-sorter', function (options) {
-  // Sort CSS declarations alphabetically or using the set sorting order
-  const sortCssDecls = function (cssDecls, sortOrder) {
-    if (sortOrder === 'alphabetically') {
-      timsort(cssDecls, function (a, b) {
-        if (a.prop !== b.prop) {
-          return a.prop < b.prop ? -1 : 1;
-        } else {
-          return 0;
-        }
+// Sort CSS declarations alphabetically or using the set sorting order
+function sortCssDecls (cssDecls, sortOrder) {
+  if (sortOrder === 'alphabetically') {
+    timsort(cssDecls, function (a, b) {
+      if (a.prop !== b.prop) {
+        return a.prop < b.prop ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    timsort(cssDecls, function (a, b) {
+      const aIndex = sortOrder.indexOf(a.prop);
+      const bIndex = sortOrder.indexOf(b.prop);
+
+      if (aIndex !== bIndex) {
+        return aIndex < bIndex ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+}
+
+// Return all comments in two types with the node they belong to
+function processComments (css) {
+  const newline = [];
+  const inline = [];
+
+  css.walkComments(function (comment) {
+    // Don't do anything to root comments or the last newline comment
+    const lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+
+    if (comment.parent.type === 'root' || lastNewlineNode) {
+      return;
+    }
+
+    if (~comment.raws.before.indexOf('\n')) {
+      newline.unshift({
+        'comment': comment,
+        'pairedNode': comment.next()
       });
     } else {
-      timsort(cssDecls, function (a, b) {
-        const aIndex = sortOrder.indexOf(a.prop);
-        const bIndex = sortOrder.indexOf(b.prop);
-
-        if (aIndex !== bIndex) {
-          return aIndex < bIndex ? -1 : 1;
-        } else {
-          return 0;
-        }
+      inline.push({
+        'comment': comment,
+        'pairedNode': comment.prev()
       });
     }
+
+    comment.remove();
+  });
+
+  return {
+    'newline': newline,
+    'inline': inline
   };
+}
 
-  // Return all comments in two types with the node they belong to
-  const processComments = function (css) {
-    const newline = [];
-    const inline = [];
+function processCss (css, sortOrder) {
+  const processedComments = processComments(css);
 
-    css.walkComments(function (comment) {
-      // Don't do anything to root comments or the last newline comment
-      const lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+  // Traverse nodes with children and sort those children
+  css.walk(function (rule) {
+    const isRule = rule.type === 'rule' || rule.type === 'atrule';
 
-      if (comment.parent.type === 'root' || lastNewlineNode) {
-        return;
-      }
+    if (isRule && rule.nodes && rule.nodes.length > 1) {
+      sortCssDecls(rule.nodes, sortOrder);
+    }
+  });
 
-      if (~comment.raws.before.indexOf('\n')) {
-        newline.unshift({
-          'comment': comment,
-          'pairedNode': comment.next()
-        });
-      } else {
-        inline.push({
-          'comment': comment,
-          'pairedNode': comment.prev()
-        });
-      }
+  // Add comments back to the nodes they are paired with
+  processedComments.newline.forEach(function (element) {
+    element.comment.remove();
+    element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+  });
 
-      comment.remove();
-    });
+  processedComments.inline.forEach(function (element) {
+    element.comment.remove();
+    element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+  });
+}
 
-    return {
-      'newline': newline,
-      'inline': inline
-    };
-  };
-
-  const processCss = function (css, sortOrder) {
-    const processedComments = processComments(css);
-
-    // Traverse nodes with children and sort those children
-    css.walk(function (rule) {
-      const isRule = rule.type === 'rule' || rule.type === 'atrule';
-
-      if (isRule && rule.nodes && rule.nodes.length > 1) {
-        sortCssDecls(rule.nodes, sortOrder);
-      }
-    });
-
-    // Add comments back to the nodes they are paired with
-    processedComments.newline.forEach(function (element) {
-      element.comment.remove();
-      element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
-    });
-
-    processedComments.inline.forEach(function (element) {
-      element.comment.remove();
-      element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
-    });
-  };
-
+module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   return function (css) {
     let sortOrderPath;
 
