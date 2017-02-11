@@ -87,6 +87,11 @@ const commentOrderTests = [
     expected: 'a{\n/*border*/\nborder: 0;flex: 0;}'
   },
   {
+    message: 'Handle multiple newline comments.',
+    fixture: 'a{flex: 0;\n/*border a*/\n/*border b*/\nborder: 0;}',
+    expected: 'a{\n/*border a*/\n/*border b*/\nborder: 0;flex: 0;}'
+  },
+  {
     message: 'Keep inline comment beside declaration.',
     fixture: 'a{flex: 0;\nborder: 0; /*border*/}',
     expected: 'a{\nborder: 0; /*border*/flex: 0;}'
