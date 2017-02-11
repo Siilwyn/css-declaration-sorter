@@ -65,9 +65,9 @@ Sorting multiple files by overwriting:
 
 ### Vanilla JS
 ```js
-var fs = require('fs');
-var postcss = require('postcss');
-var cssdeclsort = require('css-declaration-sorter');
+const fs = require('fs');
+const postcss = require('postcss');
+const cssdeclsort = require('css-declaration-sorter');
 
 postcss([cssdeclsort({order: 'smacss'})])
   .process(fs.readFileSync('something.css'))
@@ -78,9 +78,9 @@ postcss([cssdeclsort({order: 'smacss'})])
 
 ### Gulp
 ```js
-var gulp = require('gulp');
-var gulpPostcss = require('gulp-postcss');
-var cssdeclsort = require('css-declaration-sorter');
+const gulp = require('gulp');
+const gulpPostcss = require('gulp-postcss');
+const cssdeclsort = require('css-declaration-sorter');
 
 gulp.task('css', function () {
   return gulp.src('something.css')
