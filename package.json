@@ -34,7 +34,7 @@
     "preversion": "npm test",
     "postversion": "git push && npm publish",
     "lint": "eslint src/*.js bin/*.js tests/*.js",
-    "watch": "watch 'npm run test && npm run lint --silent' src bin",
+    "watch": "watch 'npm run test && npm run lint --silent' src bin tests",
     "scrape": "node src/property-scraper"
   },
   "dependencies": {
