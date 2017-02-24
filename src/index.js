@@ -33,7 +33,7 @@ function sortCssDecls (cssDecls, sortOrder) {
 function processCss (css, sortOrder) {
   const newline = [];
   const inline = [];
-  const cached = [];
+  const rulesCache = [];
 
   css.walk(function (node) {
     const nodes = node.nodes;
@@ -67,12 +67,12 @@ function processCss (css, sortOrder) {
     // comment nodes before we start sorting.
     const isRule = type === 'rule' || type === 'atrule';
     if (isRule && nodes && nodes.length > 1) {
-      cached.push(nodes);
+      rulesCache.push(nodes);
     }
   });
 
   // Perform a sort once all comment nodes are removed
-  cached.forEach(function (nodes) {
+  rulesCache.forEach(function (nodes) {
     sortCssDecls(nodes, sortOrder);
   });
 
