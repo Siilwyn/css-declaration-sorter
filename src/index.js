@@ -6,92 +6,89 @@ const path = require('path');
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
-module.exports = postcss.plugin('css-declaration-sorter', function (options) {
-  // Sort CSS declarations alphabetically or using the set sorting order
-  const sortCssDecls = function (cssDecls, sortOrder) {
-    if (sortOrder === 'alphabetically') {
-      timsort(cssDecls, function (a, b) {
-        if (a.prop !== b.prop) {
-          return a.prop < b.prop ? -1 : 1;
-        } else {
-          return 0;
-        }
-      });
-    } else {
-      timsort(cssDecls, function (a, b) {
-        const aIndex = sortOrder.indexOf(a.prop);
-        const bIndex = sortOrder.indexOf(b.prop);
+// Sort CSS declarations alphabetically or using the set sorting order
+function sortCssDecls (cssDecls, sortOrder) {
+  if (sortOrder === 'alphabetically') {
+    timsort(cssDecls, function (a, b) {
+      if (a.prop !== b.prop) {
+        return a.prop < b.prop ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    timsort(cssDecls, function (a, b) {
+      const aIndex = sortOrder.indexOf(a.prop);
+      const bIndex = sortOrder.indexOf(b.prop);
 
-        if (aIndex !== bIndex) {
-          return aIndex < bIndex ? -1 : 1;
-        } else {
-          return 0;
-        }
-      });
-    }
-  };
+      if (aIndex !== bIndex) {
+        return aIndex < bIndex ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+}
 
-  // Return all comments in two types with the node they belong to
-  const processComments = function (css) {
-    const newline = [];
-    const inline = [];
+function processCss (css, sortOrder) {
+  const newline = [];
+  const inline = [];
+  const rulesCache = [];
 
-    css.walkComments(function (comment) {
+  css.walk(function (node) {
+    const nodes = node.nodes;
+    const type = node.type;
+
+    if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
-      const lastNewlineNode = !comment.next() && ~comment.raws.before.indexOf('\n');
+      const lastNewlineNode = !node.next() && ~node.raws.before.indexOf('\n');
 
-      if (comment.parent.type === 'root' || lastNewlineNode) {
+      if (node.parent.type === 'root' || lastNewlineNode) {
         return;
       }
 
-      if (~comment.raws.before.indexOf('\n')) {
-        newline.push({
-          'comment': comment,
-          'pairedNode': comment.next()
+      if (~node.raws.before.indexOf('\n')) {
+        newline.unshift({
+          'comment': node,
+          'pairedNode': node.next()
         });
       } else {
         inline.push({
-          'comment': comment,
-          'pairedNode': comment.prev()
+          'comment': node,
+          'pairedNode': node.prev()
         });
       }
 
-      comment.remove();
-    });
+      node.remove();
+      return;
+    }
 
-    // Reverse order because newline comments are inserted before the next node
-    newline.reverse();
+    // Add rule-like nodes to a cache so that we can remove all
+    // comment nodes before we start sorting.
+    const isRule = type === 'rule' || type === 'atrule';
+    if (isRule && nodes && nodes.length > 1) {
+      rulesCache.push(nodes);
+    }
+  });
 
-    return {
-      'newline': newline,
-      'inline': inline
-    };
-  };
+  // Perform a sort once all comment nodes are removed
+  rulesCache.forEach(function (nodes) {
+    sortCssDecls(nodes, sortOrder);
+  });
 
-  const processCss = function (css, sortOrder) {
-    const processedComments = processComments(css);
+  // Add comments back to the nodes they are paired with
+  newline.forEach(function (element) {
+    element.comment.remove();
+    element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+  });
 
-    // Traverse nodes with children and sort those children
-    css.walk(function (rule) {
-      const isRule = rule.type === 'rule' || rule.type === 'atrule';
+  inline.forEach(function (element) {
+    element.comment.remove();
+    element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+  });
+}
 
-      if (isRule && rule.nodes && rule.nodes.length > 1) {
-        sortCssDecls(rule.nodes, sortOrder);
-      }
-    });
-
-    // Add comments back to the nodes they are paired with
-    processedComments.newline.forEach(function (element) {
-      element.comment.remove();
-      element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
-    });
-
-    processedComments.inline.forEach(function (element) {
-      element.comment.remove();
-      element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
-    });
-  };
-
+module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   return function (css) {
     let sortOrderPath;
 
