@@ -1,6 +1,6 @@
 {
   "name": "css-declaration-sorter",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "keywords": [
     "postcss",
