@@ -47,24 +47,30 @@ function processCss (css, sortOrder) {
         return;
       }
 
+      // single comment without neibours
+      if (!node.prev() && !node.next()) {
+        return;
+      }
 
       if (~node.raws.before.indexOf('\n')) {
-        const pairedNode = node.next() || node.prev();
+        const pairedNode = node.next() ? node.next() : node.prev().prev();
         if (pairedNode) {
           newline.unshift({
             'comment': node,
+            'pairedParent': node.parent,
             'pairedNode': pairedNode,
             'inverse': !node.next()
           });
           node.remove();
         }
       } else {
-        const pairedNode = node.prev() || node.next();
+        const pairedNode = node.prev() ? node.prev() : node.next().next();
         if (pairedNode) {
           inline.push({
             'comment': node,
+            'pairedParent': node.parent,
             'pairedNode': pairedNode,
-            'inverse': !node.prev()
+            'inverse': false
           });
           node.remove();
         }
@@ -89,9 +95,9 @@ function processCss (css, sortOrder) {
   newline.forEach(function (element) {
     element.comment.remove();
     if (!element.inverse) {
-      element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+      element.pairedParent.insertBefore(element.pairedNode, element.comment);
     } else {
-      element.pairedNode.parent.insertAfter(element.pairedNode.prev(), element.comment);
+      element.pairedParent.insertAfter(element.pairedNode, element.comment);
     }
 
   });
@@ -99,9 +105,9 @@ function processCss (css, sortOrder) {
   inline.forEach(function (element) {
     element.comment.remove();
     if (!element.inverse) {
-      element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+      element.pairedParent.insertAfter(element.pairedNode, element.comment);
     } else {
-      element.pairedNode.parent.insertBefore(element.pairedNode.next(), element.comment);
+      element.pairedParent.insertBefore(element.pairedNode, element.comment);
     }
   });
 }

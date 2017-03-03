@@ -123,6 +123,16 @@ const nestedDeclarationTests = [
     message: 'Sort nested with comments only',
     fixture: 'a{&:hover{/*Comment*/}}',
     expected: 'a{&:hover{/*Comment*/}}'
+  },
+  {
+    message: 'Without sort nested with comments at top without',
+    fixture: 'a{&:hover{/*Comment*/ flex: 0;}}',
+    expected: 'a{&:hover{/*Comment*/ flex: 0;}}',
+  },
+  {
+    message: 'Without sort nested with comments at top',
+    fixture: 'a{&:hover{flex: 0;/*Comment*/ }}',
+    expected: 'a{&:hover{flex: 0;/*Comment*/ }}',
   }
 ];
 
