@@ -47,19 +47,28 @@ function processCss (css, sortOrder) {
         return;
       }
 
-      if (~node.raws.before.indexOf('\n')) {
-        newline.unshift({
-          'comment': node,
-          'pairedNode': node.next()
-        });
-      } else {
-        inline.push({
-          'comment': node,
-          'pairedNode': node.prev()
-        });
-      }
 
-      node.remove();
+      if (~node.raws.before.indexOf('\n')) {
+        const pairedNode = node.next() || node.prev();
+        if (pairedNode) {
+          newline.unshift({
+            'comment': node,
+            'pairedNode': pairedNode,
+            'inverse': !node.next()
+          });
+          node.remove();
+        }
+      } else {
+        const pairedNode = node.prev() || node.next();
+        if (pairedNode) {
+          inline.push({
+            'comment': node,
+            'pairedNode': pairedNode,
+            'inverse': !node.prev()
+          });
+          node.remove();
+        }
+      }
       return;
     }
 
@@ -79,12 +88,21 @@ function processCss (css, sortOrder) {
   // Add comments back to the nodes they are paired with
   newline.forEach(function (element) {
     element.comment.remove();
-    element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+    if (!element.inverse) {
+      element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
+    } else {
+      element.pairedNode.parent.insertAfter(element.pairedNode.prev(), element.comment);
+    }
+
   });
 
   inline.forEach(function (element) {
     element.comment.remove();
-    element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+    if (!element.inverse) {
+      element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+    } else {
+      element.pairedNode.parent.insertBefore(element.pairedNode.next(), element.comment);
+    }
   });
 }
 

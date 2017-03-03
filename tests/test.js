@@ -108,6 +108,21 @@ const nestedDeclarationTests = [
     message: 'Sort nested at-rule declarations.',
     fixture: 'a{@media(){flex: 0;border: 0;}}',
     expected: 'a{@media(){border: 0;flex: 0;}}'
+  },
+  {
+    message: 'Sort nested with comments at top',
+    fixture: 'a{&:hover{/*Comment*/ flex: 0; border: 0;}}',
+    expected: 'a{&:hover{ border: 0;/*Comment*/ flex: 0;}}'
+  },
+  {
+    message: 'Sort nested with comments at bottom',
+    fixture: 'a{&:hover{flex: 0;border: 0;/*Comment*/}}',
+    expected: 'a{&:hover{border: 0;/*Comment*/flex: 0;}}'
+  },
+  {
+    message: 'Sort nested with comments only',
+    fixture: 'a{&:hover{/*Comment*/}}',
+    expected: 'a{&:hover{/*Comment*/}}'
   }
 ];
 
