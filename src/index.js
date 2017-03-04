@@ -31,8 +31,7 @@ function sortCssDecls (cssDecls, sortOrder) {
 }
 
 function processCss (css, sortOrder) {
-  const newline = [];
-  const inline = [];
+  const comments = [];
   const rulesCache = [];
 
   css.walk(function (node) {
@@ -41,40 +40,36 @@ function processCss (css, sortOrder) {
 
     if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
-      const lastNewlineNode = !node.next() && ~node.raws.before.indexOf('\n');
+      const isNewlineNode = ~node.raws.before.indexOf('\n');
+      const lastNewlineNode = isNewlineNode && !node.next();
+      const onlyNode = !node.prev() && !node.next();
 
-      if (node.parent.type === 'root' || lastNewlineNode) {
+      if (lastNewlineNode || onlyNode) {
         return;
       }
 
-      // single comment without neibours
-      if (!node.prev() && !node.next()) {
-        return;
-      }
-
-      if (~node.raws.before.indexOf('\n')) {
+      if (isNewlineNode) {
         const pairedNode = node.next() ? node.next() : node.prev().prev();
         if (pairedNode) {
-          newline.unshift({
+          comments.unshift({
             'comment': node,
-            'pairedParent': node.parent,
             'pairedNode': pairedNode,
-            'inverse': !node.next()
+            'insertPosition': node.next() ? 'Before' : 'After',
           });
           node.remove();
         }
       } else {
         const pairedNode = node.prev() ? node.prev() : node.next().next();
         if (pairedNode) {
-          inline.push({
+          comments.push({
             'comment': node,
-            'pairedParent': node.parent,
             'pairedNode': pairedNode,
-            'inverse': false
+            'insertPosition': 'After',
           });
           node.remove();
         }
       }
+
       return;
     }
 
@@ -92,23 +87,10 @@ function processCss (css, sortOrder) {
   });
 
   // Add comments back to the nodes they are paired with
-  newline.forEach(function (element) {
-    element.comment.remove();
-    if (!element.inverse) {
-      element.pairedParent.insertBefore(element.pairedNode, element.comment);
-    } else {
-      element.pairedParent.insertAfter(element.pairedNode, element.comment);
-    }
-
-  });
-
-  inline.forEach(function (element) {
-    element.comment.remove();
-    if (!element.inverse) {
-      element.pairedParent.insertAfter(element.pairedNode, element.comment);
-    } else {
-      element.pairedParent.insertBefore(element.pairedNode, element.comment);
-    }
+  comments.forEach(function (node) {
+    const pairedNode = node.pairedNode;
+    node.comment.remove();
+    pairedNode.parent['insert' + node.insertPosition](pairedNode, node.comment);
   });
 }
 
