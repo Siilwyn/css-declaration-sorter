@@ -72,6 +72,11 @@ const commentOrderTests = [
     expected: 'a{flex: 0;/*flex*/}'
   },
   {
+    message: 'Handle declaration with one comment.',
+    fixture: 'a{/*comment*/}',
+    expected: 'a{/*comment*/}',
+  },
+  {
     message: 'Keep dangling comment intact.',
     fixture: 'a{flex: 0;\n/*end*/}',
     expected: 'a{flex: 0;\n/*end*/}'
@@ -110,30 +115,15 @@ const nestedDeclarationTests = [
     expected: 'a{@media(){border: 0;flex: 0;}}'
   },
   {
-    message: 'Sort nested with comments at top',
-    fixture: 'a{&:hover{/*Comment*/ flex: 0; border: 0;}}',
-    expected: 'a{&:hover{ border: 0;/*Comment*/ flex: 0;}}'
+    message: 'Keep nested newline comment above declaration.',
+    fixture: 'a{&:hover{flex: 0;\n/*border*/\nborder: 0;}}',
+    expected: 'a{&:hover{\n/*border*/\nborder: 0;flex: 0;}}'
   },
   {
-    message: 'Sort nested with comments at bottom',
-    fixture: 'a{&:hover{flex: 0;border: 0;/*Comment*/}}',
-    expected: 'a{&:hover{border: 0;/*Comment*/flex: 0;}}'
+    message: 'Keep nested inline comment beside declaration.',
+    fixture: 'a{&:hover{flex: 0;\nborder: 0; /*border*/}}',
+    expected: 'a{&:hover{\nborder: 0; /*border*/flex: 0;}}'
   },
-  {
-    message: 'Sort nested with comments only',
-    fixture: 'a{&:hover{/*Comment*/}}',
-    expected: 'a{&:hover{/*Comment*/}}'
-  },
-  {
-    message: 'Without sort nested with comments at top without',
-    fixture: 'a{&:hover{/*Comment*/ flex: 0;}}',
-    expected: 'a{&:hover{/*Comment*/ flex: 0;}}',
-  },
-  {
-    message: 'Without sort nested with comments at top',
-    fixture: 'a{&:hover{flex: 0;/*Comment*/ }}',
-    expected: 'a{&:hover{flex: 0;/*Comment*/ }}',
-  }
 ];
 
 testCssFixtures('Should order CSS declarations.', sortOrderTests);
