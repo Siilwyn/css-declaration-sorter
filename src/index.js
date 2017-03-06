@@ -31,8 +31,7 @@ function sortCssDecls (cssDecls, sortOrder) {
 }
 
 function processCss (css, sortOrder) {
-  const newline = [];
-  const inline = [];
+  const comments = [];
   const rulesCache = [];
 
   css.walk(function (node) {
@@ -41,25 +40,36 @@ function processCss (css, sortOrder) {
 
     if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
-      const lastNewlineNode = !node.next() && ~node.raws.before.indexOf('\n');
+      const isNewlineNode = ~node.raws.before.indexOf('\n');
+      const lastNewlineNode = isNewlineNode && !node.next();
+      const onlyNode = !node.prev() && !node.next();
 
-      if (node.parent.type === 'root' || lastNewlineNode) {
+      if (lastNewlineNode || onlyNode) {
         return;
       }
 
-      if (~node.raws.before.indexOf('\n')) {
-        newline.unshift({
-          'comment': node,
-          'pairedNode': node.next()
-        });
+      if (isNewlineNode) {
+        const pairedNode = node.next() ? node.next() : node.prev().prev();
+        if (pairedNode) {
+          comments.unshift({
+            'comment': node,
+            'pairedNode': pairedNode,
+            'insertPosition': node.next() ? 'Before' : 'After',
+          });
+          node.remove();
+        }
       } else {
-        inline.push({
-          'comment': node,
-          'pairedNode': node.prev()
-        });
+        const pairedNode = node.prev() ? node.prev() : node.next().next();
+        if (pairedNode) {
+          comments.push({
+            'comment': node,
+            'pairedNode': pairedNode,
+            'insertPosition': 'After',
+          });
+          node.remove();
+        }
       }
 
-      node.remove();
       return;
     }
 
@@ -77,14 +87,10 @@ function processCss (css, sortOrder) {
   });
 
   // Add comments back to the nodes they are paired with
-  newline.forEach(function (element) {
-    element.comment.remove();
-    element.pairedNode.parent.insertBefore(element.pairedNode, element.comment);
-  });
-
-  inline.forEach(function (element) {
-    element.comment.remove();
-    element.pairedNode.parent.insertAfter(element.pairedNode, element.comment);
+  comments.forEach(function (node) {
+    const pairedNode = node.pairedNode;
+    node.comment.remove();
+    pairedNode.parent['insert' + node.insertPosition](pairedNode, node.comment);
   });
 }
 
