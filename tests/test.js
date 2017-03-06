@@ -72,6 +72,11 @@ const commentOrderTests = [
     expected: 'a{flex: 0;/*flex*/}'
   },
   {
+    message: 'Handle declaration with one comment.',
+    fixture: 'a{/*comment*/}',
+    expected: 'a{/*comment*/}',
+  },
+  {
     message: 'Keep dangling comment intact.',
     fixture: 'a{flex: 0;\n/*end*/}',
     expected: 'a{flex: 0;\n/*end*/}'
@@ -108,7 +113,17 @@ const nestedDeclarationTests = [
     message: 'Sort nested at-rule declarations.',
     fixture: 'a{@media(){flex: 0;border: 0;}}',
     expected: 'a{@media(){border: 0;flex: 0;}}'
-  }
+  },
+  {
+    message: 'Keep nested newline comment above declaration.',
+    fixture: 'a{&:hover{flex: 0;\n/*border*/\nborder: 0;}}',
+    expected: 'a{&:hover{\n/*border*/\nborder: 0;flex: 0;}}'
+  },
+  {
+    message: 'Keep nested inline comment beside declaration.',
+    fixture: 'a{&:hover{flex: 0;\nborder: 0; /*border*/}}',
+    expected: 'a{&:hover{\nborder: 0; /*border*/flex: 0;}}'
+  },
 ];
 
 testCssFixtures('Should order CSS declarations.', sortOrderTests);
