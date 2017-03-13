@@ -6,10 +6,17 @@ const path = require('path');
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
+function compareDifferentType (a, b) {
+  return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
+}
+
 // Sort CSS declarations alphabetically or using the set sorting order
 function sortCssDecls (cssDecls, sortOrder) {
   if (sortOrder === 'alphabetically') {
     timsort(cssDecls, function (a, b) {
+      if (a.type !== b.type) {
+        return compareDifferentType(a, b);
+      }
       if (a.prop !== b.prop) {
         return a.prop < b.prop ? -1 : 1;
       } else {
@@ -18,6 +25,9 @@ function sortCssDecls (cssDecls, sortOrder) {
     });
   } else {
     timsort(cssDecls, function (a, b) {
+      if (a.type !== b.type) {
+        return compareDifferentType(a, b);
+      }
       const aIndex = sortOrder.indexOf(a.prop);
       const bIndex = sortOrder.indexOf(b.prop);
 

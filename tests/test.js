@@ -124,6 +124,11 @@ const nestedDeclarationTests = [
     fixture: 'a{&:hover{flex: 0;\nborder: 0; /*border*/}}',
     expected: 'a{&:hover{\nborder: 0; /*border*/flex: 0;}}'
   },
+  {
+    message: 'Keep nested inline comment beside declaration.',
+    fixture: 'a{margin:0;&:hover{color:red;}padding:0;}',
+    expected: 'a{margin:0;padding:0;&:hover{color:red;}}'
+  }
 ];
 
 testCssFixtures('Should order CSS declarations.', sortOrderTests);
