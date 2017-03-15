@@ -21,6 +21,7 @@ const transform = function (input, output) {
     options.to = output;
     options.order = args.order;
     options.customOrder = args.customOrder;
+    options.position = args.position;
 
     log('Input:', input, 'Output:', output);
 
