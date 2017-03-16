@@ -4,5 +4,8 @@ node_js:
   - '6'
   - '4'
 
+script:
+  - 'npm run ci'
+
 notifications:
   email: false
