@@ -19,7 +19,6 @@ const testCssFixtures = function (testMessage, tests) {
 
     tests.forEach(function (test) {
       const options = test.options || {};
-
       processCss(test.fixture, options).then(function (result) {
         t.equal(result.css, test.expected, test.message);
         t.equal(result.warnings().length, 0);
@@ -123,6 +122,11 @@ const nestedDeclarationTests = [
     message: 'Keep nested inline comment beside declaration.',
     fixture: 'a{&:hover{flex: 0;\nborder: 0; /*border*/}}',
     expected: 'a{&:hover{\nborder: 0; /*border*/flex: 0;}}'
+  },
+  {
+    message: 'Put declarations before nested selector.',
+    fixture: 'a{margin: 0;&:hover{color: red;}padding: 0;}',
+    expected: 'a{margin: 0;padding: 0;&:hover{color: red;}}'
   },
 ];
 
