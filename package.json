@@ -32,7 +32,7 @@
     "start": "npm run watch",
     "test": "node tests/test.js",
     "preversion": "npm test",
-    "postversion": "git push && npm publish",
+    "postversion": "git push && git push --tags && npm publish",
     "lint": "eslint src/*.js bin/*.js tests/*.js",
     "watch": "watch 'npm run test && npm run lint --silent' src bin tests",
     "scrape": "node src/property-scraper",
