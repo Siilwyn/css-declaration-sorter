@@ -19,7 +19,6 @@ const testCssFixtures = function (testMessage, tests) {
 
     tests.forEach(function (test) {
       const options = test.options || {};
-
       processCss(test.fixture, options).then(function (result) {
         t.equal(result.css, test.expected, test.message);
         t.equal(result.warnings().length, 0);

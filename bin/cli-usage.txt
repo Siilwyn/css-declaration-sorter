@@ -9,6 +9,10 @@ Options:
   --order           Use provided order instead of ordering alphabetically.
   --output          Output to a file instead of writing to the origin or stdout.
   --verbose         Log extra information about the process to the console.
+  --position        Put properties at top of rule of at the bottom. (top by default)
 
 Orders:
   alphabetically, smacss, concentric-css
+
+Position:
+  top, bottom
