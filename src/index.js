@@ -6,28 +6,33 @@ const path = require('path');
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
-// Sort CSS declarations alphabetically or using the set sorting order
-function sortCssDecls (cssDecls, sortOrder) {
-  if (sortOrder === 'alphabetically') {
-    timsort(cssDecls, function (a, b) {
-      if (a.type === 'decl' && b.type === 'decl') {
-        return comparator(a.prop, b.prop);
-      } else {
-        return compareDifferentType(a, b);
-      }
+module.exports = postcss.plugin('css-declaration-sorter', function (options) {
+  return function (css) {
+    let sortOrderPath;
+
+    options = options || {};
+
+    // Use included sorting order if order is passed and not alphabetically
+    if (options.order && options.order !== 'alphabetically') {
+      sortOrderPath = path.join(__dirname, '../orders/', options.order) + '.json';
+    } else if (options.customOrder) {
+      sortOrderPath = options.customOrder;
+    } else {
+      // Fallback to the default sorting order
+      return processCss(css, 'alphabetically');
+    }
+
+    // Load in the array containing the order from a JSON file
+    return new Promise(function (resolve, reject) {
+      fs.readFile(sortOrderPath, function (error, data) {
+        if (error) return reject(error);
+        resolve(data);
+      });
+    }).then(function (data) {
+      return processCss(css, JSON.parse(data));
     });
-  } else {
-    timsort(cssDecls, function (a, b) {
-      if (a.type === 'decl' && b.type === 'decl') {
-        const aIndex = sortOrder.indexOf(a.prop);
-        const bIndex = sortOrder.indexOf(b.prop);
-        return comparator(aIndex, bIndex);
-      } else {
-        return compareDifferentType(a, b);
-      }
-    });
-  }
-}
+  };
+});
 
 function processCss (css, sortOrder) {
   const comments = [];
@@ -92,33 +97,28 @@ function processCss (css, sortOrder) {
   });
 }
 
-module.exports = postcss.plugin('css-declaration-sorter', function (options) {
-  return function (css) {
-    let sortOrderPath;
-
-    options = options || {};
-
-    // Use included sorting order if order is passed and not alphabetically
-    if (options.order && options.order !== 'alphabetically') {
-      sortOrderPath = path.join(__dirname, '../orders/', options.order) + '.json';
-    } else if (options.customOrder) {
-      sortOrderPath = options.customOrder;
-    } else {
-      // Fallback to the default sorting order
-      return processCss(css, 'alphabetically');
-    }
-
-    // Load in the array containing the order from a JSON file
-    return new Promise(function (resolve, reject) {
-      fs.readFile(sortOrderPath, function (error, data) {
-        if (error) return reject(error);
-        resolve(data);
-      });
-    }).then(function (data) {
-      return processCss(css, JSON.parse(data));
+// Sort CSS declarations alphabetically or using the set sorting order
+function sortCssDecls (cssDecls, sortOrder) {
+  if (sortOrder === 'alphabetically') {
+    timsort(cssDecls, function (a, b) {
+      if (a.type === 'decl' && b.type === 'decl') {
+        return comparator(a.prop, b.prop);
+      } else {
+        return compareDifferentType(a, b);
+      }
     });
-  };
-});
+  } else {
+    timsort(cssDecls, function (a, b) {
+      if (a.type === 'decl' && b.type === 'decl') {
+        const aIndex = sortOrder.indexOf(a.prop);
+        const bIndex = sortOrder.indexOf(b.prop);
+        return comparator(aIndex, bIndex);
+      } else {
+        return compareDifferentType(a, b);
+      }
+    });
+  }
+}
 
 function comparator (a, b) {
   return a === b ? 0 : a < b ? -1 : 1;
