@@ -35,7 +35,8 @@
     "postversion": "git push && npm publish",
     "lint": "eslint src/*.js bin/*.js tests/*.js",
     "watch": "watch 'npm run test && npm run lint --silent' src bin tests",
-    "scrape": "node src/property-scraper"
+    "scrape": "node src/property-scraper",
+    "ci": "npm test && npm run lint -- --max-warnings 0"
   },
   "dependencies": {
     "argh": "^0.1.4",
