@@ -20,20 +20,20 @@ function sortCssDecls (cssDecls, sortOrder, propsPosition) {
                             propsPosition === 'bottom' ? -1 : 1;
   if (sortOrder === 'alphabetically') {
     timsort(cssDecls, function (a, b) {
-      if (a.type === b.type && a.type === 'decl') {
+      if (a.type === 'decl' && b.type === 'decl') {
         return comparator(a.prop, b.prop);
       } else {
-        return propsPositionSign * compareDifferentType(a, b);
+        return compareDifferentType(a, b);
       }
     });
   } else {
     timsort(cssDecls, function (a, b) {
-      if (a.type === b.type && a.type === 'decl') {
+      if (a.type === 'decl' && b.type === 'decl') {
         const aIndex = sortOrder.indexOf(a.prop);
         const bIndex = sortOrder.indexOf(b.prop);
         return comparator(aIndex, bIndex);
       } else {
-        return propsPositionSign * compareDifferentType(a, b);
+        return compareDifferentType(a, b);
       }
     });
   }
@@ -131,3 +131,11 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
     });
   };
 });
+
+function comparator (a, b) {
+  return a === b ? 0 : a < b ? -1 : 1;
+}
+
+function compareDifferentType (a, b) {
+  return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
+}

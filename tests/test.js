@@ -124,16 +124,10 @@ const nestedDeclarationTests = [
     expected: 'a{&:hover{\nborder: 0; /*border*/flex: 0;}}'
   },
   {
-    message: 'Put decls after other nodes.',
-    fixture: 'a{margin:0;&:hover{color:red;}padding:0;}',
-    expected: 'a{&:hover{color:red;}margin:0;padding:0;}',
-    options: { position: 'bottom' }
+    message: 'Put declarations before nested selector.',
+    fixture: 'a{margin: 0;&:hover{color: red;}padding: 0;}',
+    expected: 'a{margin: 0;padding: 0;&:hover{color: red;}}'
   },
-  {
-    message: 'Put decls before other nodes by default',
-    fixture: 'a{margin:0;&:hover{color:red;}padding:0;}',
-    expected: 'a{margin:0;padding:0;&:hover{color:red;}}'
-  }
 ];
 
 testCssFixtures('Should order CSS declarations.', sortOrderTests);
