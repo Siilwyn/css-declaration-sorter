@@ -6,18 +6,8 @@ const path = require('path');
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
-function compareDifferentType (a, b) {
-  return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
-}
-
-function comparator (a, b) {
-  return a === b ? 0 : a < b ? -1 : 1;
-}
-
 // Sort CSS declarations alphabetically or using the set sorting order
-function sortCssDecls (cssDecls, sortOrder, propsPosition) {
-  const propsPositionSign = propsPosition === 'top' ? 1 :
-                            propsPosition === 'bottom' ? -1 : 1;
+function sortCssDecls (cssDecls, sortOrder) {
   if (sortOrder === 'alphabetically') {
     timsort(cssDecls, function (a, b) {
       if (a.type === 'decl' && b.type === 'decl') {
@@ -39,7 +29,7 @@ function sortCssDecls (cssDecls, sortOrder, propsPosition) {
   }
 }
 
-function processCss (css, sortOrder, propsPosition) {
+function processCss (css, sortOrder) {
   const comments = [];
   const rulesCache = [];
 
@@ -91,7 +81,7 @@ function processCss (css, sortOrder, propsPosition) {
 
   // Perform a sort once all comment nodes are removed
   rulesCache.forEach(function (nodes) {
-    sortCssDecls(nodes, sortOrder, propsPosition);
+    sortCssDecls(nodes, sortOrder);
   });
 
   // Add comments back to the nodes they are paired with
@@ -108,8 +98,6 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
 
     options = options || {};
 
-    const position = options.position || 'top';
-
     // Use included sorting order if order is passed and not alphabetically
     if (options.order && options.order !== 'alphabetically') {
       sortOrderPath = path.join(__dirname, '../orders/', options.order) + '.json';
@@ -117,7 +105,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
       sortOrderPath = options.customOrder;
     } else {
       // Fallback to the default sorting order
-      return processCss(css, 'alphabetically', position);
+      return processCss(css, 'alphabetically');
     }
 
     // Load in the array containing the order from a JSON file
@@ -127,7 +115,7 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
         resolve(data);
       });
     }).then(function (data) {
-      return processCss(css, JSON.parse(data), position);
+      return processCss(css, JSON.parse(data));
     });
   };
 });
