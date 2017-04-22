@@ -1,6 +1,8 @@
 <img alt='CSS declaration sorter logo' src='https://cdn.rawgit.com/Siilwyn/css-declaration-sorter/master/logo.svg' height='260' align='right'>
 
 # CSS Declaration Sorter
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Siilwyn/css-declaration-sorter.svg)](https://greenkeeper.io/)
 [![Travis Build Status][travis-icon]][travis]
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
