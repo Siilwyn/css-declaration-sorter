@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "argh": "^0.1.4",
-    "postcss": "^6.0.0",
+    "postcss": "^6.0.1",
     "read-file-stdin": "^0.2.0",
     "timsort": "^0.3.0",
     "write-file-stdout": "0.0.2"
