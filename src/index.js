@@ -48,7 +48,7 @@ function processCss (css, sortOrder) {
       const lastNewlineNode = isNewlineNode && !node.next();
       const onlyNode = !node.prev() && !node.next();
 
-      if (lastNewlineNode || onlyNode) {
+      if (lastNewlineNode || onlyNode || node.parent.type === 'root') {
         return;
       }
 

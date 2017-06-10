@@ -71,6 +71,11 @@ const commentOrderTests = [
     expected: 'a{flex: 0;/*flex*/}'
   },
   {
+    message: 'Keep root comments intact.',
+    fixture: '/*a*/\na{}\n/*b*/\nb{}',
+    expected: '/*a*/\na{}\n/*b*/\nb{}'
+  },
+  {
     message: 'Handle declaration with one comment.',
     fixture: 'a{/*comment*/}',
     expected: 'a{/*comment*/}',
