@@ -46,7 +46,7 @@
     "write-file-stdout": "0.0.2"
   },
   "devDependencies": {
-    "eslint": "^3.2.0",
+    "eslint": "^4.1.0",
     "tape": "^4.2.1",
     "watch": "^1.0.1"
   }
