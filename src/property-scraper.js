@@ -10,6 +10,9 @@ const isStandardProperty = function (tags) {
     }) &&
     !tags.find(function (tagName) {
       return tagName.match(/non-standard/i);
+    }) &&
+    !tags.find(function (tagName) {
+      return tagName.match(/deprecated/i);
     })
   );
 };
