@@ -39,29 +39,13 @@ body {
 `npm install css-declaration-sorter --save-dev`
 
 ### CLI
-```
-Usage: cssdeclsort [options] [input]
-Sort CSS declarations from file(s) or stdin and output to file(s) or stdout.
+This module does not include its own CLI but works with the official [PostCSS CLI](https://github.com/postcss/postcss-cli). To use the examples below, install `postcss-cli` or prefix with `npx`.
 
-Options:
-  -h, --help        Display help text.
-  -v, --version     Display cssdeclsort's version.
-  --customOrder     Use provided JSON file data to order the declarations.
-  --directory       Output to provided directory instead of current directory.
-  --order           Use provided order instead of ordering alphabetically.
-  --output          Output to a file instead of writing to the origin or stdout.
-  --verbose         Log extra information about the process to the console.
-
-Orders:
-  alphabetically, smacss, concentric-css
-
-```
-
-Piping data and writing to a specific file:  
-`perfectionist input.css | cssdeclsort --output output.css`
+Piping out result from file:  
+`postcss input.css --use css-declaration-sorter | cat`
 
 Sorting multiple files by overwriting:  
-`cssdeclsort --order smacss *.css`
+`postcss *.css --use css-declaration-sorter --replace --no-map`
 
 ### Vanilla JS
 ```js

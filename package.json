@@ -17,13 +17,9 @@
   "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
   "files": [
     "src",
-    "bin",
     "orders"
   ],
   "main": "src/index.js",
-  "bin": {
-    "cssdeclsort": "bin/cssdeclsort.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
@@ -33,14 +29,12 @@
     "test": "node tests/test.js",
     "preversion": "npm test",
     "postversion": "git push && git push --tags && npm publish",
-    "lint": "eslint src/*.js bin/*.js tests/*.js",
-    "watch": "watch 'npm run test && npm run lint --silent' src bin tests",
+    "lint": "eslint src/*.js tests/*.js",
+    "watch": "watch 'npm run test && npm run lint --silent' src tests",
     "scrape": "node src/property-scraper",
     "ci": "npm test && npm run lint -- --max-warnings 0"
   },
   "dependencies": {
-    "argh": "^0.1.4",
-    "gather-stream": "^1.0.0",
     "postcss": "^6.0.0",
     "timsort": "^0.3.0"
   },
