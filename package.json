@@ -12,7 +12,7 @@
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.js tests/*.js",
     "preversion": "npm test",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push --follow-tags && npm publish",
     "scrape": "node src/property-scraper"
   },
   "dependencies": {
