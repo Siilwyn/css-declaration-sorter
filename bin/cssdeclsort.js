@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const read = require('read-file-stdin');
-const write = require('write-file-stdout');
 const args = require('argh').argv;
+const fs = require('fs');
+const gatherStream = require('gather-stream');
+const path = require('path');
 
 const cssdeclsort = require('../src/index.js');
 const log = require('./verbose-log');
 
 const transform = function (input, output) {
   // Read from a file, fallback to stdin
-  read(input, function (error, data) {
+  readFileStdin(input, function (error, data) {
     const options = {};
 
     if (error) throw error;
@@ -26,7 +25,7 @@ const transform = function (input, output) {
 
     cssdeclsort.process(data, options).then(function (result) {
       // Write to a file, fallback to stdout
-      write(output, result.css);
+      writeFileStdout(output, result.css);
     }).catch(function (error) {
       console.error(error.toString());
     });
@@ -69,6 +68,19 @@ const handleArgs = function () {
     transform(null, explicitOutput);
   }
 };
+
+function readFileStdin (file, callback) {
+  if ('function' == typeof file) callback = file, file = null;
+  const stream = file ? fs.createReadStream(file) : process.stdin;
+  stream.pipe(gatherStream(callback));
+}
+
+function writeFileStdout (file, contents) {
+  if (1 === arguments.length) contents = file, file = null;
+  // eslint-disable-next-line no-sync
+  if (file) return fs.writeFileSync(file, contents);
+  process.stdout.write(contents);
+}
 
 process.title = 'cssdeclsort';
 
