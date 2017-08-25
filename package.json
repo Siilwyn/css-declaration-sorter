@@ -2,30 +2,12 @@
   "name": "css-declaration-sorter",
   "version": "2.1.0",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
-  "keywords": [
-    "postcss",
-    "postcss-plugin",
-    "css",
-    "declaration",
-    "sorter",
-    "property",
-    "order"
-  ],
-  "homepage": "https://github.com/Siilwyn/css-declaration-sorter",
-  "bugs": "https://github.com/Siilwyn/css-declaration-sorter/issues",
-  "license": "MIT",
-  "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
+  "main": "src/index.js",
   "files": [
     "src/index.js",
     "orders"
   ],
-  "main": "src/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
-  },
   "scripts": {
-    "start": "npm run test && npm run lint",
     "test": "node tests/test.js",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.js tests/*.js",
@@ -40,5 +22,20 @@
   "devDependencies": {
     "eslint": "^4.1.0",
     "tape": "^4.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
+  },
+  "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
+  "license": "MIT",
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "css",
+    "declaration",
+    "sorter",
+    "property",
+    "order"
+  ]
 }
