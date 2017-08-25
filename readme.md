@@ -28,12 +28,38 @@ body {
 }
 ```
 
-## Capabilities
-- Up-to-date CSS properties from the [MDN Web Platform](https://developer.mozilla.org/).
+## Niceness
+- Up-to-date CSS properties fetched from the [MDN Web Platform](https://developer.mozilla.org/).
 - Sort using your own defined order.
-- Sorting nested rules.
+- Nested rules sorting support.
 - Less and SCSS support when combined with either [postcss-scss](https://github.com/postcss/postcss-scss) or [postcss-less](https://github.com/webschik/postcss-less).
-- Thought-out sorting orders out of the box, approved by their authors.
+- Thought-out sorting orders out of the box, **approved by their authors**.
+
+## Sorting orders
+- Alphabetically  
+`alphabetically`  
+*Default, ordering in a simple alphabetical manner from a - z.*
+
+- [SMACSS](https://smacss.com/book/formatting#grouping)  
+`smacss`  
+*Ordering from most important, flow affecting properties, to least important properties.*
+  - Box
+  - Border
+  - Background
+  - Text
+  - Other
+
+- [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)  
+`concentric-css`  
+*Starts outside the box model, moves inward.*
+  - Positioning
+  - Visibility
+  - Box model
+  - Dimensions
+  - Text
+
+- Custom order  
+*Provide your own order by passing the location of a JSON file containing an array.*
 
 ## Usage
 `npm install css-declaration-sorter --save-dev`
@@ -51,12 +77,12 @@ Sorting multiple files by overwriting:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const cssdeclsort = require('css-declaration-sorter');
+const cssDeclarationSorter = require('css-declaration-sorter');
 
-postcss([cssdeclsort({order: 'smacss'})])
-  .process(fs.readFileSync('something.css'))
+postcss([cssDeclarationSorter({order: 'smacss'})])
+  .process(fs.readFileSync('some.css'))
   .then(function (result) {
-    fs.writeFileSync('something.css', result.css);
+    fs.writeFileSync('some.css', result.css);
   });
 ```
 
@@ -64,38 +90,15 @@ postcss([cssdeclsort({order: 'smacss'})])
 ```js
 const gulp = require('gulp');
 const gulpPostcss = require('gulp-postcss');
-const cssdeclsort = require('css-declaration-sorter');
+const cssDeclarationSorter = require('css-declaration-sorter');
 
 gulp.task('css', function () {
-  return gulp.src('something.css')
-    .pipe(gulpPostcss([cssdeclsort({order: 'smacss'})]))
+  return gulp.src('some.css')
+    .pipe(gulpPostcss([cssDeclarationSorter({order: 'smacss'})]))
     .pipe(gulp.dest('./'));
 });
 ```
-See [PostCSS] docs for more examples and other environments.
-
-## Sorting orders
-- Alphabetically  
-*Ordering in a simple alphabetical manner from a - z.*
-
-- [SMACSS](https://smacss.com/book/formatting#grouping)  
-*Ordering from most important, flow affecting properties, to least important properties.*
-  - Box
-  - Border
-  - Background
-  - Text
-  - Other
-
-- [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)  
-*Starts outside the box model, moves inward.*
-  - Positioning
-  - Visibility
-  - Box model
-  - Dimensions
-  - Text
-
-- Custom order  
-*Provide your own order by passing an array in a JSON file.*
+See [PostCSS] documentation for more examples and other environments.
 
 [PostCSS]: https://github.com/postcss/postcss
 [travis]: https://travis-ci.org/Siilwyn/css-declaration-sorter
