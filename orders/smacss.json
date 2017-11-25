@@ -2,8 +2,10 @@
   "box-sizing",
   "display",
   "display-outside",
-  "box-suppress",
   "display-inside",
+  "visibility",
+  "box-suppress",
+  "z-index",
   "position",
   "top",
   "right",
@@ -166,6 +168,7 @@
   "background-position-y",
   "background-repeat",
   "background-size",
+  "box-shadow",
   "isolation",
 
   "color",
@@ -217,6 +220,7 @@
   "text-shadow",
   "text-size-adjust",
   "text-transform",
+  "vertical-align",
   "white-space",
   "word-break",
   "word-spacing",
@@ -239,7 +243,6 @@
   "page-break-before",
   "page-break-after",
   "page-break-inside",
-  "box-shadow",
   "caption-side",
   "clip-path",
   "content",
@@ -285,9 +288,6 @@
   "unicode-bidi",
   "unicode-range",
   "user-select",
-  "vertical-align",
-  "visibility",
   "widows",
-  "writing-mode",
-  "z-index"
+  "writing-mode"
 ]
