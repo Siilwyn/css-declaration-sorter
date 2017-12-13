@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "node tests/test.js",
+    "test:benchmark": "node tests/benchmark/benchmark.js",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.js tests/*.js",
     "preversion": "npm test",
@@ -20,6 +21,7 @@
     "timsort": "^0.3.0"
   },
   "devDependencies": {
+    "benchmark": "^2.1.4",
     "eslint": "^4.1.0",
     "tape": "^4.2.1"
   },
