@@ -43,6 +43,8 @@
   "align-items",
   "align-self",
   "justify-content",
+  "justify-items",
+  "justify-self",
   "vertical-align",
   "order",
   "float",
