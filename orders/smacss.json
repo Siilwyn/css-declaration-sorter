@@ -45,6 +45,8 @@
   "align-items",
   "align-self",
   "justify-content",
+  "justify-items",
+  "justify-self",
   "order",
   "width",
   "min-width",
