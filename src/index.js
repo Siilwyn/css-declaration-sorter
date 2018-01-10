@@ -125,5 +125,7 @@ function comparator (a, b) {
 }
 
 function compareDifferentType (a, b) {
+  if (b.type === 'atrule') { return  0; }
+
   return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
 }
