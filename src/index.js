@@ -5,6 +5,10 @@ const path = require('path');
 
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
+const Stringifier = require('postcss/lib/stringifier');
+
+// Stringify variables just like declarations.
+Stringifier.prototype.variable = Stringifier.prototype.decl;
 
 module.exports = postcss.plugin('css-declaration-sorter', function (options) {
   return function (css) {
@@ -41,6 +45,13 @@ function processCss (css, sortOrder) {
   css.walk(function (node) {
     const nodes = node.nodes;
     const type = node.type;
+
+    if (type === 'decl') {
+      if (node.prop[0] === '$') {
+        node.type = 'variable';
+      }
+      return;
+    }
 
     if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
@@ -125,7 +136,6 @@ function comparator (a, b) {
 }
 
 function compareDifferentType (a, b) {
-  if (b.type === 'atrule') { return  0; }
-
+  if (b.type === 'atrule' || b.type === 'variable') return 0;
   return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
 }
