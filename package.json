@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "benchmark": "^2.1.4",
-    "eslint": "^4.1.0",
+    "eslint": "^5.0.0",
     "tape": "^4.2.1"
   },
   "repository": {
