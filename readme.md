@@ -2,6 +2,7 @@
 
 # CSS Declaration Sorter
 [![Travis Build Status][travis-icon]][travis]
+[![npm version][npm-icon]][npm]
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
 
@@ -103,6 +104,8 @@ See [PostCSS] documentation for more examples and other environments.
 [PostCSS]: https://github.com/postcss/postcss
 [travis]: https://travis-ci.org/Siilwyn/css-declaration-sorter
 [travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
+[npm]: https://npmjs.com/css-declaration-sorter
+[npm-icon]: https://img.shields.io/npm/v/css-declaration-sorter.svg?style=flat-square
 [david]: https://david-dm.org/Siilwyn/css-declaration-sorter
 [david-icon]: https://img.shields.io/david/Siilwyn/css-declaration-sorter.svg?style=flat-square
 [david-dev]: https://david-dm.org/Siilwyn/css-declaration-sorter?type=dev
