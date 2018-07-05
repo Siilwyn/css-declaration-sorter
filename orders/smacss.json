@@ -172,6 +172,8 @@
   "box-shadow",
   "isolation",
 
+  "ruby-align",
+  "ruby-position",
   "color",
   "caret-color",
   "font",

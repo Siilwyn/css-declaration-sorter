@@ -234,6 +234,8 @@
   "resize",
   "right",
   "rotate",
+  "ruby-align",
+  "ruby-position",
   "scale",
   "scroll-behavior",
   "scroll-snap-coordinate",
