@@ -70,6 +70,8 @@
   "transform-box",
   "transform-origin",
   "transform-style",
+  "rotate",
+  "scale",
 
   "perspective",
   "perspective-origin",
