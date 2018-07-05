@@ -5,6 +5,9 @@ env:
   node: true
 
 rules:
+  comma-dangle:
+    - warn
+    - always-multiline
   comma-spacing:
     - warn
     - {
