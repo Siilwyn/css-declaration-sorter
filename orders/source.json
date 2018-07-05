@@ -233,6 +233,8 @@
   "quotes",
   "resize",
   "right",
+  "rotate",
+  "scale",
   "scroll-behavior",
   "scroll-snap-coordinate",
   "scroll-snap-destination",
