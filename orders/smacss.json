@@ -97,6 +97,8 @@
   "transform-box",
   "transform-origin",
   "transform-style",
+  "rotate",
+  "scale",
 
   "border",
   "border-top",
