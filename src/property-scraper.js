@@ -20,7 +20,7 @@ const isStandardProperty = function (tags) {
 const options = {
   hostname: 'developer.mozilla.org',
   port: 443,
-  path: '/en-US/docs/Web/CSS$children?expand'
+  path: '/en-US/docs/Web/CSS$children?expand',
 };
 
 const request = https.get(options, function (result) {
