@@ -228,6 +228,8 @@
   "touch-action",
   "pointer-events",
 
+  "ruby-align",
+  "ruby-position",
   "color",
   "caret-color",
   "font",
