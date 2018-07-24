@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2018-07-24
+### Added
+- New flex box shorthand properties which can conflict with existing flex box properties.
+- New ruby, transform and text related properties.
+
+### Removed
+- Node 4 support.
+- Deprecated grid properties.
+
 ## [3.0.1] - 2018-01-11
 ### Fixed
 - Keep at-rules at the same position.
@@ -28,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[4.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v3.0.1...v4.0.0
 [3.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v2.0.1...v2.1.0
