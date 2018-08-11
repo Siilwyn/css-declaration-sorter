@@ -67,6 +67,21 @@ const sortOrderTests = [
     fixture: 'a{border: 0;@import sii;flex:0;}',
     expected: 'a{border: 0;@import sii;flex:0;}',
   },
+  {
+    message: 'Keep CSS variables at the same position.',
+    fixture: 'a{border: 0;--bg-color: blue;}',
+    expected: 'a{border: 0;--bg-color: blue;}',
+  },
+  {
+    message: 'Keep Less variables at the same position.',
+    fixture: 'a{border: 0;@bg-color: blue;}',
+    expected: 'a{border: 0;@bg-color: blue;}',
+  },
+  {
+    message: 'Keep SCSS variables at the same position.',
+    fixture: 'a{border: 0;$bg-color: blue;}',
+    expected: 'a{border: 0;$bg-color: blue;}',
+  },
 ];
 
 const commentOrderTests = [
