@@ -76,15 +76,14 @@ Sorting multiple files by overwriting:
 
 ### Vanilla JS
 ```js
-const fs = require('fs');
 const postcss = require('postcss');
 const cssDeclarationSorter = require('css-declaration-sorter');
 
 postcss([cssDeclarationSorter({order: 'smacss'})])
-  .process(fs.readFileSync('some.css'))
-  .then(function (result) {
-    fs.writeFileSync('some.css', result.css);
-  });
+  .process('a { color: hyperblue; display: block; }')
+  .then(result =>
+    result.css === 'a { display: block; color: hyperblue; }'
+  );
 ```
 
 ### Gulp
