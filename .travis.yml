@@ -8,6 +8,10 @@ node_js:
 script:
   - npm run test:ci
 
+branches:
+  only:
+    master
+
 deploy:
   provider: npm
   email: "talk@selwyn.cc"
