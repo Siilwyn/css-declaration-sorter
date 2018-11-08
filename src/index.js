@@ -1,20 +1,21 @@
 'use strict';
 
-const fs = require('fs');
+const { readFile } = require('fs');
 const path = require('path');
+const { promisify } = require('util');
 
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
-module.exports = postcss.plugin('css-declaration-sorter', function (options) {
-  return function (css) {
+module.exports = postcss.plugin(
+  'css-declaration-sorter',
+  (options = {}) => css => {
     let sortOrderPath;
-
-    options = options || {};
 
     // Use included sorting order if order is passed and not alphabetically
     if (options.order && options.order !== 'alphabetically') {
-      sortOrderPath = path.join(__dirname, '../orders/', options.order) + '.json';
+      sortOrderPath =
+        path.join(__dirname, '../orders/', options.order) + '.json';
     } else if (options.customOrder) {
       sortOrderPath = options.customOrder;
     } else {
@@ -23,22 +24,17 @@ module.exports = postcss.plugin('css-declaration-sorter', function (options) {
     }
 
     // Load in the array containing the order from a JSON file
-    return new Promise(function (resolve, reject) {
-      fs.readFile(sortOrderPath, function (error, data) {
-        if (error) return reject(error);
-        resolve(data);
-      });
-    }).then(function (data) {
-      return processCss(css, JSON.parse(data));
-    });
-  };
-});
+    return promisify(readFile)(sortOrderPath).then(data =>
+      processCss(css, JSON.parse(data))
+    );
+  }
+);
 
 function processCss (css, sortOrder) {
   const comments = [];
   const rulesCache = [];
 
-  css.walk(function (node) {
+  css.walk(node => {
     const nodes = node.nodes;
     const type = node.type;
 
@@ -85,12 +81,12 @@ function processCss (css, sortOrder) {
   });
 
   // Perform a sort once all comment nodes are removed
-  rulesCache.forEach(function (nodes) {
+  rulesCache.forEach(nodes => {
     sortCssDecls(nodes, sortOrder);
   });
 
   // Add comments back to the nodes they are paired with
-  comments.forEach(function (node) {
+  comments.forEach(node => {
     const pairedNode = node.pairedNode;
     node.comment.remove();
     pairedNode.parent['insert' + node.insertPosition](pairedNode, node.comment);
@@ -100,7 +96,7 @@ function processCss (css, sortOrder) {
 // Sort CSS declarations alphabetically or using the set sorting order
 function sortCssDecls (cssDecls, sortOrder) {
   if (sortOrder === 'alphabetically') {
-    timsort(cssDecls, function (a, b) {
+    timsort(cssDecls, (a, b) => {
       if (a.type === 'decl' && b.type === 'decl') {
         return comparator(a.prop, b.prop);
       } else {
@@ -108,7 +104,7 @@ function sortCssDecls (cssDecls, sortOrder) {
       }
     });
   } else {
-    timsort(cssDecls, function (a, b) {
+    timsort(cssDecls, (a, b) => {
       if (a.type === 'decl' && b.type === 'decl') {
         const aIndex = sortOrder.indexOf(a.prop);
         const bIndex = sortOrder.indexOf(b.prop);
@@ -125,7 +121,9 @@ function comparator (a, b) {
 }
 
 function compareDifferentType (a, b) {
-  if (b.type === 'atrule') { return  0; }
+  if (b.type === 'atrule') {
+    return 0;
+  }
 
-  return (a.type === 'decl') ? -1 : (b.type === 'decl') ? 1 : 0;
+  return a.type === 'decl' ? -1 : b.type === 'decl' ? 1 : 0;
 }
