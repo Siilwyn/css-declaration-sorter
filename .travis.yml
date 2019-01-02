@@ -9,7 +9,8 @@ script:
 
 branches:
   only:
-    master
+    - master
+    - /v\d+\.\d+.+/
 
 deploy:
   provider: npm
