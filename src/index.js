@@ -40,7 +40,7 @@ function processCss (css, sortOrder) {
 
     if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
-      const isNewlineNode = ~node.raws.before.indexOf('\n');
+      const isNewlineNode = node.raws.before && ~node.raws.before.indexOf('\n');
       const lastNewlineNode = isNewlineNode && !node.next();
       const onlyNode = !node.prev() && !node.next();
 
