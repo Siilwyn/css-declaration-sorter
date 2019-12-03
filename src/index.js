@@ -1,36 +1,41 @@
 'use strict';
 
-const { readFile } = require('fs');
+const { readFile } = require('fs').promises;
 const path = require('path');
-const { promisify } = require('util');
 
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
+const builtInOrders = [
+  'alphabetical',
+  'concentric-css',
+  'smacss',
+];
+
 module.exports = postcss.plugin(
   'css-declaration-sorter',
-  (options = {}) => css => {
-    let sortOrderPath;
+  ({ order = 'alphabetical' } = {}) => css => {
+    if (typeof order === 'function')
+      return processCss({ css, comparator: order });
 
-    // Use included sorting order if order is passed and not alphabetically
-    if (options.order && options.order !== 'alphabetically') {
-      sortOrderPath =
-        path.join(__dirname, '../orders/', options.order) + '.json';
-    } else if (options.customOrder) {
-      sortOrderPath = options.customOrder;
-    } else {
-      // Fallback to the default sorting order
-      return processCss(css, 'alphabetically');
-    }
+    if (!builtInOrders.includes(order))
+      return Promise.reject(
+        Error([
+          `Invalid built-in order '${order}' provided.`,
+          `Available built-in orders are: ${builtInOrders}`,
+        ].join('\n'))
+      );
+
+    if (order === 'alphabetical')
+      return Promise.resolve(processCss({ css, order }));
 
     // Load in the array containing the order from a JSON file
-    return promisify(readFile)(sortOrderPath).then(data =>
-      processCss(css, JSON.parse(data))
-    );
+    return readFile(path.join(__dirname, '..', 'orders', order) + '.json')
+      .then(data => processCss({ css, order: JSON.parse(data) }));
   }
 );
 
-function processCss (css, sortOrder) {
+function processCss ({ css, order, comparator }) {
   const comments = [];
   const rulesCache = [];
 
@@ -82,7 +87,7 @@ function processCss (css, sortOrder) {
 
   // Perform a sort once all comment nodes are removed
   rulesCache.forEach(nodes => {
-    sortCssDecls(nodes, sortOrder);
+    sortCssDeclarations({ nodes, order, comparator });
   });
 
   // Add comments back to the nodes they are paired with
@@ -94,21 +99,27 @@ function processCss (css, sortOrder) {
 }
 
 // Sort CSS declarations alphabetically or using the set sorting order
-function sortCssDecls (cssDecls, sortOrder) {
-  if (sortOrder === 'alphabetically') {
-    timsort(cssDecls, (a, b) => {
+function sortCssDeclarations ({ nodes, order, comparator }) {
+  if (order === 'alphabetical') {
+    comparator = defaultComparator;
+  }
+
+  if (comparator) {
+    timsort(nodes, (a, b) => {
       if (a.type === 'decl' && b.type === 'decl') {
         return comparator(a.prop, b.prop);
       } else {
         return compareDifferentType(a, b);
       }
     });
-  } else {
-    timsort(cssDecls, (a, b) => {
+  }
+
+  else {
+    timsort(nodes, (a, b) => {
       if (a.type === 'decl' && b.type === 'decl') {
-        const aIndex = sortOrder.indexOf(a.prop);
-        const bIndex = sortOrder.indexOf(b.prop);
-        return comparator(aIndex, bIndex);
+        const aIndex = order.indexOf(a.prop);
+        const bIndex = order.indexOf(b.prop);
+        return defaultComparator(aIndex, bIndex);
       } else {
         return compareDifferentType(a, b);
       }
@@ -116,7 +127,7 @@ function sortCssDecls (cssDecls, sortOrder) {
   }
 }
 
-function comparator (a, b) {
+function defaultComparator (a, b) {
   return a === b ? 0 : a < b ? -1 : 1;
 }
 

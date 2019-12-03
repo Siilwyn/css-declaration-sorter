@@ -40,13 +40,19 @@ const sortOrderTests = [
     message: 'Sort alphabetically with a defined order.',
     fixture: 'a{flex: 0;border: 0;}',
     expected: 'a{border: 0;flex: 0;}',
-    options: { order: 'alphabetically' },
+    options: { order: 'alphabetical' },
   },
   {
-    message: 'Sort according to custom order.',
+    message: 'Sort according to custom order, changed.',
     fixture: 'a{border: 0;z-index: 0;}',
     expected: 'a{z-index: 0;border: 0;}',
-    options: { customOrder: 'tests/custom-order.json' },
+    options: { order: () => -1 },
+  },
+  {
+    message: 'Sort according to custom order, retained.',
+    fixture: 'a{border: 0;z-index: 0;}',
+    expected: 'a{border: 0;z-index: 0;}',
+    options: { order: () => 1 },
   },
   {
     message: 'Sort according to SMACSS.',
