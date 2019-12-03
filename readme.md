@@ -6,7 +6,14 @@
 [![npm][npm-icon]][npm]
 
 
-A Node.js module and [PostCSS] plugin to sort CSS declarations based on their property names. Ensuring the CSS is organized, more consistent and in order... Besides, sorted CSS is smaller when gzipped because there will be more similar strings. The intention of this module is to sort the source CSS code of a project in the build process. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
+A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring the styling is organized, more consistent and in order... The intention of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
+
+## Niceness
+- Up-to-date CSS properties fetched from the [MDN Web Platform](https://developer.mozilla.org/).
+- Choose your wanted order or provide your own.
+- Nested rules sorting support.
+- SCSS and Less support when combined with either [postcss-scss](https://github.com/postcss/postcss-scss) or [postcss-less](https://github.com/webschik/postcss-less).
+- Thought-out sorting orders out of the box, **approved by their authors**.
 
 ## Alphabetical example
 Input:
@@ -29,44 +36,34 @@ body {
 }
 ```
 
-## Niceness
-- Up-to-date CSS properties fetched from the [MDN Web Platform](https://developer.mozilla.org/).
-- Sort using your own defined order.
-- Nested rules sorting support.
-- Less and SCSS support when combined with either [postcss-scss](https://github.com/postcss/postcss-scss) or [postcss-less](https://github.com/webschik/postcss-less).
-- Thought-out sorting orders out of the box, **approved by their authors**.
-
-## Sorting orders
-- Alphabetically  
-`alphabetically`  
+## Built-in sorting orders
+- Alphabetical  
+`alphabetical`  
 *Default, ordering in a simple alphabetical manner from a - z.*
 
 - [SMACSS](https://smacss.com/book/formatting#grouping)  
 `smacss`  
 *Ordering from most important, flow affecting properties, to least important properties.*
-  - Box
-  - Border
-  - Background
-  - Text
-  - Other
+  1. Box
+  2. Border
+  3. Background
+  4. Text
+  5. Other
 
 - [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)  
 `concentric-css`  
 *Starts outside the box model, moves inward.*
-  - Positioning
-  - Visibility
-  - Box model
-  - Dimensions
-  - Text
-
-- Custom order  
-*Provide your own order by passing the location of a JSON file containing an array.*
+  1. Positioning
+  2. Visibility
+  3. Box model
+  4. Dimensions
+  5. Text
 
 ## Usage
 `npm install css-declaration-sorter --save-dev`
 
 ### CLI
-This module does not include its own CLI but works with the official [PostCSS CLI](https://github.com/postcss/postcss-cli). To use the examples below, install `postcss-cli` or prefix with `npx`.
+This module does not include its own CLI but works with the official [PostCSS CLI](https://github.com/postcss/postcss-cli). To use the examples below, the `postcss-cli` package is a required dependency.
 
 Piping out result from file:  
 `postcss input.css --use css-declaration-sorter | cat`
@@ -99,6 +96,16 @@ gulp.task('css', function () {
 });
 ```
 See [PostCSS] documentation for more examples and other environments.
+
+## API
+### cssDeclarationSorter({ order })
+
+#### order
+Type: `string` or `function`  
+Default: `alphabetical`  
+Options: `alphabetical`, `smacss`, `concentric-css`
+
+Provide the name of one of the built-in sort orders, for example `smacss` or a function that takes in two declaration names and returns `-1`, `0` or `1` depending on the wanted order.
 
 [PostCSS]: https://github.com/postcss/postcss
 
