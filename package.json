@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "benchmark": "^2.1.4",
-    "eslint": "^6.0.0",
+    "eslint": "^6.7.2",
     "tape": "^4.10.1"
   },
   "engines": {
