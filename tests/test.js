@@ -144,11 +144,40 @@ const nestedDeclarationTests = [
   },
 ];
 
+const keepOverridesTests = [
+  {
+    message: 'Keep shorthand overrides in place.',
+    fixture: 'a{animation-name: hi;animation: hey 1s ease;}',
+    expected: 'a{animation-name: hi;animation: hey 1s ease;}',
+    options: { keepOverrides: true },
+  },
+  {
+    message: 'Keep longhand overrides in place.',
+    fixture: 'a{flex: 1;flex-grow: -1;}',
+    expected: 'a{flex: 1;flex-grow: -1;}',
+    options: { keepOverrides: true, order: () => -1 },
+  },
+  {
+    message: 'Sort overrides with other declarations.',
+    fixture: 'a{z-index: 1;animation: hey 1s ease;}',
+    expected: 'a{animation: hey 1s ease;z-index: 1;}',
+    options: { keepOverrides: true },
+  },
+  {
+    message: 'Keep overrides in place mixed with declaration.',
+    fixture: 'a{z-index: 1;animation: hey 1s ease;animation-name: hi;}',
+    expected: 'a{animation: hey 1s ease;animation-name: hi;z-index: 1;}',
+    options: { keepOverrides: true },
+  },
+];
+
 testCssFixtures('Should order declarations.', sortOrderTests);
 
 testCssFixtures('Should retain comments.', commentOrderTests);
 
 testCssFixtures('Should order nested declarations.', nestedDeclarationTests);
+
+testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 
 tape('Should use the PostCSS plugin API.', function (t) {
   t.plan(2);
