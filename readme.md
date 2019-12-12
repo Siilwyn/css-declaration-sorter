@@ -6,7 +6,7 @@
 [![npm][npm-icon]][npm]
 
 
-A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring the styling is organized, more consistent and in order... The intention of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
+A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring styling is organized, more consistent and in order... The goal of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
 
 ## Niceness
 - Up-to-date CSS properties fetched from the [MDN Web Platform](https://developer.mozilla.org/).
@@ -39,11 +39,11 @@ body {
 ## Built-in sorting orders
 - Alphabetical  
 `alphabetical`  
-*Default, ordering in a simple alphabetical manner from a - z.*
+*Default, order in a simple alphabetical manner from a - z.*
 
 - [SMACSS](https://smacss.com/book/formatting#grouping)  
 `smacss`  
-*Ordering from most important, flow affecting properties, to least important properties.*
+*Order from most important, flow affecting properties, to least important properties.*
   1. Box
   2. Border
   3. Background
@@ -52,7 +52,7 @@ body {
 
 - [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)  
 `concentric-css`  
-*Starts outside the box model, moves inward.*
+*Order properties applying outside the box model, moving inward to intrinsic changes.*
   1. Positioning
   2. Visibility
   3. Box model
@@ -98,14 +98,20 @@ gulp.task('css', function () {
 See [PostCSS] documentation for more examples and other environments.
 
 ## API
-### cssDeclarationSorter({ order })
+### cssDeclarationSorter({ order, keepOverrides })
 
 #### order
 Type: `string` or `function`  
 Default: `alphabetical`  
 Options: `alphabetical`, `smacss`, `concentric-css`
 
-Provide the name of one of the built-in sort orders, for example `smacss` or a function that takes in two declaration names and returns `-1`, `0` or `1` depending on the wanted order.
+Provide the name of one of the built-in sort orders or a comparison function that is passed to ([`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)). This function receives two declaration names and is expected to return `-1`, `0` or `1` depending on the wanted order.
+
+#### keepOverrides
+Type: `Boolean`
+Default: `false`  
+
+To prevent breaking legacy CSS where shorthand declarations override longhand declarations this option can enabled. For example `animation-name: some; animation: greeting;` will be kept in this order when `keepOverrides` is `true`.
 
 [PostCSS]: https://github.com/postcss/postcss
 
