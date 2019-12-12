@@ -14,9 +14,16 @@ const builtInOrders = [
 
 module.exports = postcss.plugin(
   'css-declaration-sorter',
-  ({ order = 'alphabetical' } = {}) => css => {
-    if (typeof order === 'function')
-      return processCss({ css, comparator: order });
+  ({ order = 'alphabetical', keepOverrides = false } = {}) => css => {
+    let withKeepOverrides = comparator => comparator;
+    if (keepOverrides) {
+      const shorthandData = require('./shorthand-data.js');
+      withKeepOverrides = withOverridesComparator(shorthandData);
+    }
+
+    if (typeof order === 'function') {
+      return processCss({ css, comparator: withKeepOverrides(order) });
+    }
 
     if (!builtInOrders.includes(order))
       return Promise.reject(
@@ -26,16 +33,23 @@ module.exports = postcss.plugin(
         ].join('\n'))
       );
 
-    if (order === 'alphabetical')
-      return Promise.resolve(processCss({ css, order }));
+    if (order === 'alphabetical') {
+      return processCss({
+        css,
+        comparator: withKeepOverrides(defaultComparator),
+      });
+    }
 
     // Load in the array containing the order from a JSON file
     return readFile(path.join(__dirname, '..', 'orders', order) + '.json')
-      .then(data => processCss({ css, order: JSON.parse(data) }));
+      .then(data => processCss({
+        css,
+        comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
+      }));
   }
 );
 
-function processCss ({ css, order, comparator }) {
+function processCss ({ css, comparator }) {
   const comments = [];
   const rulesCache = [];
 
@@ -87,7 +101,7 @@ function processCss ({ css, order, comparator }) {
 
   // Perform a sort once all comment nodes are removed
   rulesCache.forEach(nodes => {
-    sortCssDeclarations({ nodes, order, comparator });
+    sortCssDeclarations({ nodes, comparator });
   });
 
   // Add comments back to the nodes they are paired with
@@ -98,33 +112,34 @@ function processCss ({ css, order, comparator }) {
   });
 }
 
-// Sort CSS declarations alphabetically or using the set sorting order
-function sortCssDeclarations ({ nodes, order, comparator }) {
-  if (order === 'alphabetical') {
-    comparator = defaultComparator;
-  }
+function sortCssDeclarations ({ nodes, comparator }) {
+  timsort(nodes, (a, b) => {
+    if (a.type === 'decl' && b.type === 'decl') {
+      return comparator(a.prop, b.prop);
+    } else {
+      return compareDifferentType(a, b);
+    }
+  });
+}
 
-  if (comparator) {
-    timsort(nodes, (a, b) => {
-      if (a.type === 'decl' && b.type === 'decl') {
-        return comparator(a.prop, b.prop);
-      } else {
-        return compareDifferentType(a, b);
-      }
-    });
-  }
+function withOverridesComparator (shorthandData) {
+  return function (comparator) {
+    return function (a, b) {
+      if (shorthandData[a] && shorthandData[a].includes(b)) return 0;
+      if (shorthandData[b] && shorthandData[b].includes(a)) return 0;
 
-  else {
-    timsort(nodes, (a, b) => {
-      if (a.type === 'decl' && b.type === 'decl') {
-        const aIndex = order.indexOf(a.prop);
-        const bIndex = order.indexOf(b.prop);
-        return defaultComparator(aIndex, bIndex);
-      } else {
-        return compareDifferentType(a, b);
-      }
-    });
-  }
+      return comparator(a, b);
+    };
+  };
+}
+
+function orderComparator (order) {
+  return function (a, b) {
+    const aIndex = order.indexOf(a);
+    const bIndex = order.indexOf(b);
+
+    return defaultComparator(aIndex, bIndex);
+  };
 }
 
 function defaultComparator (a, b) {
