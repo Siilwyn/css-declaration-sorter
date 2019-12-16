@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2019-12-16
+### Added
+- Option `keepOverrides` to keep overrides in place, useful for legacy CSS where shorthand declarations override longhand declarations.
+
+### Changed
+- Default sorting order renamed to `alphabetical`.
+- Custom sorting order as a JSON file replaced in favor of the option to pass a custom sorting function.
+
+### Removed
+- Node.js 6 and 8 support.
+
 ## [4.0.1] - 2018-07-30
 ### Fixed
 - Invalid package engines node version range.
@@ -12,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - New ruby, transform and text related properties.
 
 ### Removed
-- Node 4 support.
+- Node.js 4 support.
 - Deprecated grid properties.
 
 ## [3.0.1] - 2018-01-11
@@ -41,6 +52,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[5.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v4.0.1...v5.0.0
 [4.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v3.0.1...v4.0.0
 [3.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v3.0.0...v3.0.1
