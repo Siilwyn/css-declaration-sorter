@@ -56,7 +56,7 @@ const request = https.get(options, function (result) {
     cssProperties.sort();
     cssProperties = JSON.stringify(cssProperties, null, 2);
 
-    fs.writeFile('orders/source.json', cssProperties, function (error) {
+    fs.writeFile('orders/alphabetical.json', cssProperties, function (error) {
       if (error) throw error;
     });
   });

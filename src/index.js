@@ -33,13 +33,6 @@ module.exports = postcss.plugin(
         ].join('\n'))
       );
 
-    if (order === 'alphabetical') {
-      return processCss({
-        css,
-        comparator: withKeepOverrides(defaultComparator),
-      });
-    }
-
     // Load in the array containing the order from a JSON file
     return readFile(path.join(__dirname, '..', 'orders', order) + '.json')
       .then(data => processCss({
