@@ -1,4 +1,4 @@
-<img alt='CSS declaration sorter logo' src='https://cdn.rawgit.com/Siilwyn/css-declaration-sorter/master/logo.svg' height='260' align='right'>
+<img alt='CSS declaration sorter logo' src='logo.svg' height='260' align='right'>
 
 # CSS Declaration Sorter
 [![Travis Build Status][travis-icon]][travis]
