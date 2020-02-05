@@ -71,6 +71,11 @@ const sortOrderTests = [
     fixture: 'a{border: 0;@import sii;flex:0;}',
     expected: 'a{border: 0;@import sii;flex:0;}',
   },
+  {
+    message: 'Retain unkown properties',
+    fixture: 'a{unkown-b: 0; unkown-a: 0;}',
+    expected: 'a{unkown-b: 0; unkown-a: 0;}',
+  },
 ];
 
 const commentOrderTests = [
@@ -192,12 +197,12 @@ tape('CSS properties are up-to-date.', function (t) {
   fs.readdir(cssOrdersDir, function (error, files) {
     const sourceProperties = JSON.parse(
       // eslint-disable-next-line no-sync
-      fs.readFileSync(path.join(cssOrdersDir, 'source.json'))
+      fs.readFileSync(path.join(cssOrdersDir, 'alphabetical.json'))
     );
 
     files
       .filter(function (fileName) {
-        return fileName !== 'source.json';
+        return fileName !== 'alphabetical.json';
       })
       // Pair filenames and amount of properties from each CSS order file
       .map(function (fileName) {
