@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2020-02-06
+### Changed
+- Sorting of unknown properties when sorting alphabetically now works the same as the other orders. Instead of sorting all properties only known properties will be sorted and unknown properties will retain their respective order.
+
 ## [5.0.0] - 2019-12-16
 ### Added
 - Option `keepOverrides` to keep overrides in place, useful for legacy CSS where shorthand declarations override longhand declarations.
@@ -52,6 +56,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[5.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.0.0...v5.1.0
 [5.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v4.0.1...v5.0.0
 [4.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v3.0.1...v4.0.0
