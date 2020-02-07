@@ -118,6 +118,9 @@ function sortCssDeclarations ({ nodes, comparator }) {
 function withOverridesComparator (shorthandData) {
   return function (comparator) {
     return function (a, b) {
+      a = postcss.vendor.unprefixed(a);
+      b = postcss.vendor.unprefixed(b);
+
       if (shorthandData[a] && shorthandData[a].includes(b)) return 0;
       if (shorthandData[b] && shorthandData[b].includes(a)) return 0;
 
