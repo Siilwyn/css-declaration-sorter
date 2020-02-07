@@ -111,7 +111,7 @@ Provide the name of one of the built-in sort orders or a comparison function tha
 Type: `Boolean`
 Default: `false`  
 
-To prevent breaking legacy CSS where shorthand declarations override longhand declarations this option can enabled. For example `animation-name: some; animation: greeting;` will be kept in this order when `keepOverrides` is `true`.
+To prevent breaking legacy CSS where shorthand declarations override longhand declarations (also taking into account vendor prefixes) this option can enabled. For example `animation-name: some; animation: greeting;` will be kept in this order when `keepOverrides` is `true`.
 
 [PostCSS]: https://github.com/postcss/postcss
 

@@ -174,6 +174,12 @@ const keepOverridesTests = [
     expected: 'a{animation: hey 1s ease;animation-name: hi;z-index: 1;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep vendor prefixed declarations in place.',
+    fixture: 'a{animation: a;-moz-animation:b;}',
+    expected: 'a{animation: a;-moz-animation:b;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
