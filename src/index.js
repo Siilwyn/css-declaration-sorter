@@ -1,8 +1,7 @@
 'use strict';
 
-const { readFile } = require('fs');
+const { readFile } = require('fs').promises;
 const path = require('path');
-const { promisify } = require('util');
 
 const postcss = require('postcss');
 const timsort = require('timsort').sort;
@@ -35,7 +34,7 @@ module.exports = postcss.plugin(
       );
 
     // Load in the array containing the order from a JSON file
-    return promisify(readFile)(path.join(__dirname, '..', 'orders', order) + '.json')
+    return readFile(path.join(__dirname, '..', 'orders', order) + '.json')
       .then(data => processCss({
         css,
         comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
