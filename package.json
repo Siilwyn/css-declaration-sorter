@@ -33,7 +33,7 @@
     "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
   },
   "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
-  "license": "MIT",
+  "license": "ISC",
   "keywords": [
     "postcss",
     "postcss-plugin",
