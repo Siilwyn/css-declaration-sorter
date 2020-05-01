@@ -23,7 +23,7 @@
   "devDependencies": {
     "benchmark": "^2.1.4",
     "eslint": "^6.8.0",
-    "tape": "^4.13.2"
+    "tape": "^5.0.0"
   },
   "engines": {
     "node": ">= 10"
