@@ -71,6 +71,23 @@ Piping out result from file:
 Sorting multiple files by overwriting:  
 `postcss *.css --use css-declaration-sorter --replace --no-map`
 
+Sorting all files in a directory with sass syntax (require npm package [postcss-scss](https://github.com/postcss/postcss-scss)) by overwriting (default order):  
+`postcss ./src/**/*.scss --syntax postcss-scss --use css-declaration-sorter --replace --no-map`
+
+Sorting all files in the directory with sass syntax and special order by overwriting:  
+You need to add config file or use the package.json to add:  
+```json
+"postcss": {
+  "syntax": "postcss-scss",
+  "map": false,
+  "plugins": {
+    "css-declaration-sorter": { "order": "smacss" }
+  }
+}
+```
+Later you can execute or you can add it like a script in your package.json:  
+`postcss ./src/**/*.scss --replace --config package.json`
+
 ### Vanilla JS
 ```js
 const postcss = require('postcss');
