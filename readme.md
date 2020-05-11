@@ -41,7 +41,7 @@ body {
 `alphabetical`  
 *Default, order in a simple alphabetical manner from a - z.*
 
-- [SMACSS](https://smacss.com/book/formatting#grouping)  
+- [SMACSS](http://smacss.com/book/formatting#grouping)  
 `smacss`  
 *Order from most important, flow affecting properties, to least important properties.*
   1. Box
