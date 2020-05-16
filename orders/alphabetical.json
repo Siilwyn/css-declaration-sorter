@@ -235,6 +235,7 @@
   "resize",
   "right",
   "rotate",
+  "row-gap",
   "ruby-align",
   "ruby-position",
   "scale",

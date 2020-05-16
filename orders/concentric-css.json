@@ -60,6 +60,7 @@
   "column-span",
   "column-count",
   "column-width",
+  "row-gap",
   "break-before",
   "break-after",
   "break-inside",
