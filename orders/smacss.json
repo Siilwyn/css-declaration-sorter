@@ -91,6 +91,7 @@
   "column-span",
   "column-count",
   "column-width",
+  "row-gap",
   "object-fit",
   "object-position",
   "transform",
