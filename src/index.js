@@ -131,15 +131,8 @@ function withOverridesComparator (shorthandData) {
 
 function orderComparator (order) {
   return function (a, b) {
-    const aIndex = order.indexOf(a);
-    const bIndex = order.indexOf(b);
-
-    return defaultComparator(aIndex, bIndex);
+    return order.indexOf(a) - order.indexOf(b);
   };
-}
-
-function defaultComparator (a, b) {
-  return a === b ? 0 : a < b ? -1 : 1;
 }
 
 function compareDifferentType (a, b) {
