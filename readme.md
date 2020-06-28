@@ -131,8 +131,8 @@ To prevent breaking legacy CSS where shorthand declarations override longhand de
 
 [PostCSS]: https://github.com/postcss/postcss
 
-[travis]: https://travis-ci.org/Siilwyn/css-declaration-sorter
-[travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
+[travis]: https://travis-ci.com/Siilwyn/css-declaration-sorter
+[travis-icon]: https://img.shields.io/travis/com/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
 [lgtm]: https://lgtm.com/projects/g/Siilwyn/css-declaration-sorter/
 [lgtm-icon]: https://img.shields.io/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter.svg?style=flat-square
 [npm]: https://www.npmjs.com/package/css-declaration-sorter
