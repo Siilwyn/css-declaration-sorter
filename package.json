@@ -26,7 +26,7 @@
     "tape": "^5.0.1"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">=14.5.0"
   },
   "repository": {
     "type": "git",
