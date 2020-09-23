@@ -17,7 +17,7 @@
     "scrape": "node src/property-scraper"
   },
   "dependencies": {
-    "postcss": "^7.0.32",
+    "postcss": "^8.0.7",
     "timsort": "^0.3.0"
   },
   "devDependencies": {
