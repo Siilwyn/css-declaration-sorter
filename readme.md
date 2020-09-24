@@ -60,7 +60,8 @@ body {
   5. Text
 
 ## Usage
-`npm install css-declaration-sorter --save-dev`
+Following the PostCSS plugin guidelines, this package depends on PostCSS as a peer dependency:
+`npm install postcss css-declaration-sorter --save-dev`
 
 ### CLI
 This module does not include its own CLI but works with the official [PostCSS CLI](https://github.com/postcss/postcss-cli). To use the examples below, the `postcss-cli` package is a required dependency.

@@ -191,9 +191,8 @@ testCssFixtures('Should order nested declarations.', nestedDeclarationTests);
 testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 
 tape('Should use the PostCSS plugin API.', function (t) {
-  t.plan(2);
+  t.plan(1);
 
-  t.ok(plugin().postcssVersion, 'Able to access version.');
   t.equal(plugin().postcssPlugin, name, 'Able to access name.');
 });
 
