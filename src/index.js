@@ -3,7 +3,6 @@
 const { readFile } = require('fs').promises;
 const path = require('path');
 
-const postcss = require('postcss');
 const timsort = require('timsort').sort;
 
 const builtInOrders = [
@@ -12,9 +11,9 @@ const builtInOrders = [
   'smacss',
 ];
 
-module.exports = postcss.plugin(
-  'css-declaration-sorter',
-  ({ order = 'alphabetical', keepOverrides = false } = {}) => css => {
+module.exports = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
+  postcssPlugin: 'css-declaration-sorter',
+  Root (css) {
     let withKeepOverrides = comparator => comparator;
     if (keepOverrides) {
       const shorthandData = require('./shorthand-data.js');
@@ -39,8 +38,10 @@ module.exports = postcss.plugin(
         css,
         comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
       }));
-  }
-);
+  },
+});
+
+module.exports.postcss = true;
 
 function processCss ({ css, comparator }) {
   const comments = [];
@@ -118,8 +119,8 @@ function sortCssDeclarations ({ nodes, comparator }) {
 function withOverridesComparator (shorthandData) {
   return function (comparator) {
     return function (a, b) {
-      a = postcss.vendor.unprefixed(a);
-      b = postcss.vendor.unprefixed(b);
+      a = removeVendorPrefix(a);
+      b = removeVendorPrefix(b);
 
       if (shorthandData[a] && shorthandData[a].includes(b)) return 0;
       if (shorthandData[b] && shorthandData[b].includes(a)) return 0;
@@ -141,4 +142,8 @@ function compareDifferentType (a, b) {
   }
 
   return a.type === 'decl' ? -1 : b.type === 'decl' ? 1 : 0;
+}
+
+function removeVendorPrefix (property) {
+  return property.replace(/^-\w+-/, '');
 }

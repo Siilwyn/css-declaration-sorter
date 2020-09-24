@@ -17,13 +17,16 @@
     "scrape": "node src/property-scraper"
   },
   "dependencies": {
-    "postcss": "^7.0.32",
     "timsort": "^0.3.0"
   },
   "devDependencies": {
     "benchmark": "^2.1.4",
     "eslint": "^7.8.1",
+    "postcss": "^8.0.9",
     "tape": "^5.0.1"
+  },
+  "peerDependencies": {
+    "postcss": "^8.0.9"
   },
   "engines": {
     "node": ">= 10"
