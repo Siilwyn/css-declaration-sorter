@@ -4,7 +4,7 @@ const Benchmark = require('benchmark');
 
 const fs = require('fs');
 const postcss = require('postcss');
-const cssDeclarationSorter = require('../../src/index.js');
+const cssDeclarationSorter = require('../../src/main');
 
 // eslint-disable-next-line
 const gumby = fs.readFileSync('./tests/benchmark/gumby.css');

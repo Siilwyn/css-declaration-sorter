@@ -5,7 +5,7 @@ const path = require('path');
 
 const tape = require('tape');
 const postcss = require('postcss');
-const plugin = require('../src/');
+const plugin = require('../src/main');
 const name = require('../package.json').name;
 
 const testCssFixtures = function (testMessage, tests) {
