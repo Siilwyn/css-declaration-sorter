@@ -13,7 +13,7 @@ const builtInOrders = [
 
 module.exports = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
   postcssPlugin: 'css-declaration-sorter',
-  Root (css) {
+  OnceExit (css) {
     let withKeepOverrides = comparator => comparator;
     if (keepOverrides) {
       const shorthandData = require('./shorthand-data.js');
