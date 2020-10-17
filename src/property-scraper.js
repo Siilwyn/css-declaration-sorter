@@ -1,67 +1,27 @@
 'use strict';
 
-const https = require('https');
-const fs = require('fs');
+const fs = require('fs').promises;
+const { css } = require('@mdn/browser-compat-data');
 
-const isStandardProperty = function (tags) {
-  return (
-    tags.find(function (tagName) {
-      return tagName.match(/css property/i);
-    }) &&
-    !tags.find(function (tagName) {
-      return tagName.match(/non-standard/i);
-    }) &&
-    !tags.find(function (tagName) {
-      return tagName.match(/deprecated/i);
-    })
-  );
-};
+const isStandardProperty = (name) => (property) => Boolean(
+  property.__compat?.status.standard_track === true &&
+  property.__compat?.status.experimental === false &&
+  property.__compat?.status.deprecated === false &&
+  (
+    property.__compat?.mdn_url &&
+    [...property.__compat.mdn_url.split('/')].pop() === name
+  ),
+);
 
-const options = {
-  hostname: 'developer.mozilla.org',
-  port: 443,
-  path: '/en-US/docs/Web/CSS$children?expand',
-};
+const cssProperties = Object.entries({ ...css.properties, ...css['at-rules']['font-face'] })
+  .filter(([name, data]) =>
+    isStandardProperty (name) (data) ||
+    Object.values(data).some(isStandardProperty(name)),
+  )
+  .map(([name]) => name)
+  .sort();
 
-const request = https.get(options, function (result) {
-  let data = '';
-
-  result.setEncoding('utf8');
-
-  result.on('data', function (chunk) {
-    data += chunk;
-  });
-
-  // Write a filtered array of CSS property names to a JSON file
-  result.on('end', function () {
-    data = JSON.parse(data);
-
-    let cssProperties = data.subpages.reduce(function (cssProperties, page) {
-      // Add page title if tagged as CSS property and not tagged as Non-standard
-      if (isStandardProperty(page.tags)) {
-        cssProperties.push(page.title);
-      }
-
-      const cssDescriptors = page.subpages.reduce(function (cssDescriptors, subPage) {
-        if (isStandardProperty(subPage.tags) && !~cssProperties.indexOf(subPage.title)) {
-          cssDescriptors.push(subPage.title);
-        }
-
-        return cssDescriptors;
-      }, []);
-
-      return [].concat(cssProperties, cssDescriptors);
-    }, []);
-
-    cssProperties.sort();
-    cssProperties = JSON.stringify(cssProperties, null, 2);
-
-    fs.writeFile('orders/alphabetical.json', cssProperties, function (error) {
-      if (error) throw error;
-    });
-  });
-});
-
-request.on('error', function (error) {
-  console.error(error);
-});
+fs.writeFile(
+  'orders/alphabetical.json',
+  JSON.stringify(cssProperties, null, 2),
+);
