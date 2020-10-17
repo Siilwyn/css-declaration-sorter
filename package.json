@@ -16,9 +16,7 @@
     "preversion": "npm test",
     "scrape": "node src/property-scraper"
   },
-  "dependencies": {
-    "timsort": "^0.3.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@mdn/browser-compat-data": "^2.0.3",
     "benchmark": "^2.1.4",
@@ -30,7 +28,7 @@
     "postcss": "^8.0.9"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "repository": {
     "type": "git",

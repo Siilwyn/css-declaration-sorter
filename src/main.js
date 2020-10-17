@@ -3,8 +3,6 @@
 const { readFile } = require('fs').promises;
 const path = require('path');
 
-const timsort = require('timsort').sort;
-
 const builtInOrders = [
   'alphabetical',
   'concentric-css',
@@ -107,7 +105,7 @@ function processCss ({ css, comparator }) {
 }
 
 function sortCssDeclarations ({ nodes, comparator }) {
-  timsort(nodes, (a, b) => {
+  nodes.sort((a, b) => {
     if (a.type === 'decl' && b.type === 'decl') {
       return comparator(a.prop, b.prop);
     } else {
