@@ -1,24 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 
-import tape from 'tape';
+import test from 'ava';
 import postcss from 'postcss';
 import plugin from '../src/main.mjs';
 
 const testCssFixtures = function (testMessage, tests) {
-  tape(testMessage, function (t) {
+  test(testMessage, function (t) {
     // Set amount of assertions by setting two assertions per sort order test
     t.plan(tests.length * 2);
 
-    tests.forEach(function (test) {
-      const options = test.options || {};
-      postcss(plugin(options))
+    return Promise.all(tests.map((test) => (
+      postcss(plugin(test.options))
         .process(test.fixture, { from: undefined })
         .then(function (result) {
-          t.equal(result.css, test.expected, test.message);
-          t.equal(result.warnings().length, 0);
-        });
-    });
+          t.is(result.css, test.expected, test.message);
+          t.is(result.warnings().length, 0);
+        })
+    )));
   });
 };
 
@@ -187,13 +186,13 @@ testCssFixtures('Should order nested declarations.', nestedDeclarationTests);
 
 testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 
-tape('Should use the PostCSS plugin API.', function (t) {
+test('Should use the PostCSS plugin API.', function (t) {
   t.plan(1);
 
-  t.equal(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
+  t.is(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
 });
 
-tape('CSS properties are up-to-date.', function (t) {
+test.cb('CSS properties are up-to-date.', function (t) {
   const cssOrdersDir = './orders/';
 
   fs.readdir(cssOrdersDir, function (error, files) {
@@ -217,7 +216,7 @@ tape('CSS properties are up-to-date.', function (t) {
         };
       })
       .forEach(function (customOrderFile) {
-        t.deepLooseEqual(
+        t.deepEqual(
           customOrderFile.properties.sort(),
           sourceProperties.sort(),
           `${customOrderFile.fileName} has the same properties as source.`
