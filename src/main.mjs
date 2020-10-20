@@ -1,7 +1,6 @@
-'use strict';
-
-const { readFile } = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import shorthandData from './shorthand-data.mjs';
+import path from 'path';
 
 const builtInOrders = [
   'alphabetical',
@@ -9,12 +8,11 @@ const builtInOrders = [
   'smacss',
 ];
 
-module.exports = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
+const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
   postcssPlugin: 'css-declaration-sorter',
   OnceExit (css) {
     let withKeepOverrides = comparator => comparator;
     if (keepOverrides) {
-      const shorthandData = require('./shorthand-data.js');
       withKeepOverrides = withOverridesComparator(shorthandData);
     }
 
@@ -31,7 +29,7 @@ module.exports = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
       );
 
     // Load in the array containing the order from a JSON file
-    return readFile(path.join(__dirname, '..', 'orders', order) + '.json')
+    return fs.readFile(path.join('orders', order) + '.json')
       .then(data => processCss({
         css,
         comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
@@ -39,7 +37,8 @@ module.exports = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
   },
 });
 
-module.exports.postcss = true;
+pluginEntrypoint.postcss = true;
+export default pluginEntrypoint;
 
 function processCss ({ css, comparator }) {
   const comments = [];

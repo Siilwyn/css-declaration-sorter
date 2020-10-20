@@ -2,26 +2,33 @@
   "name": "css-declaration-sorter",
   "version": "6.0.0",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
-  "main": "src/main.js",
+  "type": "module",
+  "main": "./src/main.cjs",
+  "exports": {
+    "import": "./src/main.mjs",
+    "require": "./src/main.cjs"
+  },
   "files": [
-    "src/main.js",
-    "src/shorthand-data.js",
+    "src/main.mjs",
+    "src/main.cjs",
+    "src/shorthand-data.mjs",
     "orders"
   ],
   "scripts": {
-    "test": "node tests/test.js",
-    "test:benchmark": "node tests/benchmark/benchmark.js",
+    "build": "rollup src/main.mjs --format cjs --file src/main.cjs",
+    "test": "node src/main.test.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
-    "lint": "eslint src/*.js tests/*.js",
+    "lint": "eslint src/*.mjs",
     "preversion": "npm test",
-    "scrape": "node src/property-scraper"
+    "scrape": "node src/property-scraper.mjs",
+    "prepack": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {
     "@mdn/browser-compat-data": "^2.0.3",
-    "benchmark": "^2.1.4",
     "eslint": "^7.11.0",
     "postcss": "^8.1.1",
+    "rollup": "^2.27.0",
     "tape": "^5.0.1"
   },
   "peerDependencies": {

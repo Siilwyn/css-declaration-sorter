@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+const shorthandData = {
   'animation': [
     'animation-name',
     'animation-duration',
@@ -230,3 +228,5 @@ module.exports = {
     'text-emphasis-color',
   ],
 };
+
+export default shorthandData;
