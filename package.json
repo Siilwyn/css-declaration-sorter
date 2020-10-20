@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "rollup src/main.mjs --format cjs --file src/main.cjs",
-    "test": "node src/main.test.mjs",
+    "test": "ava src/*.test.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.mjs",
     "preversion": "npm test",
@@ -26,10 +26,10 @@
   "dependencies": {},
   "devDependencies": {
     "@mdn/browser-compat-data": "^2.0.3",
+    "ava": "^3.13.0",
     "eslint": "^7.11.0",
     "postcss": "^8.1.1",
-    "rollup": "^2.27.0",
-    "tape": "^5.0.1"
+    "rollup": "^2.27.0"
   },
   "peerDependencies": {
     "postcss": "^8.0.9"
