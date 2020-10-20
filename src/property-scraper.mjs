@@ -1,7 +1,7 @@
-'use strict';
+import { promises as fs } from 'fs';
+import browserCompatData from '@mdn/browser-compat-data';
 
-const fs = require('fs').promises;
-const { css } = require('@mdn/browser-compat-data');
+const { css } = browserCompatData;
 
 const isStandardProperty = (name) => (property) => Boolean(
   property.__compat?.status.standard_track === true &&

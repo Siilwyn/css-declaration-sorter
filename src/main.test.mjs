@@ -1,12 +1,9 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
 
-const fs = require('fs');
-const path = require('path');
-
-const tape = require('tape');
-const postcss = require('postcss');
-const plugin = require('../src/main');
-const name = require('../package.json').name;
+import tape from 'tape';
+import postcss from 'postcss';
+import plugin from '../src/main.mjs';
 
 const testCssFixtures = function (testMessage, tests) {
   tape(testMessage, function (t) {
@@ -193,7 +190,7 @@ testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 tape('Should use the PostCSS plugin API.', function (t) {
   t.plan(1);
 
-  t.equal(plugin().postcssPlugin, name, 'Able to access name.');
+  t.equal(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
 });
 
 tape('CSS properties are up-to-date.', function (t) {

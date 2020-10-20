@@ -9,7 +9,7 @@
 A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring styling is organized, more consistent and in order... The goal of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
 
 ## Niceness
-- Up-to-date CSS properties fetched from the [MDN Web Platform](https://developer.mozilla.org/).
+- Up-to-date CSS properties fetched from the [MDN Compatibility Data](https://github.com/mdn/browser-compat-data/) project.
 - Choose your wanted order or provide your own.
 - Nested rules sorting support.
 - SCSS and Less support when combined with either [postcss-scss](https://github.com/postcss/postcss-scss) or [postcss-less](https://github.com/webschik/postcss-less).
@@ -90,25 +90,25 @@ Sorting all files in the directory with SCSS syntax and SMACSS order by overwrit
 
 ### Vanilla JS
 ```js
-const postcss = require('postcss');
-const cssDeclarationSorter = require('css-declaration-sorter');
+import postcss from 'postcss';
+import cssDeclarationSorter from 'css-declaration-sorter';
 
-postcss([cssDeclarationSorter({order: 'smacss'})])
-  .process('a { color: hyperblue; display: block; }')
-  .then(result =>
+postcss([cssDeclarationSorter({ order: 'smacss' })])
+  .process('a { color: hyperblue; display: block; }', { from: undefined })
+  .then(result => console.log(
     result.css === 'a { display: block; color: hyperblue; }'
-  );
+  ));
 ```
 
 ### Gulp
 ```js
-const gulp = require('gulp');
-const gulpPostcss = require('gulp-postcss');
-const cssDeclarationSorter = require('css-declaration-sorter');
+import gulp from 'gulp';
+import gulpPostcss from 'gulp-postcss';
+import cssDeclarationSorter from 'css-declaration-sorter';
 
 gulp.task('css', function () {
   return gulp.src('some.css')
-    .pipe(gulpPostcss([cssDeclarationSorter({order: 'smacss'})]))
+    .pipe(gulpPostcss([cssDeclarationSorter({ order: 'smacss'} )]))
     .pipe(gulp.dest('./'));
 });
 ```
