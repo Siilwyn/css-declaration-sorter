@@ -1,19 +1,16 @@
-import fs from 'fs';
-import path from 'path';
-
 import test from 'ava';
 import postcss from 'postcss';
 import plugin from '../src/main.mjs';
 
-const testCssFixtures = function (testMessage, tests) {
-  test(testMessage, function (t) {
+const testCssFixtures = (testMessage, tests) => {
+  test(testMessage, (t) => {
     // Set amount of assertions by setting two assertions per sort order test
     t.plan(tests.length * 2);
 
     return Promise.all(tests.map((test) => (
       postcss(plugin(test.options))
         .process(test.fixture, { from: undefined })
-        .then(function (result) {
+        .then((result) => {
           t.is(result.css, test.expected, test.message);
           t.is(result.warnings().length, 0);
         })
@@ -186,43 +183,8 @@ testCssFixtures('Should order nested declarations.', nestedDeclarationTests);
 
 testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 
-test('Should use the PostCSS plugin API.', function (t) {
+test('Should use the PostCSS plugin API.', (t) => {
   t.plan(1);
 
   t.is(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
-});
-
-test.cb('CSS properties are up-to-date.', function (t) {
-  const cssOrdersDir = './orders/';
-
-  fs.readdir(cssOrdersDir, function (error, files) {
-    const sourceProperties = JSON.parse(
-      // eslint-disable-next-line no-sync
-      fs.readFileSync(path.join(cssOrdersDir, 'alphabetical.json'))
-    );
-
-    files
-      .filter(function (fileName) {
-        return fileName !== 'alphabetical.json';
-      })
-      // Pair filenames and amount of properties from each CSS order file
-      .map(function (fileName) {
-        return {
-          fileName: fileName,
-          properties: JSON.parse(
-            // eslint-disable-next-line no-sync
-            fs.readFileSync(path.join(cssOrdersDir, fileName))
-          ),
-        };
-      })
-      .forEach(function (customOrderFile) {
-        t.deepEqual(
-          customOrderFile.properties.sort(),
-          sourceProperties.sort(),
-          `${customOrderFile.fileName} has the same properties as source.`
-        );
-      });
-
-    t.end();
-  });
 });

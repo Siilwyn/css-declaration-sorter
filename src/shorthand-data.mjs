@@ -138,8 +138,8 @@ const shorthandData = {
     'grid-auto-rows',
     'grid-auto-columns',
     'grid-auto-flow',
-    'grid-column-gap',
-    'grid-row-gap',
+    'column-gap',
+    'row-gap',
   ],
   'grid-area': [
     'grid-row-start',
@@ -150,10 +150,6 @@ const shorthandData = {
   'grid-column': [
     'grid-column-start',
     'grid-column-end',
-  ],
-  'grid-gap': [
-    'grid-row-gap',
-    'grid-column-gap',
   ],
   'grid-row': [
     'grid-row-start',
