@@ -63,6 +63,8 @@ body {
 Following the PostCSS plugin guidelines, this package depends on PostCSS as a peer dependency:
 `npm install postcss css-declaration-sorter --save-dev`
 
+**Note:** To use with Node.js 10 install `css-declaration-sorter@5` and check out [the readme in the version 5 branch](https://github.com/Siilwyn/css-declaration-sorter/tree/v5).
+
 ### CLI
 This module does not include its own CLI but works with the official [PostCSS CLI](https://github.com/postcss/postcss-cli). To use the examples below, the `postcss-cli` package is a required dependency.
 
