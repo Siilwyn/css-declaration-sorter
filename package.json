@@ -1,6 +1,6 @@
 {
   "name": "css-declaration-sorter",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "type": "module",
   "main": "./src/main.cjs",

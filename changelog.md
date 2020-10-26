@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.0.1] - 2020-10-26
+### Added
+- ES module export type, both CommonJS and ES module importing are supported.
+- Newer font and grid CSS properties like `row-grap` and `font-display`.
+### Changed
+- Scraping of CSS properties now comes from MDN browser compatibility package.
+- PostCSS upgraded to version eight which changes PostCSS to a peer dependency.
+- Order declarations to be ordered in the precendece of their shorthand counterparts. Special thanks to @DiemenDesign.
+### Removed
+- Node.js 10 support.
+
 ## [5.1.2] - 2020-02-21
 ### Fixed
 - Experimental Node.js warning from showing up on some versions.
