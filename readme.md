@@ -101,20 +101,11 @@ postcss([cssDeclarationSorter({ order: 'smacss' })])
     result.css === 'a { display: block; color: hyperblue; }'
   ));
 ```
+___
 
-### Gulp
-```js
-import gulp from 'gulp';
-import gulpPostcss from 'gulp-postcss';
-import cssDeclarationSorter from 'css-declaration-sorter';
+**[View usage examples](/examples) for more in combination with other tools.**  
 
-gulp.task('css', function () {
-  return gulp.src('some.css')
-    .pipe(gulpPostcss([cssDeclarationSorter({ order: 'smacss'} )]))
-    .pipe(gulp.dest('./'));
-});
-```
-See [PostCSS] documentation for more examples and other environments.
+___
 
 ## API
 ### cssDeclarationSorter({ order, keepOverrides })
