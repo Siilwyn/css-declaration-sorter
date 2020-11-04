@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.0.2] - 2020-11-04
+### Fixed
+- Loading built-in order using a relative path.
+
 ## [6.0.1] - 2020-10-26
 ### Added
 - ES module export type, both CommonJS and ES module importing are supported.
@@ -75,6 +79,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.0.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.1...v6.0.2
+[6.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.2...v6.0.1
 [5.1.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.1...v5.1.2
 [5.1.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.0.0...v5.1.0
