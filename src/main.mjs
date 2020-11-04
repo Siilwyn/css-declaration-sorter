@@ -1,6 +1,9 @@
 import { promises as fs } from 'fs';
 import shorthandData from './shorthand-data.mjs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const builtInOrders = [
   'alphabetical',
@@ -29,7 +32,7 @@ const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}
       );
 
     // Load in the array containing the order from a JSON file
-    return fs.readFile(path.join('orders', order) + '.json')
+    return fs.readFile(path.resolve(currentDirectory, '..', 'orders', order) + '.json')
       .then(data => processCss({
         css,
         comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
