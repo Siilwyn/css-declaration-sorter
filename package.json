@@ -25,7 +25,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@mdn/browser-compat-data": "^2.0.3",
+    "@mdn/browser-compat-data": "^2.0.4",
     "ava": "^3.13.0",
     "eslint": "^7.12.1",
     "postcss": "^8.1.4",
