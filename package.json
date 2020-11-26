@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "rollup src/main.mjs --format cjs --file src/main.cjs",
+    "preversion": "npm run scrape",
     "test": "ava src/*.test.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.mjs",
@@ -25,7 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@mdn/browser-compat-data": "^2.0.4",
+    "@mdn/browser-compat-data": "^2.0.7",
     "ava": "^3.13.0",
     "eslint": "^7.12.1",
     "postcss": "^8.1.4",
