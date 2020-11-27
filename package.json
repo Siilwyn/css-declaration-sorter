@@ -16,11 +16,10 @@
   ],
   "scripts": {
     "build": "rollup src/main.mjs --format cjs --file src/main.cjs",
-    "preversion": "npm run scrape",
+    "preversion": "npm test",
     "test": "ava src/*.test.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/*.mjs",
-    "preversion": "npm test",
     "scrape": "node src/property-scraper.mjs",
     "prepack": "npm run build"
   },
@@ -28,7 +27,7 @@
   "devDependencies": {
     "@mdn/browser-compat-data": "^2.0.7",
     "ava": "^3.13.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.14.0",
     "postcss": "^8.1.4",
     "rollup": "^2.33.3"
   },
