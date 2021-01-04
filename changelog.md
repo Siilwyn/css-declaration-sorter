@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [6.0.1] - 2020-10-26
 ### Added
 - ES module export type, both CommonJS and ES module importing are supported.
-- Newer font and grid CSS properties like `row-grap` and `font-display`.
+- Newer font and grid CSS properties like `row-gap` and `font-display`.
 ### Changed
 - Scraping of CSS properties now comes from MDN browser compatibility package.
 - PostCSS upgraded to version eight which changes PostCSS to a peer dependency.
