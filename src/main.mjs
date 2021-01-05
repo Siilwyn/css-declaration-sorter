@@ -11,6 +11,14 @@ const builtInOrders = [
   'smacss',
 ];
 
+/**
+ * Sort CSS, SCSS or Less declarations based on their property names.
+ * @public
+ * @param order - Provide the name of one of the built-in sort orders or a comparison function that is passed to `Array.sort`.
+ * @param keepOverrides - Prevent breaking legacy CSS where shorthand declarations override longhand declarations.
+ * @see {@link https://github.com/Siilwyn/css-declaration-sorter/blob/master/readme.md#api | API documentation}
+ * @see {@link https://github.com/Siilwyn/css-declaration-sorter/blob/master/readme.md#usage | Usage examples}
+ */
 const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
   postcssPlugin: 'css-declaration-sorter',
   OnceExit (css) {
