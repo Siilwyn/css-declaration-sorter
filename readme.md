@@ -118,7 +118,7 @@ Options: `alphabetical`, `smacss`, `concentric-css`
 Provide the name of one of the built-in sort orders or a comparison function that is passed to ([`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)). This function receives two declaration names and is expected to return `-1`, `0` or `1` depending on the wanted order.
 
 #### keepOverrides
-Type: `Boolean`
+Type: `Boolean`  
 Default: `false`  
 
 To prevent breaking legacy CSS where shorthand declarations override longhand declarations (also taking into account vendor prefixes) this option can enabled. For example `animation-name: some; animation: greeting;` will be kept in this order when `keepOverrides` is `true`.
