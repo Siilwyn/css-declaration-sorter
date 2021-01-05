@@ -132,4 +132,4 @@ To prevent breaking legacy CSS where shorthand declarations override longhand de
 [npm]: https://www.npmjs.com/package/css-declaration-sorter
 [npm-icon]: https://img.shields.io/npm/v/css-declaration-sorter.svg?style=flat-square
 [prs]: /contributing.md
-[prs-icon]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[prs-icon]: https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat-square
