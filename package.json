@@ -28,7 +28,7 @@
     "@mdn/browser-compat-data": "^3.0.0",
     "ava": "^3.14.0",
     "eslint": "^7.16.0",
-    "postcss": "^8.2.1",
+    "postcss": "^8.2.2",
     "rollup": "^2.35.1"
   },
   "peerDependencies": {
