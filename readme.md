@@ -1,7 +1,6 @@
 <img alt='CSS declaration sorter logo' src='https://raw.githubusercontent.com/Siilwyn/css-declaration-sorter/master/logo.svg?sanitize=true' height='260' align='right'>
 
 # CSS Declaration Sorter
-[![Travis Build Status][travis-icon]][travis]
 [![LGTM Grade][lgtm-icon]][lgtm]
 [![npm][npm-icon]][npm]
 [![prs][prs-icon]][prs]
@@ -125,11 +124,9 @@ To prevent breaking legacy CSS where shorthand declarations override longhand de
 
 [PostCSS]: https://github.com/postcss/postcss
 
-[travis]: https://travis-ci.com/Siilwyn/css-declaration-sorter
-[travis-icon]: https://img.shields.io/travis/com/Siilwyn/css-declaration-sorter/master.svg?style=flat-square
 [lgtm]: https://lgtm.com/projects/g/Siilwyn/css-declaration-sorter/
-[lgtm-icon]: https://img.shields.io/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter.svg?style=flat-square
+[lgtm-icon]: https://img.shields.io/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter.svg
 [npm]: https://www.npmjs.com/package/css-declaration-sorter
-[npm-icon]: https://img.shields.io/npm/v/css-declaration-sorter.svg?style=flat-square
+[npm-icon]: https://img.shields.io/npm/v/css-declaration-sorter.svg
 [prs]: /contributing.md
-[prs-icon]: https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat-square
+[prs-icon]: https://img.shields.io/badge/PRs-welcome-blue.svg
