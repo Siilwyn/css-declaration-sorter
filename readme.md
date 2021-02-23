@@ -124,6 +124,6 @@ To prevent breaking legacy CSS where shorthand declarations override longhand de
 [PostCSS]: https://github.com/postcss/postcss
 
 [lgtm]: https://lgtm.com/projects/g/Siilwyn/css-declaration-sorter/
-[lgtm-badge]: https://tiny-shields.voorhoede.workers.dev/service/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter
+[lgtm-badge]: https://tinyshields.dev/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter.svg
 [npm]: https://www.npmjs.com/package/css-declaration-sorter
-[npm-badge]: https://tiny-shields.voorhoede.workers.dev/service/npm/css-declaration-sorter
+[npm-badge]: https://tinyshields.dev/npm/css-declaration-sorter.svg
