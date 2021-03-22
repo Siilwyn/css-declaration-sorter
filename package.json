@@ -27,7 +27,7 @@
   "devDependencies": {
     "@mdn/browser-compat-data": "^3.1.0",
     "ava": "^3.15.0",
-    "eslint": "^7.20.0",
+    "eslint": "^7.22.0",
     "postcss": "^8.2.8",
     "rollup": "^2.40.0"
   },
