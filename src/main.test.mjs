@@ -173,6 +173,12 @@ const keepOverridesTests = [
     expected: 'a{animation: a;-moz-animation:b;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep border declarations in place.',
+    fixture: 'a{border-top: 1px solid;border-color: purple;}',
+    expected:'a{border-top: 1px solid;border-color: purple;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
