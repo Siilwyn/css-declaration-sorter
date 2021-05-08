@@ -179,6 +179,12 @@ const keepOverridesTests = [
     expected:'a{border-top: 1px solid;border-color: purple;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep padding declarations in place.',
+    fixture: 'a{padding-left: unset;padding-inline-start: 0;}',
+    expected:'a{padding-left: unset;padding-inline-start: 0;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
