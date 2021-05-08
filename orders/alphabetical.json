@@ -1,9 +1,9 @@
 [
+  "all",
   "-webkit-line-clamp",
   "align-content",
   "align-items",
   "align-self",
-  "all",
   "animation",
   "animation-delay",
   "animation-direction",
