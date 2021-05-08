@@ -215,6 +215,22 @@ const shorthandData = {
     'padding-bottom',
     'padding-left',
   ],
+  'padding-inline': [
+    'padding-inline-start',
+    'padding-inline-end',
+  ],
+  'padding-inline-start': [
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
+  ],
+  'padding-inline-end': [
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
+  ],
   'place-content': [
     'align-content',
     'justify-content',
