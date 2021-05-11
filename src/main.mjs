@@ -2,10 +2,9 @@ import { promises as fs } from 'fs';
 import shorthandData from './shorthand-data.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { sort as timsort } from 'timsort';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
-
-import { sort as timsort } from 'timsort';
 
 const builtInOrders = [
   'alphabetical',
