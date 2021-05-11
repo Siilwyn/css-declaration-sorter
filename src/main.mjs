@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import shorthandData from './shorthand-data.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { sort as timsort } from 'timsort';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
@@ -107,7 +108,7 @@ function processCss ({ css, comparator }) {
 }
 
 function sortCssDeclarations ({ nodes, comparator }) {
-  nodes.sort((a, b) => {
+  timsort(nodes, (a, b) => {
     if (a.type === 'decl' && b.type === 'decl') {
       return comparator(a.prop, b.prop);
     } else {

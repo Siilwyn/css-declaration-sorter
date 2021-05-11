@@ -23,7 +23,9 @@
     "scrape": "node src/property-scraper.mjs",
     "prepack": "npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "timsort": "^0.3.0"
+  },
   "devDependencies": {
     "@mdn/browser-compat-data": "^3.2.4",
     "ava": "^3.15.0",
@@ -35,7 +37,7 @@
     "postcss": "^8.0.9"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 10"
   },
   "repository": {
     "type": "git",
