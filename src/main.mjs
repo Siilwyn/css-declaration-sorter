@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
+const timsort = require('timsort').sort;
+
 const builtInOrders = [
   'alphabetical',
   'concentric-css',
@@ -107,7 +109,7 @@ function processCss ({ css, comparator }) {
 }
 
 function sortCssDeclarations ({ nodes, comparator }) {
-  nodes.sort((a, b) => {
+  timsort(nodes, (a, b) => {
     if (a.type === 'decl' && b.type === 'decl') {
       return comparator(a.prop, b.prop);
     } else {
