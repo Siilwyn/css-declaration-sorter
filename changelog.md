@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.0.3] - 2021-05-11
+### Fixed
+- Sorting padding and border shorthands with `keepOverrides` enabled.
+- Property reset with `all`, the property is moved to the top.
+### Changed
+- Add back Node.js 10 support.
+
 ## [6.0.2] - 2020-11-04
 ### Fixed
 - Loading built-in order using a relative path.
@@ -79,6 +86,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.0.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.2...v6.0.3
 [6.0.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.1...v6.0.2
 [6.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.2...v6.0.1
 [5.1.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.1...v5.1.2
