@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
-const timsort = require('timsort').sort;
+import { sort as timsort } from 'timsort';
 
 const builtInOrders = [
   'alphabetical',
