@@ -1,21 +1,19 @@
-import test from 'ava';
+import { test } from 'uvu';
+import * as assert from 'uvu/assert';
 import postcss from 'postcss';
 import plugin from '../src/main.mjs';
 
 const testCssFixtures = (testMessage, tests) => {
-  test(testMessage, (t) => {
-    // Set amount of assertions by setting two assertions per sort order test
-    t.plan(tests.length * 2);
-
-    return Promise.all(tests.map((test) => (
-      postcss(plugin(test.options))
-        .process(test.fixture, { from: undefined })
+  test(testMessage, () => (
+    Promise.all(tests.map(({ message, fixture, expected, options }) => (
+      postcss(plugin(options))
+        .process(fixture, { from: undefined })
         .then((result) => {
-          t.is(result.css, test.expected, test.message);
-          t.is(result.warnings().length, 0);
+          assert.is(result.css, expected, message);
+          assert.is(result.warnings().length, 0);
         })
-    )));
-  });
+    )))
+  ));
 };
 
 const sortOrderTests = [
@@ -195,8 +193,8 @@ testCssFixtures('Should order nested declarations.', nestedDeclarationTests);
 
 testCssFixtures('Should keep shorthand override order.', keepOverridesTests);
 
-test('Should use the PostCSS plugin API.', (t) => {
-  t.plan(1);
-
-  t.is(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
+test('Should use the PostCSS plugin API.', () => {
+  assert.is(plugin().postcssPlugin, 'css-declaration-sorter', 'Able to access name.');
 });
+
+test.run();

@@ -1,16 +1,18 @@
-import fs from 'fs';
+import { readFileSync } from 'fs';
+import { promises as fs } from 'fs';
 import path from 'path';
-import test from 'ava';
+import { test } from 'uvu';
+import * as assert from 'uvu/assert';
 import shorthandData from './shorthand-data.mjs';
 
 const cssOrdersDir = './orders/';
 const sourceProperties = JSON.parse(
   // eslint-disable-next-line no-sync
-  fs.readFileSync(path.join(cssOrdersDir, 'alphabetical.json'))
+  readFileSync(path.join(cssOrdersDir, 'alphabetical.json'))
 );
 
-test.cb('CSS properties are up-to-date.', (t) => {
-  fs.readdir(cssOrdersDir, (error, files) => {
+test('CSS properties are up-to-date.', () => (
+  fs.readdir(cssOrdersDir).then((files) => (
     files
       .filter((fileName) => fileName !== 'alphabetical.json')
       // Pair filenames and amount of properties from each CSS order file
@@ -18,27 +20,27 @@ test.cb('CSS properties are up-to-date.', (t) => {
         fileName: fileName,
         properties: JSON.parse(
           // eslint-disable-next-line no-sync
-          fs.readFileSync(path.join(cssOrdersDir, fileName))
+          readFileSync(path.join(cssOrdersDir, fileName))
         ),
       }))
       .forEach((customOrderFile) => {
-        t.deepEqual(
+        assert.equal(
           customOrderFile.properties.sort(),
           sourceProperties.sort(),
           `${customOrderFile.fileName} has the same properties as source.`
         );
-      });
+      })
+  ))
+));
 
-    t.end();
-  });
-});
-
-test('Shorthand data matches known CSS properties', (t) => {
+test('Shorthand data matches known CSS properties', () => {
   Object.keys(shorthandData).map((property) =>
-    t.true(sourceProperties.includes(property), `${property} not found.`)
+    assert.is(sourceProperties.includes(property), true, `${property} not found.`)
   );
 
   Object.values(shorthandData).flat().map((property) => (
-    t.true(sourceProperties.includes(property), `${property} not found.`)
+    assert.is(sourceProperties.includes(property), true, `${property} not found.`)
   ));
 });
+
+test.run();
