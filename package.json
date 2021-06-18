@@ -15,7 +15,7 @@
     "orders"
   ],
   "scripts": {
-    "build": "rollup src/main.mjs --format cjs --file src/main.cjs",
+    "build": "rollup src/main.mjs --exports default --format cjs --file src/main.cjs",
     "preversion": "npm test",
     "test": "uvu src .+\\.test\\.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
