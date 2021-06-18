@@ -14,7 +14,7 @@ Node.js, [latest LTS is recommended](https://nodejs.org/en/about/releases/).
 ### Tips
 1. Try out a change to this package in another project with `npm link`.
 
-1. Tests are run with AVA, read [the docs](https://github.com/avajs/ava/), AVA provides a powerful CLI to run (specific) tests.
+1. Tests are run with uvu, read [the docs](https://github.com/lukeed/uvu#readme).
 
 1. To add a new CSS property it first needs to be included in [@mdn/browser-compat-data](https://github.com/mdn/browser-compat-data).
 
