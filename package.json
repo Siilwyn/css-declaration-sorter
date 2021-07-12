@@ -27,7 +27,7 @@
     "timsort": "^0.3.0"
   },
   "devDependencies": {
-    "@mdn/browser-compat-data": "^3.3.3",
+    "@mdn/browser-compat-data": "^3.3.10",
     "eslint": "^7.30.0",
     "postcss": "^8.3.5",
     "rollup": "^2.51.2",
