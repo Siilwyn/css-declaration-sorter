@@ -30,7 +30,7 @@
     "@mdn/browser-compat-data": "^3.3.3",
     "eslint": "^7.30.0",
     "postcss": "^8.3.5",
-    "rollup": "^2.51.2",
+    "rollup": "^2.53.2",
     "uvu": "^0.5.1"
   },
   "peerDependencies": {
