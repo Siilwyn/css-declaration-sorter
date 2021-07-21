@@ -1,4 +1,4 @@
-[
+export const properties = [
   "all",
   "-webkit-line-clamp",
   "align-content",
