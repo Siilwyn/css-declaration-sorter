@@ -22,6 +22,6 @@ const cssProperties = Object.entries({ ...css.properties, ...css['at-rules']['fo
   .sort();
 
 fs.writeFile(
-  'orders/alphabetical.json',
-  JSON.stringify(cssProperties, null, 2),
+  'orders/alphabetical.mjs',
+  `export const properties = ${JSON.stringify(cssProperties, null, 2)}`,
 );

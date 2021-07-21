@@ -1,4 +1,4 @@
-[
+export const properties = [
   "all",
   "box-sizing",
   "contain",

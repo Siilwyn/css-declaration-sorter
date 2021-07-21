@@ -1,10 +1,5 @@
-import { promises as fs } from 'fs';
 import shorthandData from './shorthand-data.mjs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { sort as timsort } from 'timsort';
-
-const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const builtInOrders = [
   'alphabetical',
@@ -32,11 +27,10 @@ const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}
         ].join('\n'))
       );
 
-    // Load in the array containing the order from a JSON file
-    return fs.readFile(path.resolve(currentDirectory, '..', 'orders', order) + '.json')
-      .then(data => processCss({
+    return import(`../orders/${order}.mjs`)
+      .then(({ properties }) => processCss({
         css,
-        comparator: withKeepOverrides(orderComparator(JSON.parse(data))),
+        comparator: withKeepOverrides(orderComparator(properties)),
       }));
   },
 });
