@@ -154,6 +154,7 @@ export const properties = [
   "font-variant-position",
   "font-variation-settings",
   "font-weight",
+  "forced-color-adjust",
   "gap",
   "grid",
   "grid-area",

@@ -220,6 +220,7 @@ export const properties = [
   "hanging-punctuation",
   "color",
   "color-adjust",
+  "forced-color-adjust",
   "color-scheme",
   "caret-color",
   "font",
