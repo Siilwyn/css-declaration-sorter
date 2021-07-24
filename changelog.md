@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.1.0] - 2021-07-24
+### Changed
+- Internal code to load built-in orders using dynamic import instead of using Node.js `fs`. Enables usage in other environments such as the browser.
+### Added
+- New properties regarding mask border, forced color adjustment & font styling overrides.
+
 ## [6.0.3] - 2021-05-11
 ### Fixed
 - Sorting padding and border shorthands with `keepOverrides` enabled.
@@ -86,6 +92,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.3...v6.1.0
 [6.0.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.2...v6.0.3
 [6.0.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.1...v6.0.2
 [6.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v5.1.2...v6.0.1
