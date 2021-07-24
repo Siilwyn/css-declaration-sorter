@@ -230,7 +230,6 @@ export const properties = [
   "src",
   "font-stretch",
   "font-size",
-  "math-style",
   "line-height",
   "font-family",
   "font-display",

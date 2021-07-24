@@ -223,7 +223,6 @@ export const properties = [
   "mask-repeat",
   "mask-size",
   "mask-type",
-  "math-style",
   "max-block-size",
   "max-height",
   "max-inline-size",

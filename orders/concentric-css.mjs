@@ -315,7 +315,6 @@ export const properties = [
   "font-weight",
   "font-stretch",
   "font-size",
-  "math-style",
   "line-height",
   "src",
   "font-family",
