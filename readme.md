@@ -58,7 +58,7 @@ body {
   5. Text
 
 ## Usage
-Following the PostCSS plugin guidelines, this package depends on PostCSS as a peer dependency:
+Following the PostCSS plugin guidelines, this package depends on PostCSS as a peer dependency:  
 `npm install postcss css-declaration-sorter --save-dev`
 
 ### CLI
