@@ -4,7 +4,9 @@
 [![LGTM Grade][lgtm-badge]][lgtm]
 [![npm][npm-badge]][npm]
 
-A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring styling is organized, more consistent and in order... The goal of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size. Check out [the Atom package](https://github.com/Siilwyn/css-declaration-sorter-atom) for individual usage.
+A Node.js module and [PostCSS] plugin to sort CSS, SCSS or Less declarations based on their property names. Ensuring styling is organized, more consistent and in order... The goal of this package is to sort the source code of a project in the build process or to decrease the distributed CSS gzipped size.
+
+Check out [the Prettier plugin](https://github.com/Siilwyn/prettier-plugin-css-order) for usage with a variety of file formats.
 
 ## Niceness
 - Up-to-date CSS properties fetched from the [MDN Compatibility Data](https://github.com/mdn/browser-compat-data/) project.
