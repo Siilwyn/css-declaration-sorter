@@ -110,6 +110,11 @@ const commentOrderTests = [
     fixture: 'a{flex: 0;\nborder: 0; /*border*/}',
     expected: 'a{\nborder: 0; /*border*/flex: 0;}',
   },
+  {
+    message: 'Do not lose reference to paired comment node on one line.',
+    fixture: 'body{/*a*/border:0;/*b*/}',
+    expected: 'body{border:0;/*b*//*a*/}',
+  },
 ];
 
 const nestedDeclarationTests = [

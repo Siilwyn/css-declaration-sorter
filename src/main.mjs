@@ -50,14 +50,14 @@ function processCss ({ css, comparator }) {
       // Don't do anything to root comments or the last newline comment
       const isNewlineNode = node.raws.before.includes('\n');
       const lastNewlineNode = isNewlineNode && !node.next();
-      const onlyNode = !node.prev() && !node.next();
+      const onlyNode = !node.prev() && !node.next() || !node.parent;
 
       if (lastNewlineNode || onlyNode || node.parent.type === 'root') {
         return;
       }
 
       if (isNewlineNode) {
-        const pairedNode = node.next() ? node.next() : node.prev().prev();
+        const pairedNode = node.next() || node.prev();
         if (pairedNode) {
           comments.unshift({
             'comment': node,
@@ -67,7 +67,7 @@ function processCss ({ css, comparator }) {
           node.remove();
         }
       } else {
-        const pairedNode = node.prev() ? node.prev() : node.next().next();
+        const pairedNode = node.prev() || node.next();
         if (pairedNode) {
           comments.push({
             'comment': node,
