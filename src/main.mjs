@@ -48,7 +48,7 @@ function processCss ({ css, comparator }) {
 
     if (type === 'comment') {
       // Don't do anything to root comments or the last newline comment
-      const isNewlineNode = node.raws.before.includes('\n');
+      const isNewlineNode = node.raws.before && node.raws.before.includes('\n');
       const lastNewlineNode = isNewlineNode && !node.next();
       const onlyNode = !node.prev() && !node.next() || !node.parent;
 
