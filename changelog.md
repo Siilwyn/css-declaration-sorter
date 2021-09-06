@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.1.2] - 2021-09-06
+### Fixed
+- Crash on two comments in the same line.
+
 ## [6.1.1] - 2021-07-24
 ### Fixed
 - Usage of built-in orders with CommonJS.
@@ -96,6 +100,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.1.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.1...v6.1.2
 [6.1.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.0...v6.1.1
 [6.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.3...v6.1.0
 [6.0.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.0.2...v6.0.3
