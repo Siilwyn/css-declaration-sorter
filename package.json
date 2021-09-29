@@ -31,7 +31,7 @@
   "devDependencies": {
     "@mdn/browser-compat-data": "^3.3.10",
     "eslint": "^7.32.0",
-    "postcss": "^8.3.6",
+    "postcss": "^8.3.8",
     "rollup": "^2.56.3",
     "uvu": "^0.5.1"
   },
