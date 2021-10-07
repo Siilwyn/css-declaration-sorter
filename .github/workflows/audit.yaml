@@ -26,4 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
+      - name: Update CSS properties
+        if: contains(github.head_ref, 'mdn-browser-compat-data')
+        run: npm run scrape
+
       - run: npm run test:ci
