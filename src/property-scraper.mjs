@@ -19,9 +19,13 @@ const cssProperties = Object.entries({ ...css.properties, ...css['at-rules']['fo
     Object.values(data).some(isStandardProperty(name)),
   )
   .map(([name]) => name)
-  .sort();
+  .sort((nameA, nameB) => (
+    nameA === 'all'
+      ? -1
+      : nameA.localeCompare(nameB)
+  ));
 
 fs.writeFile(
   'orders/alphabetical.mjs',
-  `export const properties = ${JSON.stringify(cssProperties, null, 2)}`,
+  `export const properties = ${JSON.stringify(cssProperties, null, 2)}\n`,
 );
