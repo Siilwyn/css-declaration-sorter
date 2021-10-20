@@ -1,5 +1,4 @@
 import shorthandData from './shorthand-data.mjs';
-import { sort as timsort } from 'timsort';
 
 const builtInOrders = [
   'alphabetical',
@@ -102,7 +101,7 @@ function processCss ({ css, comparator }) {
 }
 
 function sortCssDeclarations ({ nodes, comparator }) {
-  timsort(nodes, (a, b) => {
+  nodes.sort((a, b) => {
     if (a.type === 'decl' && b.type === 'decl') {
       return comparator(a.prop, b.prop);
     } else {
