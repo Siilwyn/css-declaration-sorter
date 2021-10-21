@@ -26,7 +26,7 @@
     "prepack": "npm run build"
   },
   "devDependencies": {
-    "@mdn/browser-compat-data": "^3.3.14",
+    "@mdn/browser-compat-data": "^4.0.5",
     "eslint": "^8.0.1",
     "postcss": "^8.3.8",
     "rollup": "^2.57.0",
