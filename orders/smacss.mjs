@@ -363,6 +363,7 @@ export const properties = [
   "shape-outside",
   "tab-size",
   "table-layout",
+  "ruby-position",
   "text-combine-upright",
   "touch-action",
   "transition",
