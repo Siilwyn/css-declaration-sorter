@@ -288,6 +288,7 @@ export const properties = [
   "right",
   "rotate",
   "row-gap",
+  "ruby-position",
   "scale",
   "scroll-behavior",
   "scroll-margin",

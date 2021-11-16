@@ -347,6 +347,7 @@ export const properties = [
   "unicode-bidi",
   "unicode-range",
   "user-select",
+  "ruby-position",
   "text-combine-upright",
   "text-align",
   "text-align-last",
