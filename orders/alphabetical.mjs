@@ -1,6 +1,7 @@
 export const properties = [
   "all",
   "-webkit-line-clamp",
+  "accent-color",
   "align-content",
   "align-items",
   "align-self",
@@ -319,6 +320,7 @@ export const properties = [
   "shape-image-threshold",
   "shape-margin",
   "shape-outside",
+  "size-adjust",
   "src",
   "tab-size",
   "table-layout",
