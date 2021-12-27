@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import shorthandData from './shorthand-data.mjs';
