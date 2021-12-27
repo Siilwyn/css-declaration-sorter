@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import { promises as fs } from 'node:fs';
 import browserCompatData from '@mdn/browser-compat-data';
 
 const { css } = browserCompatData;
