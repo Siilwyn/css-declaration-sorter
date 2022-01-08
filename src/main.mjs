@@ -97,7 +97,7 @@ function processCss ({ css, comparator }) {
   comments.forEach(node => {
     const pairedNode = node.pairedNode;
     node.comment.remove();
-    pairedNode.parent['insert' + node.insertPosition](pairedNode, node.comment);
+    pairedNode.parent && pairedNode.parent['insert' + node.insertPosition](pairedNode, node.comment);
   });
 }
 
