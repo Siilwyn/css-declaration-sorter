@@ -1,7 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import postcss from 'postcss';
-import plugin from '../src/main.mjs';
+import { cssDeclarationSorter as plugin } from './main.mjs';
 
 const testCssFixtures = (testMessage, tests) => {
   test(testMessage, () => (
