@@ -3,11 +3,7 @@
   "version": "6.1.4",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "type": "module",
-  "main": "./src/main.cjs",
-  "exports": {
-    "import": "./src/main.mjs",
-    "require": "./src/main.cjs"
-  },
+  "exports": "./src/main.mjs",
   "files": [
     "src/main.mjs",
     "src/main.cjs",
@@ -15,9 +11,6 @@
     "orders"
   ],
   "scripts": {
-    "prebuild": "rollup orders/*.mjs --format cjs --dir orders; rename .js .cjs orders/*.js",
-    "build": "rollup src/main.mjs --exports default --format cjs --file src/main.cjs",
-    "postbuild": "sed -i 's/mjs/cjs/' src/main.cjs",
     "preversion": "npm test",
     "test": "uvu src .+\\.test\\.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
@@ -29,14 +22,13 @@
     "@mdn/browser-compat-data": "^4.1.2",
     "eslint": "^8.2.0",
     "postcss": "^8.4.6",
-    "rollup": "^2.59.0",
     "uvu": "^0.5.2"
   },
   "peerDependencies": {
     "postcss": "^8.0.9"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14"
   },
   "repository": {
     "type": "git",
