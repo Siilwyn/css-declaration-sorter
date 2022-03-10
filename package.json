@@ -4,6 +4,7 @@
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "type": "module",
   "exports": "./src/main.mjs",
+  "types": "./src/main.d.ts",
   "files": [
     "src/main.mjs",
     "src/main.cjs",
