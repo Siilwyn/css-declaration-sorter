@@ -3,7 +3,7 @@ A custom order can be achieved by passing in a compare function. You can do anyt
 
 ```js
 import postcss from 'postcss';
-import cssDeclarationSorter from 'css-declaration-sorter';
+import { cssDeclarationSorter } from 'css-declaration-sorter';
 
 const myOrder = ['margin', 'border', 'padding'];
 

@@ -3,21 +3,20 @@
   "version": "6.1.4",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "type": "module",
-  "main": "./src/main.cjs",
+  "main": "./dist/main.cjs",
   "exports": {
     "import": "./src/main.mjs",
-    "require": "./src/main.cjs"
+    "require": "./dist/main.cjs"
   },
+  "types": "./src/main.d.ts",
   "files": [
     "src/main.mjs",
-    "src/main.cjs",
     "src/shorthand-data.mjs",
-    "orders"
+    "orders",
+    "dist"
   ],
   "scripts": {
-    "prebuild": "rollup orders/*.mjs --format cjs --dir orders; rename .js .cjs orders/*.js",
-    "build": "rollup src/main.mjs --exports default --format cjs --file src/main.cjs",
-    "postbuild": "sed -i 's/mjs/cjs/' src/main.cjs",
+    "build": "rollup -c",
     "preversion": "npm test",
     "test": "uvu src .+\\.test\\.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
@@ -27,16 +26,18 @@
   },
   "devDependencies": {
     "@mdn/browser-compat-data": "^4.1.2",
-    "eslint": "^8.2.0",
-    "postcss": "^8.4.6",
-    "rollup": "^2.59.0",
-    "uvu": "^0.5.2"
+    "@rollup/plugin-dynamic-import-vars": "^1.4.2",
+    "@rollup/plugin-replace": "^4.0.0",
+    "eslint": "^8.12.0",
+    "postcss": "^8.4.12",
+    "rollup": "^2.70.1",
+    "uvu": "^0.5.3"
   },
   "peerDependencies": {
     "postcss": "^8.0.9"
   },
   "engines": {
-    "node": ">= 12"
+    "node": "^10 || ^12 || >=14"
   },
   "repository": {
     "type": "git",

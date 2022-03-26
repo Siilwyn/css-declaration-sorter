@@ -1,4 +1,4 @@
-import shorthandData from './shorthand-data.mjs';
+import { shorthandData } from './shorthand-data.mjs';
 
 const builtInOrders = [
   'alphabetical',
@@ -6,7 +6,7 @@ const builtInOrders = [
   'smacss',
 ];
 
-const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
+export const cssDeclarationSorter = ({ order = 'alphabetical', keepOverrides = false } = {}) => ({
   postcssPlugin: 'css-declaration-sorter',
   OnceExit (css) {
     let withKeepOverrides = comparator => comparator;
@@ -34,8 +34,10 @@ const pluginEntrypoint = ({ order = 'alphabetical', keepOverrides = false } = {}
   },
 });
 
-pluginEntrypoint.postcss = true;
-export default pluginEntrypoint;
+cssDeclarationSorter.postcss = true;
+
+// Kept for backward compatibility
+export default cssDeclarationSorter;
 
 function processCss ({ css, comparator }) {
   const comments = [];

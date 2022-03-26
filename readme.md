@@ -91,7 +91,7 @@ Sorting all files in the directory with SCSS syntax and SMACSS order by overwrit
 ### Vanilla JS
 ```js
 import postcss from 'postcss';
-import cssDeclarationSorter from 'css-declaration-sorter';
+import { cssDeclarationSorter } from 'css-declaration-sorter';
 
 postcss([cssDeclarationSorter({ order: 'smacss' })])
   .process('a { color: hyperblue; display: block; }', { from: undefined })

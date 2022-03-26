@@ -1,4 +1,4 @@
-const shorthandData = {
+export const shorthandData = {
   'animation': [
     'animation-name',
     'animation-duration',
@@ -259,5 +259,3 @@ const shorthandData = {
     'text-emphasis-color',
   ],
 };
-
-export default shorthandData;
