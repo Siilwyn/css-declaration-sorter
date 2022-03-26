@@ -36,6 +36,9 @@ export const cssDeclarationSorter = ({ order = 'alphabetical', keepOverrides = f
 
 cssDeclarationSorter.postcss = true;
 
+// Kept for backward compatibility
+export default cssDeclarationSorter;
+
 function processCss ({ css, comparator }) {
   const comments = [];
   const rulesCache = [];
