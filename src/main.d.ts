@@ -21,7 +21,7 @@ interface Options {
 type SortOrder = 'alphabetical' | 'concentric-css' | 'smacss';
 
 /**
- * This function receives two declaration names and is expected
+ * This function receives two declaration property names and is expected
  * to return -1, 0 or 1 depending on the wanted order.
  */
-type SortFunction = (aProp: string, bProp: string) => -1 | 0 | 1;
+type SortFunction = (propertyNameA: string, propertyNameB: string) => -1 | 0 | 1;
