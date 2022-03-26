@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.2.0] - 2022-03-26
+### Added
+- TypesScript types, special thanks to @peterblazejewicz.
+- Named exports.
+- New properties regarding font hyphens, print color and scrollbar gutter.
+### Fixed
+- Dynamic imports in CommonJS output.
+### Changed
+- No more dependencies, smaller ESM package.
+
 ## [6.1.4] - 2022-01-08
 ### Fixed
 - Crash on missing paired comment node from invalid SCSS parsing.
@@ -108,6 +118,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.2.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.4...v6.2.0
 [6.1.4]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.3...v6.1.4
 [6.1.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.2...v6.1.3
 [6.1.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.1...v6.1.2
