@@ -11,7 +11,6 @@ export default [
       interop: 'default',
       exports: 'named',
       inlineDynamicImports: true,
-      outro: 'module.exports = cssDeclarationSorter;',
     },
     plugins: [
       dynamicImportVars(),
