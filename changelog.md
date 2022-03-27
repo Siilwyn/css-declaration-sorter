@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.2.2] - 2022-03-27
+### Fixed
+- Types export for CommonJS.
+- Expected plugin type, now using PostCSS `PluginCreator` type.
+
 ## [6.2.1] - 2022-03-26
 ### Fixed
 - Include types in npm package files.
@@ -122,6 +127,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.2.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.1...v6.2.2
 [6.2.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.0...v6.2.1
 [6.2.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.4...v6.2.0
 [6.1.4]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.3...v6.1.4
