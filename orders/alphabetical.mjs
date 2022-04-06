@@ -118,6 +118,7 @@ export const properties = [
   "columns",
   "contain",
   "content",
+  "content-visibility",
   "counter-increment",
   "counter-reset",
   "counter-set",

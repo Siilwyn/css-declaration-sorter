@@ -82,6 +82,7 @@ export const properties = [
   "perspective-origin",
   "appearance",
   "visibility",
+  "content-visibility",
   "opacity",
   "z-index",
   "paint-order",

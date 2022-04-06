@@ -5,6 +5,7 @@ export const properties = [
   "display",
   "appearance",
   "visibility",
+  "content-visibility",
   "z-index",
   "paint-order",
   "position",
