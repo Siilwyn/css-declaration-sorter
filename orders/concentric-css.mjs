@@ -238,6 +238,7 @@ export const properties = [
   "padding-block",
   "padding-block-start",
   "padding-block-end",
+  "image-orientation",
   "image-rendering",
 
   "aspect-ratio",
