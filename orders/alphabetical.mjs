@@ -177,6 +177,7 @@ export const properties = [
   "height",
   "hyphenate-character",
   "hyphens",
+  "image-orientation",
   "image-rendering",
   "inline-size",
   "inset",

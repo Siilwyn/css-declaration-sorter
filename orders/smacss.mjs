@@ -311,6 +311,7 @@ export const properties = [
   "cursor",
   "empty-cells",
   "filter",
+  "image-orientation",
   "image-rendering",
   "mask",
   "mask-border",
