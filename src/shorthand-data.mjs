@@ -266,6 +266,14 @@ export const shorthandData = {
     'width',
     'height',
   ],
+  'max-inline-size': [
+    'max-width',
+    'max-height',
+  ],
+  'max-block-size': [
+    'max-width',
+    'max-height',
+  ],
   'outline': [
     'outline-color',
     'outline-style',
