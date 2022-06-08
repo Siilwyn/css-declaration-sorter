@@ -258,6 +258,14 @@ export const shorthandData = {
     'mask-clip',
     'mask-composite',
   ],
+  'inline-size': [
+    'width',
+    'height',
+  ],
+  'block-size': [
+    'width',
+    'height',
+  ],
   'outline': [
     'outline-color',
     'outline-style',
