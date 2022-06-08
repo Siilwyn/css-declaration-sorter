@@ -188,6 +188,18 @@ const keepOverridesTests = [
     expected:'a{padding-left: unset;padding-inline-start: 0;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep border block declarations in place.',
+    fixture: 'a{border-block-end: 1px solid purple;border-block: none;}',
+    expected: 'a{border-block-end: 1px solid purple;border-block: none;}',
+    options: { keepOverrides: true },
+  },
+  {
+    message: 'Keep border block style declarations in place.',
+    fixture: 'a{border-style: none;border-block-end: 1px solid purple;}',
+    expected: 'a{border-style: none;border-block-end: 1px solid purple;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
