@@ -80,26 +80,6 @@ export const shorthandData = {
     'list-style-position',
     'list-style-image',
   ],
-  'padding-inline': [
-    'padding-inline-start',
-    'padding-inline-end',
-    'padding-top',
-    'padding-right',
-    'padding-bottom',
-    'padding-left',
-  ],
-  'padding-inline-start': [
-    'padding-top',
-    'padding-right',
-    'padding-bottom',
-    'padding-left',
-  ],
-  'padding-inline-end': [
-    'padding-top',
-    'padding-right',
-    'padding-bottom',
-    'padding-left',
-  ],
   'padding': [
     'padding-block',
     'padding-block-start',
@@ -120,10 +100,30 @@ export const shorthandData = {
     'padding-bottom',
     'padding-left',
   ],
+  'padding-block-start': [
+    'padding-top',
+    'padding-right',
+    'padding-left',
+  ],
+  'padding-block-end': [
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
+  ],
   'padding-inline': [
     'padding-inline-start',
     'padding-inline-end',
     'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
+  ],
+  'padding-inline-start': [
+    'padding-top',
+    'padding-right',
+    'padding-left',
+  ],
+  'padding-inline-end': [
     'padding-right',
     'padding-bottom',
     'padding-left',
@@ -151,6 +151,18 @@ export const shorthandData = {
   'margin-inline': [
     'margin-inline-start',
     'margin-inline-end',
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
+  ],
+  'margin-inline-start': [
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
+  ],
+  'margin-inline-end': [
     'margin-top',
     'margin-right',
     'margin-bottom',
