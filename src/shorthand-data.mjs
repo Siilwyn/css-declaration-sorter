@@ -143,10 +143,18 @@ export const shorthandData = {
   'margin-block': [
     'margin-block-start',
     'margin-block-end',
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
   ],
   'margin-inline': [
     'margin-inline-start',
     'margin-inline-end',
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
   ],
   'border': [
     'border-top',
