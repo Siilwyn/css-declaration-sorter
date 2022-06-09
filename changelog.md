@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.3.0] - 2022-06-09
+### Added
+- New properties: `content-visibility` and `image-orientation`.
+### Fixed
+- Logical properties like `padding-block` moved unsafely with `keepOverrides`.
+
 ## [6.2.2] - 2022-03-27
 ### Fixed
 - Types export for CommonJS.
@@ -127,6 +133,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.3.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.2...v6.3.0
 [6.2.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.1...v6.2.2
 [6.2.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.0...v6.2.1
 [6.2.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.1.4...v6.2.0
