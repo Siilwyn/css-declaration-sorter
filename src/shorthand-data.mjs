@@ -123,6 +123,10 @@ export const shorthandData = {
   'padding-inline': [
     'padding-inline-start',
     'padding-inline-end',
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
   ],
   'margin': [
     'margin-block',
