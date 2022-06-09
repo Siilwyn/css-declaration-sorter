@@ -83,6 +83,10 @@ export const shorthandData = {
   'padding-inline': [
     'padding-inline-start',
     'padding-inline-end',
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
   ],
   'padding-inline-start': [
     'padding-top',
@@ -111,6 +115,10 @@ export const shorthandData = {
   'padding-block': [
     'padding-block-start',
     'padding-block-end',
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left',
   ],
   'padding-inline': [
     'padding-inline-start',
@@ -309,6 +317,34 @@ export const shorthandData = {
   'max-block-size': [
     'max-width',
     'max-height',
+  ],
+  'inset': [
+    'inset-block',
+    'inset-block-start',
+    'inset-block-end',
+    'inset-inline',
+    'inset-inline-start',
+    'inset-inline-end',
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ],
+  'inset-block': [
+    'inset-block-start',
+    'inset-block-end',
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ],
+  'inset-inline': [
+    'inset-inline-start',
+    'inset-inline-end',
+    'top',
+    'right',
+    'bottom',
+    'left',
   ],
   'outline': [
     'outline-color',
