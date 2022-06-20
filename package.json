@@ -31,7 +31,7 @@
     "@rollup/plugin-replace": "^4.0.0",
     "eslint": "^8.12.0",
     "postcss": "^8.4.12",
-    "rollup": "^2.70.1",
+    "rollup": "^2.75.6",
     "uvu": "^0.5.3"
   },
   "peerDependencies": {
