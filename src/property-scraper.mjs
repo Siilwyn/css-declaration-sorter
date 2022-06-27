@@ -1,7 +1,9 @@
-import { promises as fs } from 'node:fs';
-import browserCompatData from '@mdn/browser-compat-data';
+import fs from 'node:fs/promises';
 
-const { css } = browserCompatData;
+const { css } = await import.meta.resolve('@mdn/browser-compat-data')
+  .then((moduleResolution) => new URL(moduleResolution).pathname)
+  .then(fs.readFile)
+  .then(JSON.parse);
 
 const isStandardProperty = (name) => (property) => Boolean(
   property.__compat?.status.standard_track === true &&
@@ -9,6 +11,7 @@ const isStandardProperty = (name) => (property) => Boolean(
   property.__compat?.status.deprecated === false &&
   (
     property.__compat?.mdn_url &&
+    !property.__compat?.mdn_url.includes('Guide') &&
     [...property.__compat.mdn_url.split('/')].pop() === name
   ),
 );
