@@ -1,6 +1,10 @@
 export const properties = [
   "all",
   "-webkit-line-clamp",
+  "-webkit-text-fill-color",
+  "-webkit-text-stroke",
+  "-webkit-text-stroke-color",
+  "-webkit-text-stroke-width",
   "accent-color",
   "align-content",
   "align-items",
@@ -347,6 +351,7 @@ export const properties = [
   "text-justify",
   "text-orientation",
   "text-overflow",
+  "text-rendering",
   "text-shadow",
   "text-transform",
   "text-underline-offset",
