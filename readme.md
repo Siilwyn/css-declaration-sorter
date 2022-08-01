@@ -127,3 +127,5 @@ To prevent breaking legacy CSS where shorthand declarations override longhand de
 [lgtm-badge]: https://tinyshields.dev/lgtm/grade/javascript/g/Siilwyn/css-declaration-sorter.svg
 [npm]: https://www.npmjs.com/package/css-declaration-sorter
 [npm-badge]: https://tinyshields.dev/npm/css-declaration-sorter.svg
+[depfu]: https://depfu.com/github/Siilwyn/css-declaration-sorter
+[depfu-badge]: https://tinyshields.dev/depfu/github/Siilwyn/css-declaration-sorter.svg
