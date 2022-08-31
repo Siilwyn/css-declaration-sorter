@@ -200,6 +200,12 @@ const keepOverridesTests = [
     expected: 'a{border-style: none;border-block-end: 1px solid purple;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep border width logical property declarations in place.',
+    fixture: 'a{background: grey;border-width: 0;border-top-width: 1px;border-inline-start-width: 1px;}',
+    expected: 'a{background: grey;border-width: 0;border-inline-start-width: 1px;border-top-width: 1px;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
