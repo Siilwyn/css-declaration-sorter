@@ -18,6 +18,10 @@ export const cssDeclarationSorter = ({ order = 'alphabetical', keepOverrides = f
       return processCss({ css, comparator: withKeepOverrides(order) });
     }
 
+    if (Array.isArray(order)) {
+      return processCss({ css, comparator: withKeepOverrides(((a, b) => order.indexOf(a) - order.indexOf(b))) });
+    }
+
     if (!builtInOrders.includes(order))
       return Promise.reject(
         Error([

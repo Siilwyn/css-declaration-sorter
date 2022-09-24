@@ -46,6 +46,18 @@ const sortOrderTests = [
     options: { order: () => 1 },
   },
   {
+    message: 'Sort according to custom order, changed.',
+    fixture: 'a{border: 0;z-index: 0;}',
+    expected: 'a{z-index: 0;border: 0;}',
+    options: { order: ['z-index', 'border'] },
+  },
+  {
+    message: 'Sort according to custom order, retained.',
+    fixture: 'a{border: 0;z-index: 0;}',
+    expected: 'a{border: 0;z-index: 0;}',
+    options: { order: ['border', 'z-index'] },
+  },
+  {
     message: 'Sort according to SMACSS.',
     fixture: 'a{border: 0;flex: 0;}',
     expected: 'a{flex: 0;border: 0;}',

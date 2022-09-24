@@ -113,7 +113,7 @@ Type: `string` or `function`
 Default: `alphabetical`  
 Options: `alphabetical`, `smacss`, `concentric-css`
 
-Provide the name of one of the built-in sort orders or a comparison function that is passed to ([`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)). This function receives two declaration names and is expected to return `-1`, `0` or `1` depending on the wanted order.
+Provide the name of one of the built-in sort orders, an array of declaration names in your desired order, a comparison function that is passed to ([`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)). This function receives two declaration names and is expected to return `-1`, `0` or `1` depending on the wanted order.
 
 #### keepOverrides
 Type: `Boolean`  
