@@ -20,7 +20,7 @@ export default [
         preventAssignment: true,
         'nodes\.sort\(': 'stableSort(nodes,',
       }),
-      dynamicImportVars.default(),
+      dynamicImportVars(),
     ],
   },
   {
