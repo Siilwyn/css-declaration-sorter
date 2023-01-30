@@ -26,7 +26,7 @@
     "prepack": "npm run build"
   },
   "devDependencies": {
-    "@mdn/browser-compat-data": "^5.2.23",
+    "@mdn/browser-compat-data": "^5.2.31",
     "@rollup/plugin-dynamic-import-vars": "^2.0.2",
     "@rollup/plugin-replace": "^5.0.2",
     "eslint": "^8.12.0",
