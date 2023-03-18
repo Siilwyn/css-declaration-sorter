@@ -11,24 +11,10 @@ export default [
       interop: 'default',
       exports: 'named',
       inlineDynamicImports: true,
-      intro: `const stableSort = require('./stable-sort.cjs');`,
       outro: 'module.exports = cssDeclarationSorter;',
     },
     plugins: [
-      replace({
-        delimiters: ['', ''],
-        preventAssignment: true,
-        'nodes\.sort\(': 'stableSort(nodes,',
-      }),
       dynamicImportVars(),
     ],
-  },
-  {
-    input: ['src/stable-sort.cjs'],
-    output: {
-      dir: 'dist',
-      format: 'cjs',
-      entryFileNames: '[name].cjs',
-    }
   },
 ];
