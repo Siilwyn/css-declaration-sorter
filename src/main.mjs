@@ -1,4 +1,5 @@
 import { shorthandData } from './shorthand-data.mjs';
+import { bubbleSort } from './bubble-sort.mjs';
 
 const builtInOrders = [
   'alphabetical',
@@ -103,7 +104,7 @@ function processCss ({ css, comparator }) {
 }
 
 function sortCssDeclarations ({ nodes, comparator }) {
-  nodes.sort((a, b) => {
+  bubbleSort(nodes, (a, b) => {
     if (a.type === 'decl' && b.type === 'decl') {
       return comparator(a.prop, b.prop);
     } else {
@@ -133,7 +134,7 @@ function orderComparator (order) {
 }
 
 function compareDifferentType (a, b) {
-  if (b.type === 'atrule') {
+  if (b.type === 'atrule' || a.type === 'atrule') {
     return 0;
   }
 

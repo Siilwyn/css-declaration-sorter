@@ -37,13 +37,13 @@ const sortOrderTests = [
     message: 'Sort according to custom order, changed.',
     fixture: 'a{border: 0;z-index: 0;}',
     expected: 'a{z-index: 0;border: 0;}',
-    options: { order: () => -1 },
+    options: { order: () => 1 },
   },
   {
     message: 'Sort according to custom order, retained.',
     fixture: 'a{border: 0;z-index: 0;}',
     expected: 'a{border: 0;z-index: 0;}',
-    options: { order: () => 1 },
+    options: { order: () => -1 },
   },
   {
     message: 'Sort according to SMACSS.',
@@ -66,6 +66,11 @@ const sortOrderTests = [
     message: 'Retain unkown properties',
     fixture: 'a{unkown-b: 0; unkown-a: 0;}',
     expected: 'a{unkown-b: 0; unkown-a: 0;}',
+  },
+  {
+    message: 'Sort shorthand, resulting in impactful ordering.',
+    fixture: 'a{border-width: 0;border-radius: 0;border-bottom: 1px;}',
+    expected: 'a{border-bottom: 1px;border-radius: 0;border-width: 0;}',
   },
 ];
 
@@ -204,6 +209,12 @@ const keepOverridesTests = [
     message: 'Keep border width logical property declarations in place.',
     fixture: 'a{background: grey;border-width: 0;border-top-width: 1px;border-inline-start-width: 1px;}',
     expected: 'a{background: grey;border-width: 0;border-inline-start-width: 1px;border-top-width: 1px;}',
+    options: { keepOverrides: true },
+  },
+  {
+    message: 'Keep longhand border style declaration in place.',
+    fixture: 'a{border-width: 0;border-radius: 0;border-bottom: 1px;}',
+    expected: 'a{border-radius: 0;border-width: 0;border-bottom: 1px;}',
     options: { keepOverrides: true },
   },
 ];
