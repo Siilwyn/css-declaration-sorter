@@ -38,7 +38,7 @@
     "postcss": "^8.0.9"
   },
   "engines": {
-    "node": "^10 || ^12 || >=14"
+    "node": "^14 || ^16 || >=18"
   },
   "repository": {
     "type": "git",
