@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [6.4.0] - 2023-03-23
+### Added
+- New container, overflow and font related properties.
+### Fixed
+- Order of shorthand properties between overrides that are already changing position with `keepOverrides`.
+
 ## [6.3.1] - 2022-09-02
 ### Fixed
 - Logical border properties moving with `keepOverrides`.
@@ -137,6 +143,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 - Put declarations before nested declarations.
 
+[6.4.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.1...v6.4.0
 [6.3.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.0...v6.3.1
 [6.3.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.2...v6.3.0
 [6.2.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.1...v6.2.2
