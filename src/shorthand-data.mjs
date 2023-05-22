@@ -280,6 +280,10 @@ export const shorthandData = {
     'border-top-left-radius',
     'border-bottom-right-radius',
     'border-bottom-left-radius',
+    'border-end-end-radius',
+    'border-end-start-radius',
+    'border-start-end-radius',
+    'border-start-start-radius',
   ],
   'border-block': [
     'border-block-start',
