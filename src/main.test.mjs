@@ -217,6 +217,12 @@ const keepOverridesTests = [
     expected: 'a{border-radius: 0;border-width: 0;border-bottom: 1px;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep longhand border logical declaration in place.',
+    fixture: 'a{border-radius: 5px;border-end-start-radius: 0;border-end-end-radius: 0;}',
+    expected: 'a{border-radius: 5px;border-end-end-radius: 0;border-end-start-radius: 0;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
