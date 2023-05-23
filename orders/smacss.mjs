@@ -11,7 +11,6 @@ export const properties = [
   "display",
   "appearance",
   "visibility",
-  "content-visibility",
   "z-index",
   "paint-order",
   "position",
@@ -301,6 +300,7 @@ export const properties = [
   "overflow-wrap",
 
   "animation",
+  "animation-composition",
   "animation-duration",
   "animation-timing-function",
   "animation-delay",
@@ -383,6 +383,7 @@ export const properties = [
   "tab-size",
   "table-layout",
   "ruby-position",
+  "math-style",
   "text-combine-upright",
   "touch-action",
   "transition",
