@@ -5,24 +5,21 @@
   "type": "module",
   "main": "./dist/main.cjs",
   "exports": {
-    "import": "./src/main.mjs",
+    "import": "./src/core/main.mjs",
     "require": "./dist/main.cjs"
   },
-  "types": "./src/main.d.ts",
+  "types": "./src/core/main.d.ts",
   "files": [
-    "src/main.mjs",
-    "src/main.d.ts",
-    "src/shorthand-data.mjs",
-    "src/bubble-sort.mjs",
-    "orders",
-    "dist"
+    "src/core/",
+    "src/orders/",
+    "dist/"
   ],
   "scripts": {
     "build": "rollup -c",
     "preversion": "npm test",
     "test": "uvu src .+\\.test\\.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
-    "lint": "eslint src/*.mjs",
+    "lint": "eslint src/core/*.mjs",
     "scrape": "node --experimental-import-meta-resolve src/property-scraper.mjs",
     "prepack": "npm run build"
   },

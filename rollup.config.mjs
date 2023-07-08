@@ -2,7 +2,7 @@ import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 
 export default [
   {
-    input: 'src/main.mjs',
+    input: 'src/core/main.mjs',
     output: {
       dir: 'dist',
       format: 'cjs',
