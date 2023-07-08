@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Removed
 - Node.js 12 support.
 
+## [6.4.1] - 2023-07-08
+### Fixed
+- Backport: Missing bubble sort code in npm package.
+
 ## [6.4.0] - 2023-03-23
 ### Added
 - New container, overflow and font related properties.
@@ -153,8 +157,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Changed
 - Put declarations before nested declarations.
 
-[7.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.0...v7.0.1
-[7.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.4.0...v7.0.0
+[7.0.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.0...v7.0.2
+[7.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.4.1...v7.0.0
+[6.4.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.4.0...v6.4.1
 [6.4.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.1...v6.4.0
 [6.3.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.0...v6.3.1
 [6.3.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.2.2...v6.3.0
