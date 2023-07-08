@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [7.0.1] - 2023-07-08
+### Fixed
+- Missing bubble sort code in npm package.
+
 ## [7.0.0] - 2023-05-29
 ### Fixed
 - Border properties `border-end` and `border-start` radius moving unsafely.
@@ -149,6 +153,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Changed
 - Put declarations before nested declarations.
 
+[7.0.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.4.0...v7.0.0
 [6.4.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.1...v6.4.0
 [6.3.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v6.3.0...v6.3.1
