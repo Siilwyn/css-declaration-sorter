@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/main.cjs",
   "exports": {
+    "types": "./src/main.d.ts",
     "import": "./src/main.mjs",
     "require": "./dist/main.cjs"
   },
