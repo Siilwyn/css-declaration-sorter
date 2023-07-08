@@ -1,10 +1,10 @@
 import { promises as fs } from 'node:fs';
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { shorthandData } from './shorthand-data.mjs';
-import { properties as sourceProperties } from '../orders/alphabetical.mjs';
+import { shorthandData } from './core/shorthand-data.mjs';
+import { properties as sourceProperties } from './orders/alphabetical.mjs';
 
-const cssOrdersDir = './orders/';
+const cssOrdersDir = './src/orders/';
 
 test('CSS properties are up-to-date.', () => (
   fs.readdir(cssOrdersDir).then(async (files) => {
