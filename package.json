@@ -5,10 +5,10 @@
   "type": "module",
   "main": "./dist/main.cjs",
   "exports": {
+    "types": "./src/core/main.d.ts",
     "import": "./src/core/main.mjs",
     "require": "./dist/main.cjs"
   },
-  "types": "./src/core/main.d.ts",
   "files": [
     "src/core/",
     "src/orders/",

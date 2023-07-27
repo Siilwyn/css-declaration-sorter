@@ -1,6 +1,6 @@
 import type { PluginCreator } from 'postcss';
 
-declare const cssDeclarationSorter: PluginCreator<{
+export const cssDeclarationSorter: PluginCreator<{
   /**
   Provide the name of one of the built-in sort orders or a comparison function that is passed to `Array.sort`.
 
@@ -16,7 +16,7 @@ declare const cssDeclarationSorter: PluginCreator<{
   keepOverrides?: boolean;
 }>;
 
-export = cssDeclarationSorter;
+export default cssDeclarationSorter;
 
 type SortOrder = 'alphabetical' | 'concentric-css' | 'smacss';
 
