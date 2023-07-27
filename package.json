@@ -27,7 +27,7 @@
     "@mdn/browser-compat-data": "^5.2.59",
     "@rollup/plugin-dynamic-import-vars": "^2.0.4",
     "eslint": "^8.41.0",
-    "postcss": "^8.4.23",
+    "postcss": "^8.4.25",
     "rollup": "^3.26.2",
     "uvu": "^0.5.6"
   },
