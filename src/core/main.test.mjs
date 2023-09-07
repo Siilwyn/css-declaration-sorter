@@ -63,9 +63,24 @@ const sortOrderTests = [
     expected: 'a{border: 0;@import sii;flex:0;}',
   },
   {
-    message: 'Retain unkown properties',
-    fixture: 'a{unkown-b: 0; unkown-a: 0;}',
-    expected: 'a{unkown-b: 0; unkown-a: 0;}',
+    message: 'Retain unknown properties, left to right.',
+    fixture: 'a{unknown-a: 0;unknown-b: 0;}',
+    expected: 'a{unknown-a: 0;unknown-b: 0;}',
+  },
+  {
+    message: 'Retain unknown properties, right to left.',
+    fixture: 'a{unknown-b: 0;unknown-a: 0;}',
+    expected: 'a{unknown-b: 0;unknown-a: 0;}',
+  },
+  {
+    message: 'Retain unknown next to known properties, left to right.',
+    fixture: 'a{animation: 0;animation-timeline: none;}',
+    expected: 'a{animation: 0;animation-timeline: none;}',
+  },
+  {
+    message: 'Retain unknown next to known properties, right to left.',
+    fixture: 'a{animation-timeline: none;animation: 0;}',
+    expected: 'a{animation-timeline: none;animation: 0;}',
   },
   {
     message: 'Sort shorthand, resulting in impactful ordering.',
