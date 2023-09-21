@@ -434,4 +434,9 @@ export const shorthandData = {
     'text-emphasis-style',
     'text-emphasis-color',
   ],
+  'font-synthesis': [
+    'font-synthesis-weight',
+    'font-synthesis-style',
+    'font-synthesis-small-caps',
+  ],
 };
