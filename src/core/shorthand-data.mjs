@@ -438,5 +438,6 @@ export const shorthandData = {
     'font-synthesis-weight',
     'font-synthesis-style',
     'font-synthesis-small-caps',
+    'font-synthesis-position',
   ],
 };
