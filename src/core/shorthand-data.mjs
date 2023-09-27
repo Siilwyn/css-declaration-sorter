@@ -16,6 +16,7 @@ export const shorthandData = {
     'background-repeat',
     'background-origin',
     'background-clip',
+    '-webkit-background-clip',
     'background-attachment',
     'background-color',
   ],
