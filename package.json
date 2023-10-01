@@ -3,13 +3,18 @@
   "version": "7.1.0",
   "description": "Sorts CSS declarations fast and automatically in a certain order.",
   "type": "module",
-  "main": "./dist/main.cjs",
-  "types": "./src/core/main.d.ts",
   "exports": {
-    "types": "./src/core/main.d.ts",
-    "import": "./src/core/main.mjs",
-    "require": "./dist/main.cjs"
+    "import": {
+      "types": "./src/core/main.d.mts",
+      "default": "./src/core/main.mjs"
+    },
+    "require": {
+      "types": "./src/core/main.d.cts",
+      "default": "./dist/main.cjs"
+    }
   },
+  "types": "./src/core/main.d.cts",
+  "main": "./dist/main.cjs",
   "files": [
     "src/core/",
     "src/orders/",
