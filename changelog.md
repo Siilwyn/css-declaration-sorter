@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [7.1.1] - 2023-09-23
+### Fixed
+- Regression with TypeScript types resolution for CommonJS.
+
 ## [7.1.0] - 2023-09-23
 ### Added
 - New font and math related properties.
@@ -167,6 +171,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Changed
 - Put declarations before nested declarations.
 
+[7.1.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.3...v7.1.0
 [7.0.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.0...v7.0.2
