@@ -1,8 +1,6 @@
 import fs from 'node:fs/promises';
 
-const { css } = await import.meta.resolve('@mdn/browser-compat-data')
-  .then((moduleResolution) => new URL(moduleResolution).pathname)
-  .then(fs.readFile)
+const { css } = await fs.readFile(new URL(import.meta.resolve('@mdn/browser-compat-data')))
   .then(JSON.parse);
 
 const isStandardProperty = (name) => (property) => Boolean(

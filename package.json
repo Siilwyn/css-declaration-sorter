@@ -26,7 +26,7 @@
     "test": "uvu src .+\\.test\\.mjs",
     "test:ci": "npm test && npm run lint -- --max-warnings 0",
     "lint": "eslint src/core/*.mjs",
-    "scrape": "node --experimental-import-meta-resolve src/property-scraper.mjs",
+    "scrape": "node src/property-scraper.mjs",
     "prepack": "npm run build"
   },
   "devDependencies": {
