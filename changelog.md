@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [7.2.0] - 2024-03-25
+### Added
+- New properties related to: offset, transition and text wrapping.
+### Fixed
+- Gap properties `column-gap` and `row-gap` moving unsafely.
+
 ## [7.1.1] - 2023-10-01
 ### Fixed
 - Regression with TypeScript types resolution for CommonJS.
@@ -171,6 +177,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Changed
 - Put declarations before nested declarations.
 
+[7.2.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.1.1...v7.2.0
 [7.1.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.3...v7.1.0
 [7.0.3]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.0.2...v7.0.3
