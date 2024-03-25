@@ -84,6 +84,13 @@ export const shorthandData = {
     'list-style-position',
     'list-style-image',
   ],
+  'offset': [
+    'offset-anchor',
+    'offset-distance',
+    'offset-path',
+    'offset-position',
+    'offset-rotate',
+  ],
   'padding': [
     'padding-block',
     'padding-block-start',
