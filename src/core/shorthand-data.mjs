@@ -46,6 +46,10 @@ export const shorthandData = {
     'font-family',
     'line-height',
   ],
+  'gap': [
+    'column-gap',
+    'row-gap',
+  ],
   'grid': [
     'grid-template-rows',
     'grid-template-columns',
