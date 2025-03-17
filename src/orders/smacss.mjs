@@ -302,6 +302,8 @@ export const properties = [
   "text-shadow",
   "text-transform",
   "text-wrap",
+  "text-wrap-mode",
+  "text-wrap-style",
   "vertical-align",
   "baseline-source",
   "white-space",

@@ -401,6 +401,8 @@ export const properties = [
   "text-shadow",
   "text-transform",
   "text-wrap",
+  "text-wrap-mode",
+  "text-wrap-style",
   "white-space",
   "white-space-collapse",
   "word-break",

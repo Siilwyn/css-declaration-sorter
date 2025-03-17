@@ -377,6 +377,8 @@ export const properties = [
   "text-underline-offset",
   "text-underline-position",
   "text-wrap",
+  "text-wrap-mode",
+  "text-wrap-style",
   "top",
   "touch-action",
   "transform",
