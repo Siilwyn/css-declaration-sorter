@@ -69,6 +69,7 @@ export const properties = [
   "height",
   "min-height",
   "max-height",
+  "-webkit-font-smoothing",
   "-webkit-line-clamp",
   "-webkit-text-fill-color",
   "-webkit-text-stroke",

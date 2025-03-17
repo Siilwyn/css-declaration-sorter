@@ -1,5 +1,6 @@
 export const properties = [
   "all",
+  "-webkit-font-smoothing",
   "-webkit-line-clamp",
   "-webkit-text-fill-color",
   "-webkit-text-stroke",
