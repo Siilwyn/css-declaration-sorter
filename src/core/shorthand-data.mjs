@@ -28,6 +28,10 @@ export const shorthandData = {
     'column-rule-style',
     'column-rule-color',
   ],
+  'contain-intrinsic-size': [
+    'contain-intrinsic-width',
+    'contain-intrinsic-height',
+  ],
   'flex': [
     'flex-grow',
     'flex-shrink',
@@ -178,6 +182,11 @@ export const shorthandData = {
     'margin-right',
     'margin-bottom',
     'margin-left',
+  ],
+  'marker': [
+    'marker-start',
+    'marker-mid',
+    'marker-end',
   ],
   'border': [
     'border-top',
@@ -430,10 +439,18 @@ export const shorthandData = {
     'align-self',
     'justify-self',
   ],
+  'text-box': [
+    'text-box-trim',
+    'text-box-edge',
+  ],
   'text-decoration': [
     'text-decoration-color',
     'text-decoration-style',
     'text-decoration-line',
+  ],
+  'text-wrap': [
+    'text-wrap-mode',
+    'text-wrap-style',
   ],
   'transition': [
     'transition-delay',
@@ -450,5 +467,9 @@ export const shorthandData = {
     'font-synthesis-style',
     'font-synthesis-small-caps',
     'font-synthesis-position',
+  ],
+  '-webkit-text-stroke': [
+    '-webkit-text-stroke-color',
+    '-webkit-text-stroke-width',
   ],
 };
