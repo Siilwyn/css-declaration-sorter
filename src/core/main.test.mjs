@@ -58,6 +58,12 @@ const sortOrderTests = [
     options: { order: 'concentric-css' },
   },
   {
+    message: 'Sort according to Frakto.',
+    fixture: 'a{border: 0;flex: 0;}',
+    expected: 'a{flex: 0;border: 0;}',
+    options: { order: 'frakto' },
+  },
+  {
     message: 'Keep at-rule at the same position.',
     fixture: 'a{border: 0;@import sii;flex:0;}',
     expected: 'a{border: 0;@import sii;flex:0;}',
