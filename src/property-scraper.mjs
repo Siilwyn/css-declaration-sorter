@@ -28,5 +28,7 @@ const cssProperties = Object.entries({ ...css.properties, ...css['at-rules']['fo
 
 fs.writeFile(
   'src/orders/alphabetical.mjs',
-  `export const properties = ${JSON.stringify(cssProperties, null, 2)}\n`,
+  `export const properties = ${
+    JSON.stringify(cssProperties, null, 2).replaceAll('"', "'")
+  }\n`,
 );

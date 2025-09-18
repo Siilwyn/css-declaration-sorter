@@ -9,6 +9,10 @@ export const shorthandData = {
     'animation-fill-mode',
     'animation-play-state',
   ],
+  'animation-range': [
+    'animation-range-start',
+    'animation-range-end',
+  ],
   'background': [
     'background-image',
     'background-size',
@@ -143,6 +147,14 @@ export const shorthandData = {
     'padding-bottom',
     'padding-left',
   ],
+  'position-try': [
+    'position-try-order',
+    'position-try-fallbacks',
+  ],
+  'scroll-timeline': [
+    'scroll-timeline-name',
+    'scroll-timeline-axis',
+  ],
   'margin': [
     'margin-block',
     'margin-block-start',
@@ -187,6 +199,11 @@ export const shorthandData = {
     'marker-start',
     'marker-mid',
     'marker-end',
+  ],
+  'view-timeline': [
+    'view-timeline-name',
+    'view-timeline-axis',
+    'view-timeline-inset',
   ],
   'border': [
     'border-top',
