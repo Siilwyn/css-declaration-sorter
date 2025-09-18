@@ -15,12 +15,12 @@ export const shorthandData = {
   ],
   'background': [
     'background-image',
-    'background-size',
     'background-position',
+    'background-size',
     'background-repeat',
+    'background-attachment',
     'background-origin',
     'background-clip',
-    'background-attachment',
     'background-color',
   ],
   'columns': [
