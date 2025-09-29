@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
-    "@mdn/browser-compat-data": "^7.1.6",
+    "@mdn/browser-compat-data": "^7.1.7",
     "@rollup/plugin-dynamic-import-vars": "^2.1.5",
     "eslint": "^9.35.0",
     "postcss": "^8.5.6",
