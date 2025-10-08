@@ -93,6 +93,12 @@ const sortOrderTests = [
     fixture: 'a{border-width: 0;border-radius: 0;border-bottom: 1px;}',
     expected: 'a{border-bottom: 1px;border-radius: 0;border-width: 0;}',
   },
+  {
+    message: 'Sort alphabetically with a defined order.',
+    fixture: 'a{animation: 3s linear 1s slide-in;animation-timeline: view();}',
+    expected: 'a{animation: 3s linear 1s slide-in;animation-timeline: view();}',
+    options: { order: 'concentric-css' },
+  },
 ];
 
 const commentOrderTests = [
