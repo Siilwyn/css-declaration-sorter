@@ -1,6 +1,5 @@
 export const shorthandData = {
   'animation': [
-    'animation-name',
     'animation-duration',
     'animation-timing-function',
     'animation-delay',
@@ -8,6 +7,8 @@ export const shorthandData = {
     'animation-direction',
     'animation-fill-mode',
     'animation-play-state',
+    'animation-name',
+    'animation-timeline',
   ],
   'animation-range': [
     'animation-range-start',

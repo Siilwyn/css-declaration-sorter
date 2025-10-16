@@ -384,9 +384,7 @@ export const properties = [
   'view-timeline-name',
   'view-timeline-axis',
   'view-timeline-inset',
-  'animation-timeline',
   'animation',
-  'animation-name',
   'animation-duration',
   'animation-timing-function',
   'animation-delay',
@@ -394,6 +392,8 @@ export const properties = [
   'animation-direction',
   'animation-fill-mode',
   'animation-play-state',
+  'animation-name',
+  'animation-timeline',
   'animation-composition',
   'animation-range',
   'animation-range-start',
@@ -474,5 +474,5 @@ export const properties = [
   'math-depth',
   'math-style',
   'src',
-  'tab-size'
+  'tab-size',
 ];
