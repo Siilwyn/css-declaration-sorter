@@ -467,5 +467,5 @@ export const properties = [
   'x',
   'y',
   'z-index',
-  'zoom',
+  'zoom'
 ];
