@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and follows [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [7.3.1] - 2026-01-02
+### Fixed
+- Set animation & background shorthand properties order to match CSS spec order.
+
 ## [7.3.0] - 2025-09-18
 ### Added
 - New sorting order: Frakto, thanks to @danybranding!
@@ -182,6 +186,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 ### Changed
 - Put declarations before nested declarations.
 
+[7.3.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.3.0...v7.3.1
 [7.3.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.2.0...v7.3.0
 [7.2.0]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.1.1...v7.2.0
 [7.1.1]: https://github.com/Siilwyn/css-declaration-sorter/compare/v7.1.0...v7.1.1
