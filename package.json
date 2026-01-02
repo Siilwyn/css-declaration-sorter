@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Siilwyn/css-declaration-sorter.git"
+    "url": "git+https://github.com/Siilwyn/css-declaration-sorter.git"
   },
   "author": "Selwyn <talk@selwyn.cc> (https://selwyn.cc/)",
   "license": "ISC",
