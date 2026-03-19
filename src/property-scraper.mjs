@@ -20,7 +20,6 @@ const isStandardProperty = (name) => (property) => (
 
 const excludedProperties = ['WOFF'];
 const stabilizedProperties = [
-  'font-stretch',
   'font-synthesis-position',
   'font-variant',
 ];
