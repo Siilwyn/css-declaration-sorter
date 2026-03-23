@@ -34,6 +34,16 @@ export const shorthandData = {
     'column-rule-color',
   ],
   'contain-intrinsic-size': [
+    'contain-intrinsic-inline-size',
+    'contain-intrinsic-block-size',
+    'contain-intrinsic-width',
+    'contain-intrinsic-height',
+  ],
+  'contain-intrinsic-inline-size': [
+    'contain-intrinsic-width',
+    'contain-intrinsic-height',
+  ],
+  'contain-intrinsic-block-size': [
     'contain-intrinsic-width',
     'contain-intrinsic-height',
   ],
@@ -408,6 +418,14 @@ export const shorthandData = {
     'max-width',
     'max-height',
   ],
+  'min-inline-size': [
+    'min-width',
+    'min-height',
+  ],
+  'min-block-size': [
+    'min-width',
+    'min-height',
+  ],
   'inset': [
     'inset-block',
     'inset-block-start',
@@ -442,8 +460,16 @@ export const shorthandData = {
     'outline-width',
   ],
   'overflow': [
+    'overflow-block',
+    'overflow-inline',
     'overflow-x',
     'overflow-y',
+  ],
+  'overscroll-behavior': [
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
   ],
   'place-content': [
     'align-content',
@@ -469,6 +495,11 @@ export const shorthandData = {
   'text-wrap': [
     'text-wrap-mode',
     'text-wrap-style',
+  ],
+  'white-space': [
+    'white-space-collapse',
+    'text-wrap-mode',
+    'text-wrap',
   ],
   'transition': [
     'transition-delay',
