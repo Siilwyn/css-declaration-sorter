@@ -37,6 +37,14 @@ export const shorthandData = {
     'contain-intrinsic-width',
     'contain-intrinsic-height',
   ],
+  'contain-intrinsic-inline-size': [
+    'contain-intrinsic-width',
+    'contain-intrinsic-height',
+  ],
+  'contain-intrinsic-block-size': [
+    'contain-intrinsic-width',
+    'contain-intrinsic-height',
+  ],
   'flex': [
     'flex-grow',
     'flex-shrink',
@@ -408,6 +416,14 @@ export const shorthandData = {
     'max-width',
     'max-height',
   ],
+  'min-inline-size': [
+    'min-width',
+    'min-height',
+  ],
+  'min-block-size': [
+    'min-width',
+    'min-height',
+  ],
   'inset': [
     'inset-block',
     'inset-block-start',
@@ -444,6 +460,14 @@ export const shorthandData = {
   'overflow': [
     'overflow-x',
     'overflow-y',
+    'overflow-block',
+    'overflow-inline',
+  ],
+  'overscroll-behavior': [
+    'overscroll-behavior-x',
+    'overscroll-behavior-y',
+    'overscroll-behavior-block',
+    'overscroll-behavior-inline',
   ],
   'place-content': [
     'align-content',
