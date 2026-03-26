@@ -123,6 +123,17 @@ function withOverridesComparator (shorthandData) {
       if (shorthandData[a] && shorthandData[a].includes(b)) return 0;
       if (shorthandData[b] && shorthandData[b].includes(a)) return 0;
 
+      // This is necessary when two shorthands have matching longhands
+      // without either shorthand being a longhand of the other.
+      // e.g. `text-wrap` and `white-space` both control `text-wrap-mode`.
+      if (
+        shorthandData[a] &&
+        shorthandData[b] &&
+        shorthandData[a].some(prop => shorthandData[b].includes(prop))
+      ) {
+        return 0;
+      }
+
       return comparator(a, b);
     };
   };

@@ -470,6 +470,10 @@ export const shorthandData = {
     'text-wrap-mode',
     'text-wrap-style',
   ],
+  'white-space': [
+    'white-space-collapse',
+    'text-wrap-mode',
+  ],
   'transition': [
     'transition-delay',
     'transition-duration',

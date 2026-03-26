@@ -244,6 +244,12 @@ const keepOverridesTests = [
     expected: 'a{border-radius: 5px;border-end-end-radius: 0;border-end-start-radius: 0;}',
     options: { keepOverrides: true },
   },
+  {
+    message: 'Keep text-wrap and white-space in authored order.',
+    fixture: 'a{white-space: pre;text-wrap: wrap;}',
+    expected: 'a{white-space: pre;text-wrap: wrap;}',
+    options: { keepOverrides: true },
+  },
 ];
 
 testCssFixtures('Should order declarations.', sortOrderTests);
